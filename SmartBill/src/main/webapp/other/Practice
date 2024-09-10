@@ -9,4 +9,5 @@ create table login(username varchar(50), password varchar(50), consumer_id bigin
 create table admin_login(username varchar(50), password varchar(50));
 create table bill(bill_number int, due_amount double, payable_amount double, due_date varchar(20), status varchar(20), consumer_id bigint);
 
-insert into ADMIN_LOGIN values('admin', 'Harsha@2005');
+#for admin login manually inserted through the scrapbook
+insert into admin_login values('admin', 'Harsha@2005');
