@@ -45,7 +45,7 @@
       </div>
       <div class="signup">
         <div class="container">
-          <div class='title' style="font-size: 25px; color: #70e300">Complaint Registered Successfully!</div>
+          <div class='title' style="font-size: 25px; color: #008000">Complaint Registered Successfully!</div>
           <div class='details-cont'>
             <table>
               <tbody>
