@@ -8,3 +8,5 @@ create table consumer(consumer_id bigint, title varchar(20), consumer_name varch
 create table login(username varchar(50), password varchar(50), consumer_id bigint);
 create table admin_login(username varchar(50), password varchar(50));
 create table bill(bill_number int, due_amount double, payable_amount double, due_date varchar(20), status varchar(20), consumer_id bigint);
+
+insert into ADMIN_LOGIN values('admin', 'Harsha@2005');
