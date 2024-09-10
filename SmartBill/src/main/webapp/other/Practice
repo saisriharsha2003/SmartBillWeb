@@ -1,0 +1,10 @@
+select * from consumer;
+select * from login;
+select * from admin_login;
+
+select * from bill;
+
+create table consumer(consumer_id bigint, title varchar(20), consumer_name varchar(100), email varchar(50), mobile bigint, gender varchar(20),user_name varchar(50), password varchar(50));
+create table login(username varchar(50), password varchar(50), consumer_id bigint);
+create table admin_login(username varchar(50), password varchar(50));
+create table bill(bill_number int, due_amount double, payable_amount double, due_date varchar(20), status varchar(20), consumer_id bigint);
