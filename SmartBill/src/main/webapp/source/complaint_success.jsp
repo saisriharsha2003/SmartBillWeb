@@ -84,7 +84,6 @@
           </div>
         </div>
       </div>
-      <script src="..scripts/script.js"></script>
 	<script>
 		let subm = document.getElementById("subMenu");
 		function toggleMenu() {
@@ -105,7 +104,7 @@
 		var mob = '<%= (session.getAttribute("comp_mobile") != null) ? session.getAttribute("comp_mobile").toString() : "" %>';
 		var prob = '<%= (session.getAttribute("comp_problem") != null) ? session.getAttribute("comp_problem") : "" %>';
 		var addr = '<%= (session.getAttribute("comp_address") != null) ? session.getAttribute("comp_address") : "" %>';
-		
+		console.log(compno);
 		if (cn1) cn1.textContent = compno;
         if (cn2) cn2.textContent = contp;
         if (cn3) cn3.textContent = mob;

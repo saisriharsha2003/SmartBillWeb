@@ -17,7 +17,7 @@
             <ul>
               <li><a href="home.jsp">Home</a></li>
               <li><a href="paybill.html">Pay Bill</a></li>
-              <li><a href="complaint.html">Register Complaint</a></li>
+              <li><a href="register_complaint.jsp">Register Complaint</a></li>
               <li><a href="complaint_status.html">Complaint Status</a></li>    
             </ul>
             <img src="../assets/user.png" class="user-pic" onclick="toggleMenu()">
