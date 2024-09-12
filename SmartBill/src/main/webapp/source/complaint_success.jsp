@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ page import="java.util.*" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 	<html>
 	<head>
@@ -18,7 +19,8 @@
               <li><a href="home.jsp">Home</a></li>
               <li><a href="paybill.html">Pay Bill</a></li>
               <li><a href="register_complaint.jsp">Register Complaint</a></li>
-              <li><a href="complaint_status.html">Complaint Status</a></li>    
+              <li><a href="search_complaint.jsp">Search Complaint</a></li>
+			<li><a href="/SmartBillWeb/ComplaintStatus">Complaint Status</a></li>
             </ul>
             <img src="../assets/user.png" class="user-pic" onclick="toggleMenu()">
             <div class="sub-menu-wrap" id="subMenu">
@@ -28,7 +30,7 @@
 		        		<h2 id="cu_name" style="color:#CCBA78;"></h2>
 		        	</div>
 		        	<hr>
-		        	<a href="#" class="sub-menu-link">
+		        	<a href="edit_profile.jsp" class="sub-menu-link">
 		        		<img src="../assets/edit.png" style="width: 50px; height: 50px">
 		        		<p>Edit Profile</p>
 		        		<span class="ext">></span>
@@ -45,7 +47,7 @@
       </div>
       <div class="signup">
         <div class="container">
-          <div class='title' style="font-size: 25px; color: #70e300">Complaint Registered Successfully!</div>
+          <div class='title' style="font-size: 25px; color: #008000">Complaint Registered Successfully!</div>
           <div class='details-cont'>
             <table>
               <tbody>
@@ -84,35 +86,36 @@
           </div>
         </div>
       </div>
-      <script src="..scripts/script.js"></script>
-	<script>
-		let subm = document.getElementById("subMenu");
-		function toggleMenu() {
-			subm.classList.toggle("open-menu");
-		}
-		var name = '<%= (session.getAttribute("consumer_lgname") != null) ? session.getAttribute("consumer_lgname") : "" %>';
-  		var c6 = document.getElementById("cu_name");
-  		if(c6) c6.textContent = name;
-  		
-		var cn1 = document.getElementById("cocno");
-		var cn2 = document.getElementById("cocnp");
-		var cn3 = document.getElementById("com");
-		var cn4 = document.getElementById("cop");
-		var cn5 = document.getElementById("addr");
+      <script src="../scripts/script.js"></script>
+      <%
+	      	HashMap<String, String> mp =(HashMap<String, String>)session.getAttribute("complaint-details");
+		  	String comp_id = mp.get("comp_id");
+		  	String comp_per = mp.get("comp_per");
+		  	String comp_mob = mp.get("comp_mobile");
+		  	String comp_prob = mp.get("comp_problem");
+		  	String comp_add = mp.get("comp_address");
+
+      %>
+		<script>
+			
+			var name = '<%= (session.getAttribute("consumer_lgname") != null) ? session.getAttribute("consumer_lgname") : "" %>';
+	  		var c6 = document.getElementById("cu_name");
+	  		if(c6) c6.textContent = name;
+	  		
+	  		console.log('<%= comp_id %>')
+			var cn1 = document.getElementById("cocno");
+			var cn2 = document.getElementById("cocnp");
+			var cn3 = document.getElementById("com");
+			var cn4 = document.getElementById("cop");
+			var cn5 = document.getElementById("addr");
+			
+			if (cn1) cn1.textContent = '<%= comp_id %>';
+	        if (cn2) cn2.textContent = '<%= comp_per %>';
+	        if (cn3) cn3.textContent = '<%= comp_mob %>';
+	        if (cn4) cn4.textContent = '<%= comp_prob %>';
+	        if (cn5) cn5.textContent = '<%= comp_add %>';
 		
-		var compno = '<%= (session.getAttribute("comp_id") != null) ? session.getAttribute("comp_id") : "" %>';
-		var contp = '<%= (session.getAttribute("comp_per") != null) ? session.getAttribute("comp_per") : "" %>';
-		var mob = '<%= (session.getAttribute("comp_mobile") != null) ? session.getAttribute("comp_mobile").toString() : "" %>';
-		var prob = '<%= (session.getAttribute("comp_problem") != null) ? session.getAttribute("comp_problem") : "" %>';
-		var addr = '<%= (session.getAttribute("comp_address") != null) ? session.getAttribute("comp_address") : "" %>';
-		
-		if (cn1) cn1.textContent = compno;
-        if (cn2) cn2.textContent = contp;
-        if (cn3) cn3.textContent = mob;
-        if (cn4) cn4.textContent = prob;
-        if (cn5) cn5.textContent = addr;
-	
-	</script>
+		</script>
     </div>
   </body>
 </html>

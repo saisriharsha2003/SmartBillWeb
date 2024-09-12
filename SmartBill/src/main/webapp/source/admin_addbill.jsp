@@ -9,7 +9,7 @@
 		<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 	    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	    <link rel="icon" href="../assets/icon.png" type="image/icon type">
-	    <title>Add Bill Page</title>
+	    <title>Admin Add Bill</title>
 	   
 	</head>
 	<body>
@@ -19,9 +19,10 @@
 	                src="../assets/logo.png"></a>
 	          <ul>
 	            <li><a href="admin_home.jsp">Home</a></li>
-	            <li><a href="paybill.html">View Consumers</a></li>
+	            <li><a href="/SmartBillWeb/AdminViewConsumers">View Consumers</a></li>
 	            <li><a href="admin_addbill.jsp">Add Bills</a></li>
-	            <li><a href="complaint.html">View Complaints</a></li>
+	            <li><a href="/SmartBillWeb/AdminViewBills">View Bills</a></li>	            
+	            <li><a href="/SmartBillWeb/AdminViewComplaints">View Complaints</a></li>
 	          </ul>
 	          <img src="../assets/user.png" class="user-pic" onclick="toggleMenu()">
 	          <div class="sub-menu-wrap" id="subMenu">

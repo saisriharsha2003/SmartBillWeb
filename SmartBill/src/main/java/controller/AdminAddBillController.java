@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Random;
 import model.Bill;
-import view.AdminAddBillView;
+import view.AdminView;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -41,7 +41,7 @@ public class AdminAddBillController extends HttpServlet {
 		Bill bill = new model.Bill(billno, amt, pamt, date, status, cno );
 		
 		try {
-			int res = AdminAddBillView.adminAddBill(bill);
+			int res = AdminView.adminAddBill(bill);
 			if(res == 1)
 			{
 				HttpSession session = request.getSession();

@@ -95,16 +95,16 @@ body{
 }
 .paybill th 
 {
-	width: 30%;
+	width: auto;
 	height: 30px;
-	padding: 10px;
+	padding: 20px;
 	text-align: center;
 }
 .paybill td
 {
-	width: 30%;
+	width: auto;
 	height: 30px;
-	padding: 10px;
+	padding: 20px;
 	text-align: center;
 	
 }
@@ -176,6 +176,7 @@ placeholder
 	 border-radius: 10px;
 }
 
+
 .container .title
 {
 	 font-size: 30px;
@@ -193,6 +194,32 @@ placeholder
 	 flex-wrap: wrap;
 	 justify-content: space-between;
 }
+.container1
+{
+	 max-width: 1000px;
+	 width: 100%;
+	 height: auto;
+	 background: white;
+	 padding: 30px 30px;
+	 border-radius: 10px;
+}
+.container1 .title
+{
+	 font-size: 30px;
+	 font-weight: 600;
+	 display: flex;
+	 justify-content: center;
+	
+	 margin-bottom: 10px;
+	 color:  #CCBA78;
+}
+
+.container1 form .user-details
+{
+	 display: flex;
+	 flex-wrap: wrap;
+	 justify-content: space-between;
+}
 
 form .user-details .input-box 
 {
@@ -201,7 +228,6 @@ form .user-details .input-box
 }
 .user-details .input-box .details 
 {
-	 color: black;
 	 display: block;
 	 font-weight: 500;
 	 margin-bottom: 5px;
@@ -268,6 +294,33 @@ form .user-details .input-box
 	
 }
 .sbutton input:hover
+{
+	background: linear-gradient(-135deg, #000000, #CCBA78);
+}
+
+#adstcmp 
+{
+	height: 50px;
+	width: 100%;
+	outline: none;
+	color: #fff;
+	border: none;
+	font-size: 18px;
+	font-weight: 500;
+	border-radius: 5px;
+	margin-top: 10px;
+	letter-spacing: 1px;
+	background: linear-gradient(135deg, #000000, #CCBA78);
+	
+}
+
+#up_comp_no
+{
+	width:88px;
+	border-style: none;
+	font-size: 16px;
+}
+#adstcmp:hover
 {
 	background: linear-gradient(-135deg, #000000, #CCBA78);
 }

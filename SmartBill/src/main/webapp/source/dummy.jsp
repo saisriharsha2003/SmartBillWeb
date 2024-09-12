@@ -16,10 +16,9 @@
 	                src="../assets/logo.png"></a>
 	          <ul>
 	            <li><a href="admin_home.jsp">Home</a></li>
-	            <li><a href="/SmartBillWeb/AdminViewConsumers">View Consumers</a></li>
+	            <li><a href="paybill.html">View Consumers</a></li>
 	            <li><a href="admin_addbill.jsp">Add Bills</a></li>
-	            <li><a href="/SmartBillWeb/AdminViewBills">View Bills</a></li>	            
-	            <li><a href="/SmartBillWeb/AdminViewComplaints">View Complaints</a></li>
+	            <li><a href="complaint.html">View Complaints</a></li>
 	          </ul>
 	          <img src="../assets/user.png" class="user-pic" onclick="toggleMenu()">
 	          <div class="sub-menu-wrap" id="subMenu">
@@ -46,7 +45,6 @@
 	    </div>
 	    <div class="signup">
 	     <div class="container" style="background-color: black; opacity: 0.8;">
-	     	<p style="font-size: 40px; font-weight: 600; color: #CCBA78; display:flex; justify-content: center; align-items: center">Welcome to <span class="homep" >SmartBill</span></p>
 	     </div>
 	    </div>
 	    <script>
