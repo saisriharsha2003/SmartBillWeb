@@ -20,7 +20,7 @@
 			<li><a href="paybill.html">Pay Bill</a></li>
 			<li><a href="register_complaint.jsp">Register Complaint</a></li>
 			<li><a href="search_complaint.jsp">Search Complaint</a></li>
-			<li><a href="complaint_status.html">Complaint Status</a></li>
+			<li><a href="<%= request.getContextPath() %>/ComplaintStatus">Complaint Status</a></li>
 		</ul>
 		<img src="../assets/user.png" class="user-pic" onclick="toggleMenu()">
 		<div class="sub-menu-wrap" id="subMenu">
@@ -50,7 +50,7 @@
 				<div class="user-details">
 
 					<div class="input-box" style="width: 100%">
-						<input type="text" class="searchi"
+						<input type="text" class="searchi" name="search_compid"
 							placeholder="Enter your Complaint Number" required
 							oninvalid="this.setCustomValidity('Please Enter Complaint Number')"
 							onchange="this.setCustomValidity('')">
@@ -59,10 +59,11 @@
 						</button>
 					</div>
 				</div>
+				<div class="sbutton">
+					<input type="submit" id="aButton" value="Get Complaint Status" style="cursor: pointer">
+				</div>
 			</form>
-			<div class="sbutton">
-				<input type="submit" id="aButton" value="Get Complaint Status" style="cursor: pointer">
-			</div>
+			
 		</div>
 	</div>
 </body>

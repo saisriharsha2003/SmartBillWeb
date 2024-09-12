@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import model.Bill;
 import utility.Utility;
 
-public class AdminAddBillView {
+public class AdminView {
 	public static int adminAddBill(Bill bill) throws ClassNotFoundException, SQLException
 	{
 		String sql1 = "insert into bill values(?,?,?,?,?,?)";

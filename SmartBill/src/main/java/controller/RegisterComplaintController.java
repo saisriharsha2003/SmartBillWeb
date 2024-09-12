@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import model.Bill;
 import model.ComplaintModel;
-import view.ComplaintView;
+import view.ComplaintsView;
 
 @WebServlet("/RegisterComplaintController")
 public class RegisterComplaintController extends HttpServlet {
@@ -45,7 +45,7 @@ public class RegisterComplaintController extends HttpServlet {
 		ComplaintModel comp=new ComplaintModel(compno, consno, land, ser, cat, mob, conp, prb, addr);
 		
 		try {
-			int res = ComplaintView.registerComplaint(comp);
+			int res = ComplaintsView.registerComplaint(comp);
 			if(res == 1)
 			{
 				HttpSession session = request.getSession();

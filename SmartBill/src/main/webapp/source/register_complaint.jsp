@@ -20,7 +20,7 @@
               <li><a href="paybill.html">Pay Bill</a></li>
               <li><a href="register_complaint.jsp">Register Complaint</a></li>
               <li><a href="search_complaint.jsp">Search Complaint</a></li>             
-              <li><a href="complaint_status.html">Complaint Status</a></li>    
+			<li><a href="<%= request.getContextPath() %>/ComplaintStatus">Complaint Status</a></li>
             </ul>
             <img src="../assets/user.png" class="user-pic" onclick="toggleMenu()">
             <div class="sub-menu-wrap" id="subMenu">

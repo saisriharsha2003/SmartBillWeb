@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ page import = "java.util.*" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
   <head>
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="icon" href="../assets/icon.png" type="image/icon type">
-    <title>Updated Profile</title>
+    <title>Search Complaint</title>
     
   </head>
   <body>
@@ -46,30 +47,39 @@
       </div>
       <div class="signup">
         <div class="container">
-          <div class='title' style="font-size: 25px; color: #008000">Thank You for Registering
-            to SmartBill</div>
+          <div class='title' style="font-size: 25px; color: #CCBA78">Your Complaint Details</div>
           <div class='details-cont'>
             <table>
               <tbody>
                 <tr>
-                  <td><span class='cust'>Your updated Name</span></td>
+                  <td><span class='cust'> Complaint ID </span></td>
                   <td><span class='col'>:</span><span class='cust1'
-                      id='up_name'></span></td>
+                      id='fcompid'></span></td>
                 </tr>
                 <tr>
-                  <td><span class='cust'> Your updated Email</span></td>
+                  <td><span class='cust'> Contact Person </span></td>
                   <td><span class='col'>:</span><span class='cust1'
-                      id='up_email'></span></td>
+                      id='fcompper'></span></td>
                 </tr>
                 <tr>
-                  <td><span class='cust'>Your updated Mobile</span></td>
+                  <td><span class='cust'> Status </span></td>
                   <td><span class='col'>:</span><span class='cust1'
-                      id='up_mobile'></span></td>
+                      id='fcompstatus'></span></td>
                 </tr>
                 <tr>
-                  <td><span class='cust'>Your updated Username</span></td>
+                  <td><span class='cust'> Mobile Number </span></td>
                   <td><span class='col'>:</span><span class='cust1'
-                      id='up_uname'></span></td>
+                      id='fcompmob'></span></td>
+                </tr>
+                <tr>
+                  <td><span class='cust'> Problem </span></td>
+                  <td><span class='col'>:</span><span class='cust1'
+                      id='fcomprob'></span></td>
+                </tr>
+                <tr>
+                  <td><span class='cust'> Address </span></td>
+                  <td><span class='col'>:</span><span class='cust1'
+                      id='fcompaddr'></span></td>
                 </tr>
                 
                 
@@ -85,23 +95,30 @@
         </div>
       </div>
     </div>
+    <%
+    	HashMap<String, String> m1 = (HashMap<String, String>)session.getAttribute("search_complaint_id");
+    	String p1 = m1.get("complaint_id");
+    	String p2 = m1.get("contact_person");
+    	String p3 = m1.get("mobile");
+    	String p4 = m1.get("problem");
+    	String p5 = m1.get("address");
+    	String p6 = m1.get("status");
+    %>
     <script type="text/javascript">
-        var cn1 = document.getElementById("up_name");
-        var cn2 = document.getElementById("up_email");
-        var cn3 = document.getElementById("up_mobile");
-        var cn4 = document.getElementById("up_uname");
-
-        
-        var p1 = '<%= (session.getAttribute("up-cname") != null) ? session.getAttribute("up-cname"): "" %>';
-        var p2 = '<%= (session.getAttribute("up-email") != null) ? session.getAttribute("up-email") : "" %>';
-        var p3 = '<%= (session.getAttribute("up-mob") != null) ? session.getAttribute("up-mob") : "" %>';
-        var p4 = '<%= (session.getAttribute("up-uname") != null) ? session.getAttribute("up-uname") : "" %>';
-
-        
-        if (cn1) cn1.textContent = p1;
-        if (cn2) cn2.textContent = p2;
-        if (cn3) cn3.textContent = p3;
-        if (cn4) cn4.textContent = p4;
+	   var cn1 = document.getElementById("fcompid");
+	   var cn2 = document.getElementById("fcompper");
+	   var cn3 = document.getElementById("fcompmob");
+	   var cn4 = document.getElementById("fcomprob");  
+	   var cn5 = document.getElementById("fcompaddr");
+	   var cn6 = document.getElementById("fcompstatus");  
+	
+	   var n1 = "<%= p1 %>";
+	   if (cn1) cn1.textContent = n1;
+	   if (cn2) cn2.textContent = "<%= p2 %>";
+	   if (cn3) cn3.textContent = "<%= p3 %>";
+	   if (cn4) cn4.textContent = "<%= p4 %>";
+	   if (cn5) cn5.textContent = "<%= p5 %>";
+	   if (cn6) cn6.textContent = "<%= p6 %>";
 
     </script>
   </body>

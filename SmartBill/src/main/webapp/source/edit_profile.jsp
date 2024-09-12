@@ -22,7 +22,7 @@
               <li><a href="paybill.html">Pay Bill</a></li>
               <li><a href="register_complaint.jsp">Register Complaint</a></li>
               <li><a href="search_complaint.jsp">Search Complaint</a></li>             
-              <li><a href="complaint_status.html">Complaint Status</a></li>    
+			<li><a href="<%= request.getContextPath() %>/ComplaintStatus">Complaint Status</a></li>
             </ul>
             <img src="../assets/user.png" class="user-pic" onclick="toggleMenu()">
             <div class="sub-menu-wrap" id="subMenu">
@@ -89,9 +89,15 @@
 	              </div>
 	              
 	            </div>
-	            <div class="button">
-	              <input type="submit" id="aButton" value="Update Profile" style="cursor: pointer">
-	            </div>
+	            <div style="display: flex; justify-content:center; ">
+		       		<div class="sbutton" style="width:50%; padding-right:10px;">
+		             	<input id="aButton" value="Back to Home" style="cursor: pointer; text-align :center" onclick="window.location='home.jsp'">
+		            </div>
+		        	<div class="sbutton" style="width:50%;">
+		              <input type="submit" id="up-Button" value="Update Profile" style="cursor: pointer; ">
+		            </div>	
+	         	</div>
+	            
 	            </form>
           	</div>
           	
