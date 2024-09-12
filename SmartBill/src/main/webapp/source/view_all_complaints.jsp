@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ page import = "java.util.*" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
@@ -21,7 +22,7 @@
 				<li><a href="paybill.html">Pay Bill</a></li>
 				<li><a href="register_complaint.jsp">Register Complaint</a></li>
 				<li><a href="search_complaint.jsp">Search Complaint</a></li>
-				<li><a href="ComplaintStatus">Complaint Status</a></li>
+				<li><a href="/SmartBillWeb/ComplaintStatus">Complaint Status</a></li>
 			</ul>
 			<img src="../assets/user.png" class="user-pic" onclick="toggleMenu()">
 			<div class="sub-menu-wrap" id="subMenu">
@@ -43,9 +44,9 @@
 			</nav>
 		</div>
 		<div class="signup">
-			<div class="container">
+			<div class="container1">
 				<div class="title" style="margin-bottom: 20px;">View All Complaints </div>
-					<table border="1">
+					<table class = "paybill">
 				        <thead>
 				            <tr>
 				                <th>Complaint ID</th>
@@ -64,12 +65,12 @@
 								
 							%>
 			                <tr>
-			                    <td>${complaint.complaint_id}</td>
-			                    <td>${complaint.contact_person}</td>
-			                    <td>${complaint.mobile}</td>
-			                    <td>${complaint.problem}</td>
-			                    <td>${complaint.address}</td>
-			                    <td>${complaint.status}</td>
+			                    <td><%= complaint.get("complaint_id") %></td>
+			                    <td><%= complaint.get("contact_person") %></td>
+			                    <td><%= complaint.get("mobile") %></td>
+			                    <td><%= complaint.get("problem") %></td>
+			                    <td><%= complaint.get("address") %></td>
+			                    <td><%= complaint.get("status") %></td>
 			                </tr>
 			            	<%
 				                    }
@@ -80,5 +81,14 @@
 			</div>
 		</div>
 	</body>
+	<script src="../scripts/script.js"></script>
+	<script>
+	if(document.getElementById("cu_name"))
+	{
+		var name = '<%= (session.getAttribute("consumer_lgname") != null) ? session.getAttribute("consumer_lgname") : "" %>';
+		var c1 = document.getElementById("cu_name");
+		if(c1) c1.textContent = name;		
+	}
+	</script>
 	
 </html>

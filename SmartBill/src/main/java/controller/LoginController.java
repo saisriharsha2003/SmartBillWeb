@@ -39,6 +39,16 @@ public class LoginController extends HttpServlet {
 				boolean status = LoginView.authenticateAdmin(lg);
 				if(status == true)
 				{
+					HttpSession session = request.getSession();
+					if(session.getAttribute("consumer_lgname") == null)
+					{
+						session.setAttribute("consumer_lgname", "Admin");
+					}
+					else
+					{
+						session.removeAttribute("consumer_lgname");
+						session.setAttribute("consumer_lgname", "Admin");
+					}
 					response.sendRedirect("source/admin_home.jsp");
 				}
 			} catch (ClassNotFoundException | SQLException e) {

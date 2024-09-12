@@ -19,7 +19,7 @@
               <li><a href="home.jsp">Home</a></li>
               <li><a href="paybill.html">Pay Bill</a></li>
               <li><a href="complaint.html">Register Complaint</a></li>
-			<li><a href="<%= request.getContextPath() %>/ComplaintStatus">Complaint Status</a></li>
+			<li><a href="/SmartBillWeb/ComplaintStatus">Complaint Status</a></li>
             </ul>
             <img src="../assets/user.png" class="user-pic" onclick="toggleMenu()">
             <div class="sub-menu-wrap" id="subMenu">
