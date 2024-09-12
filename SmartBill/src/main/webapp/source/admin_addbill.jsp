@@ -8,8 +8,8 @@
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 		<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 	    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	    <link rel="icon" href="../assets/icon.png" type="image/icon">
-	    <title>Add Bill Page</title>
+	    <link rel="icon" href="../assets/icon.png" type="image/icon type">
+	    <title>Admin Add Bill</title>
 	   
 	</head>
 	<body>

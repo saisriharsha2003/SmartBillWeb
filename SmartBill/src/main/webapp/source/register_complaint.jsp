@@ -19,6 +19,7 @@
               <li><a href="home.jsp">Home</a></li>
               <li><a href="paybill.html">Pay Bill</a></li>
               <li><a href="register_complaint.jsp">Register Complaint</a></li>
+              <li><a href="search_complaint.jsp">Search Complaint</a></li>             
               <li><a href="complaint_status.html">Complaint Status</a></li>    
             </ul>
             <img src="../assets/user.png" class="user-pic" onclick="toggleMenu()">
@@ -29,7 +30,7 @@
 		        		<h2 id="cu_name" style="color:#CCBA78;"></h2>
 		        	</div>
 		        	<hr>
-		        	<a href="#" class="sub-menu-link">
+		        	<a href="edit_profile.jsp" class="sub-menu-link">
 		        		<img src="../assets/edit.png" style="width: 50px; height: 50px">
 		        		<p>Edit Profile</p>
 		        		<span class="ext">></span>
@@ -66,23 +67,23 @@
               <div class="input-box">
                 <span class="details">Complaint/Service Type</span>
 
-                <select name="title" class="drtitle" name="stype">
+                <select class="drtitle" name="stype">
                   <option value="Default" selected>Select Service Type</option>
-                  <option value="">Street light related</option>
-                  <option value="">Street light related</option>
-                  <option value="">Street light related</option>
-                  <option value="">Street light related</option>
+                  <option value="Street light related">Street light related</option>
+                  <option value="Street light related">Street light related</option>
+                  <option value="Street light related">Street light related</option>
+                  <option value="Street light related">Street light related</option>
                 </select>
               </div>
               <div class="input-box">
                 <span class="details">Category</span>
 
-                <select name="title" class="drtitle" name = "ccat">
+                <select class="drtitle" name = "ccat">
                   <option value="Default" selected>Select Category</option>
-                  <option value="">Street light not working</option>
-                  <option value="">Street light damaged</option>
-                  <option value="">Street light related</option>
-                  <option value="">Street light broken</option>
+                  <option value="Street light not working">Street light not working</option>
+                  <option value="Street light damaged">Street light damaged</option>
+                  <option value="Street light related</">Street light related</option>
+                  <option value="Street light broken">Street light broken</option>
                 </select>
               </div>
               
@@ -112,7 +113,7 @@
             
             </div>
            <div class="button">
-              <input type="submit" id="compButton" value="Submit Complaint" style="margin-bottom: 5px;" onclick="complaint_store()">
+              <input type="submit" id="compButton" value="Submit Complaint" style="margin-bottom: 5px; cursor: pointer;" >
             </div>
             
           </form>

@@ -3,8 +3,10 @@ package view;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 
 import model.LoginModel;
+import model.RegisterModel;
 import utility.Utility;
 
 public class LoginView {
@@ -72,5 +74,32 @@ public class LoginView {
 			cid = rs.getLong("consumer_id");
 		}
 		return cid;
+	}
+	
+	public static HashMap<String, String> fetchUserDetails(String uname) throws ClassNotFoundException, SQLException
+	{
+		HashMap<String, String> mp = new HashMap<>();
+		String sql = "select * from consumer where user_name = ?";
+		PreparedStatement p1 = Utility.getPreparedStatement(sql);
+		p1.setString(1, uname);
+		ResultSet rs = p1.executeQuery();
+		if(rs.next())
+		{
+			mp.put("name", rs.getString("consumer_name"));
+			mp.put("email", rs.getString("email"));
+			mp.put("mobile", rs.getString("mobile").toString());
+			mp.put("username", rs.getString("user_name"));
+			mp.put("password", rs.getString("password"));
+		}
+		return mp;
+	}
+	
+	public static int updateLoginDetails(String uname, String pwd) throws ClassNotFoundException, SQLException
+	{
+		PreparedStatement p1=Utility.getPreparedStatement("update login set username = ?, password = ?");
+		p1.setString(1, uname);
+		p1.setString(2, pwd);
+		int res = p1.executeUpdate();
+		return res;
 	}
 }

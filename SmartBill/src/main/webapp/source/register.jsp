@@ -67,8 +67,8 @@
 	
 	                <select name="gender" class="drtitle">
 	                  <option value="Default" selected>Select Gender</option>
-	                  <option value="Mr">Male</option>
-	                  <option value="Ms">Female</option>
+	                  <option value="Male">Male</option>
+	                  <option value="Female">Female</option>
 	             
 	                </select>
 	              </div>

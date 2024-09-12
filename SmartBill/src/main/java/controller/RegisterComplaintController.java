@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.Random;
 
 import javax.servlet.ServletException;
@@ -48,13 +49,23 @@ public class RegisterComplaintController extends HttpServlet {
 			if(res == 1)
 			{
 				HttpSession session = request.getSession();
-				session.setAttribute("comp_id", comp.getComplaintId()); 
-				session.setAttribute("comp_per", comp.getContactPerson());
-				session.setAttribute("comp_mobile", comp.getMobile());
-				session.setAttribute("comp_problem", comp.getProlem());
-				session.setAttribute("comp_address", comp.getAddress());
-
 				
+				HashMap<String, String> mp1=new HashMap<>();
+				mp1.put("comp_id", String.valueOf(comp.getComplaintId()));
+				mp1.put("comp_per", comp.getContactPerson());
+				mp1.put("comp_mobile", String.valueOf(comp.getMobile()));
+				mp1.put("comp_problem", comp.getProlem());
+				mp1.put("comp_address", comp.getAddress());
+				
+				if(session.getAttribute("complaint-details") == null)
+				{
+					session.setAttribute("complaint-details", mp1);
+				}
+				else
+				{
+					session.removeAttribute("complaint-details");
+					session.setAttribute("complaint-details", mp1);
+				}
 				response.sendRedirect("source/complaint_success.jsp");
 			}
 		} catch (ClassNotFoundException | SQLException e) {

@@ -17,11 +17,33 @@ var check = function() {
   });
 }
 
-let subm = document.getElementById("subMenu");
-function toggleMenu() {
-	subm.classList.toggle("open-menu");
+var edit_check = function(){
+	const pwd = document.getElementById('edit-password');
+	  const cpwd = document.getElementById('edit-cpassword');
+	  const msg = document.getElementById('edit-message');
+	  cpwd.addEventListener('input', function()
+	  {
+	    if(pwd.value == cpwd.value)
+	    {
+	      msg.textContent = "Password matches.";
+	      msg.classList.add('match');
+	      msg.classList.remove('nomatch');
+	    }else {
+	      msg.textContent = "Passwords do not match.";
+	      msg.classList.add('nomatch');
+	      msg.classList.remove('match');
+	    }
+	  });
 }
-	
+
+if(document.getElementById("subMenu"))
+{
+	let subm = document.getElementById("subMenu");
+	function toggleMenu() {
+		subm.classList.toggle("open-menu");
+	}		
+}
+
 var login_check = function() {
 	  const pwd = document.getElementById('lpwd');
 	  const cpwd = document.getElementById('lcpwd');

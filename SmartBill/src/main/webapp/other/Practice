@@ -8,6 +8,5 @@ create table consumer(consumer_id bigint, title varchar(20), consumer_name varch
 create table login(username varchar(50), password varchar(50), consumer_id bigint);
 create table admin_login(username varchar(50), password varchar(50));
 create table bill(bill_number int, due_amount double, payable_amount double, due_date varchar(20), status varchar(20), consumer_id bigint);
-create table complaint(complaint_id int, consumer_id bigint, landmark varchar(50), serviceType varchar(50), category varchar(50), mobile bigint, contact_person varchar(50), problem varchar(100), address varchar(100));
-#for admin login manually inserted through the scrapbook
-insert into admin_login values('admin', 'Harsha@2005');
+
+insert into ADMIN_LOGIN values('admin', 'Harsha@2005');

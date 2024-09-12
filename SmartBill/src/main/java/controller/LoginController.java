@@ -1,10 +1,12 @@
 package controller;
 
 import model.LoginModel;
+import model.RegisterModel;
 import view.LoginView;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -51,14 +53,42 @@ public class LoginController extends HttpServlet {
 				LoginModel lg1=new LoginModel(uname, pwd);
 
 				boolean status1 = LoginView.authenticateConsumer(lg1);
+				System.out.println("status"+status1);
 				if(status1 == true)
 				{
 					String cname = LoginView.fetchConsumerName(uname);
 					long cid = LoginView.fetchConsumerId(uname);
 					HttpSession session = request.getSession();
-					session.setAttribute("consumer_lgid", cid);
-					session.setAttribute("consumer_lgname", cname);
-					
+					if(session.getAttribute("consumer_lgid") == null)
+					{
+						session.setAttribute("consumer_lgid", cid);
+					}
+					else
+					{
+						session.removeAttribute("consumer_lgid");
+						session.setAttribute("consumer_lgid", cid);
+					}
+					if(session.getAttribute("consumer_lgname") == null)
+					{
+						session.setAttribute("consumer_lgname", cname);
+					}
+					else
+					{
+						session.removeAttribute("consumer_lgname");
+						session.setAttribute("consumer_lgname", cname);
+					}
+					HashMap<String, String> mp = LoginView.fetchUserDetails(uname);
+
+					if(session.getAttribute("user-details") == null)
+					{
+						session.setAttribute("user-details", mp);
+					}
+					else
+					{
+						session.removeAttribute("user-details");
+						session.setAttribute("user-details", mp);
+					}
+						
 					response.sendRedirect("source/home.jsp");
 
 				}

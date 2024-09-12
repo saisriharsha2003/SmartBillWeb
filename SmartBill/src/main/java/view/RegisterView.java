@@ -33,5 +33,17 @@ public class RegisterView {
 		return res;
 		
 	}
+	
+	public static int updateRegisterDetails(String name, String email, long mobile, String uname, String pwd) throws ClassNotFoundException, SQLException
+	{
+		PreparedStatement p1=Utility.getPreparedStatement("update consumer set consumer_name = ?, email = ?, mobile =?, user_name = ?, password = ?");
+		p1.setString(1, name);
+		p1.setString(2, email);
+		p1.setLong(3, mobile);
+		p1.setString(4, uname);
+		p1.setString(5, pwd);
+		int res = p1.executeUpdate();
+		return res;
+	}
 
 }
