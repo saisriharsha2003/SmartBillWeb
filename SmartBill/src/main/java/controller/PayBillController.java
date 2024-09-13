@@ -26,7 +26,7 @@ public class PayBillController extends HttpServlet {
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		long conid = Long.parseLong(session.getAttribute("consumer_lgid").toString());
+		long conid = Long.parseLong(String.valueOf(session.getAttribute("consumer_lgid")));
 		try {
 			List<HashMap<String, String>> l1 = BillsView.fetchAllBills(conid);
 			if(session.getAttribute("view_all_bills") == null)

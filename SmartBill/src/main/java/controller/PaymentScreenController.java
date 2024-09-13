@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import view.AdminView;
 import view.BillsView;
+import view.PaymentsView;
 
 @WebServlet("/PaymentScreenController")
 public class PaymentScreenController extends HttpServlet {
@@ -28,6 +29,8 @@ public class PaymentScreenController extends HttpServlet {
 		int billid = Integer.parseInt(request.getParameter("up_bill"));
 		HashMap<String, String> mp;
 		try {
+			double due_amt = PaymentsView.fetchDueAmount(billid);
+
 			mp = BillsView.fetchPaymentBillDetails(billid);
 			if(session.getAttribute("payment_billdet") == null)
 			{
@@ -38,6 +41,17 @@ public class PaymentScreenController extends HttpServlet {
 			{
 				session.removeAttribute("payment_billdet");
 				session.setAttribute("payment_billdet", mp);
+			}
+			
+			if(session.getAttribute("payment_due_amount") == null)
+			{
+				session.setAttribute("payment_due_amount", due_amt);
+				
+			}
+			else
+			{
+				session.removeAttribute("payment_due_amount");
+				session.setAttribute("payment_due_amount", due_amt);
 			}
 			
 			response.sendRedirect("source/bill_details.jsp");

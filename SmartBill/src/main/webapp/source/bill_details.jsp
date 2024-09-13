@@ -9,7 +9,7 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="icon" href="../assets/icon.png" type="image/icon type">
-<title>View Bills</title>
+<title>Bill Details</title>
 
 </head>
 <body>
@@ -66,7 +66,7 @@
 	</div>
 	<div class="signup">
 		<div class="container" style="padding: 15px 15px; width: 1000px;">
-		<form>
+		<form action="<%= request.getContextPath() %>/BillDetailsController" method="post">
 		         <div class='title' style="font-size: 30px">Bill Payment</div>
 		         <div style="display: flex; justify-content: center">
 		         <%
@@ -74,7 +74,7 @@
 		         	String det_bno = hm.get("bill_id");
 		         	String det_bamt = hm.get("bill_amt");
 		         	String det_conid = hm.get("cons_id");
-		         	System.out.println(det_bamt+""+det_bno);
+					String pay_damt = String.valueOf((double)session.getAttribute("payment_due_amount"));
 		         %>
 	        	<table class="paybilldet" >
 	        		<thead style="height: 15px; padding: 10px;">
@@ -84,6 +84,10 @@
 	        			</tr>
 	        		</thead>
 	        		<tbody>
+	        			<tr>
+	        				<td style="text-align: left; margin-bottom: 50px;">Due Amount</td>
+	        				<td id="billdet_dueamt" style="margin-bottom: 50px;"></td>
+	        				
 	        			<tr>
 	        				<td style="text-align: left;">Bill Amount</td>
 	        				<td id="billdet_amt"></td>
@@ -134,22 +138,22 @@
 	        	<div style="padding-left: 47px;"><hr style="border: 1px solid black; width: 50%; margin-top: 10px; "></div>
 	        	<div style="display: flex; justify-content: center;">
 	        	<div style="padding: 10px;">
-		        	 <input type="radio" name="groupName">
+		        	 <input type="radio" name="pay_mode" value = "Credit Card">
 		        	 <label>Credit Card</label>
 	        	</div>
 	        	 
 	        	 <div style="padding: 10px;">
-		        	 <input type="radio" name="groupName">
+		        	 <input type="radio" name="pay_mode" value="Debit Card">
 		        	 <label>Debit Card</label>
 	        	</div>
 	        	</div>
 	        	<div class="flexcenter">
-	        	<div class="flexcenter" style="width: 80%">
-	        		<div class="sbutton" style="width:60%; padding:10px;">
-	              		<input type="submit" id="aButton" value="Back to Home" style="cursor: pointer; " onclick="window.location.href='home.html'">
+	        	<div class="flexcenter" style="width: 90%">
+	        		<div class="sbutton" style="width:100%; padding:10px;">
+	              		<button id="aButton"  style="cursor: pointer; text-align: center;" onclick="window.location.href='pay_bills.jsp'">Back to PayBills</button>
 	              	</div>
-		        	<div class="sbutton" style="width:60%; padding:10px;">
-	              		<input type="submit" id="aButton" value="Pay Now" style="cursor: pointer; " onclick="window.location.href='pay_screen.html'">
+		        	<div class="sbutton" style="width:100%; padding:10px;">
+	              		<button id="aButton" type = "submit" style="cursor: pointer; ">Pay Now</button>
 	              	</div>	
               	</div>
               	</div>
@@ -176,15 +180,19 @@
 	var n3 = document.getElementById("billdet_cno");
 	var n4 = document.getElementById("billdet_bno");
 	var n5 = document.getElementById("bill_pamt");
-	setValue();
+	var n6 = document.getElementById("billdet_dueamt");
+	
+	console.log(n6);
+
 	function setValue()
 	{
 		n5.value = n2.value;
 		}
-	n4.textContent = <%= det_bno %> 
-	n1.textContent = <%= det_bamt %>
-	n3.textContent = <%= det_conid %>
+	n4.textContent = <%= det_bno %>;
+	n1.textContent = <%= det_bamt %> ;
+	n3.textContent = <%= det_conid %> ;
 	n5.textContent = n2.value;
+	n6.textContent = <%= pay_damt %> 
 
 </script>
 

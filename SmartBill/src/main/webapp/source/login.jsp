@@ -63,7 +63,7 @@
               </div>
             </div>
             <div class="sbutton">
-              <input type="submit" id="aButton" value="Login" style = "cursor: pointer">
+              <button type="submit" id="aButton" style = "cursor: pointer">Login</button>
               <span class="lmessage1" id='llogin_message'></span>
             </div>
             <div class="asignup">Don't have an account? <a href="register.jsp"

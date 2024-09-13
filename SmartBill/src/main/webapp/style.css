@@ -156,9 +156,25 @@ body{
 {
 	width: auto;
 	height: 15px;
-	padding: 5px;
+	padding: 10px;
 	text-align: center;
 	
+}
+.status-paid {
+   	color: #4CAF50; 
+    font-weight: 700;
+}
+.status-unpaid {
+    color: #F44336; 
+    font-weight: 700;
+}
+.status-partially-paid {
+    color: #FFC107;
+    font-weight: 700;
+}
+.status-overdue {
+    color: #B71C1C; 
+    font-weight: 700;
 }
 .col
 {
@@ -331,7 +347,7 @@ form .user-details .input-box
 {
 	border-color: #CCBA78;
 }
-.sbutton input
+.sbutton button
 {
 	height: 40px;
 	width: 100%;
@@ -346,7 +362,7 @@ form .user-details .input-box
 	background: linear-gradient(135deg, #000000, #CCBA78);
 	
 }
-.sbutton input:hover
+.sbutton button:hover
 {
 	background: linear-gradient(-135deg, #000000, #CCBA78);
 }
@@ -363,9 +379,11 @@ form .user-details .input-box
 	border-radius: 5px;
 	margin-top: 10px;
 	letter-spacing: 1px;
+	padding: 10px 10px;
 	background: linear-gradient(135deg, #000000, #CCBA78);
 	
 }
+
 
 #up_comp_no
 {
@@ -378,7 +396,7 @@ form .user-details .input-box
 	background: linear-gradient(-135deg, #000000, #CCBA78);
 }
 
-form .button input
+form .button button
 {
 	height: 40px;
 	width: 100%;
@@ -394,7 +412,7 @@ form .button input
 	background: linear-gradient(135deg, #000000, #CCBA78);
 
 }
-form .button input:hover
+form .button button:hover
 {
 	background: linear-gradient(-135deg, #000000, #CCBA78);
 }
