@@ -20,10 +20,10 @@
 	                src="../assets/logo.png"></a>
 	          <ul>
 	            <li><a href="admin_home.jsp">Home</a></li>
-	            <li><a href="/SmartBillWeb/AdminViewConsumers">View Consumers</a></li>
+	            <li><a href="${pageContext.request.contextPath}/AdminViewConsumers">View Consumers</a></li>
 	            <li><a href="admin_addbill.jsp">Add Bills</a></li>
-	            <li><a href="/SmartBillWeb/AdminViewBills">View Bills</a></li>	            
-	            <li><a href="/SmartBillWeb/AdminViewComplaints">View Complaints</a></li>
+	            <li><a href="${pageContext.request.contextPath}/AdminViewBills">View Bills</a></li>	            
+	            <li><a href="${pageContext.request.contextPath}/AdminViewComplaints">View Complaints</a></li>
 	          </ul>
 	          <img src="../assets/user.png" class="user-pic" onclick="toggleMenu()">
 	          <div class="sub-menu-wrap" id="subMenu">
@@ -59,7 +59,7 @@
 				                <th>Due Amount</th>
 				                <th>Payable Amount</th>
 				                <th>Due Date</th>
-				               	<th>Due Date</th>				                
+				                <th>Status</th>
 				            </tr>
 				        </thead>
 				        <tbody>
@@ -67,22 +67,36 @@
 								List<HashMap<String, String>> l1 = (List<HashMap<String, String>>)session.getAttribute("admin_bills");
 			   					
 				            	if (l1 != null) {
-				                    for (HashMap<String, String> complaint : l1) {
+				                    for (HashMap<String, String> bill : l1) {
+				                  
+				                    	if(bill.get("status").equalsIgnoreCase("Unpaid"))
+										{
 								
 							%>
 			                <tr>
-			                    <td><%= complaint.get("bill_id") %></td>
-			                    <td><%= complaint.get("consumer_id") %></td>
-			                    <td><%= complaint.get("due_amount") %></td>
-			                    <td><%= complaint.get("pay_amount") %></td>
-			                    <td><%= complaint.get("due_date") %></td>
-			                    <td><%= complaint.get("status") %></td>
+			                    <td><%= bill.get("bill_id") %></td>
+			                    <td><%= bill.get("consumer_id") %></td>
+			                    <td><%= bill.get("due_amount") %></td>
+			                    <td><%= bill.get("pay_amount") %></td>
+			                    <td><%= bill.get("due_date") %></td>
+			                    <td style="color:red; font-weight:500;" ><%= bill.get("status") %></td>
 			                    
 			                </tr>
-			            	<%
-				                    }
-				                }
-				            %>
+			            	<% } else{ %>
+							<tr>
+								<td><%= bill.get("bill_id") %></td>
+			                    <td><%= bill.get("consumer_id") %></td>
+			                    <td><%= bill.get("due_amount") %></td>
+			                    <td><%= bill.get("pay_amount") %></td>
+			                    <td><%= bill.get("due_date") %></td>
+			                    <td style="color:green; font-weight:500;" ><%= bill.get("status") %></td>
+			                    
+			                </tr>
+					<%
+					}
+					}
+					}
+					%>
 		        	</tbody>
 		    	</table>
 		    	</div>

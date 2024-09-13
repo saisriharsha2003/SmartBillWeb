@@ -9,7 +9,7 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="icon" href="../assets/icon.png" type="image/icon type">
-<title>View All Complaints</title>
+<title>Pay Bills</title>
 
 </head>
 <body>
@@ -65,44 +65,71 @@
 	</nav>
 	</div>
 	<div class="signup">
-		<div class="container1">
-			<div class="title" style="margin-bottom: 20px;">View All
-				Complaints</div>
+		<div class="container1" style="width: 1000px;">
+		
+			<div class="title" style="margin-bottom: 20px;">Pay Bills</div>
+			<div style="display: flex; justify-content: center;">
 			<table class="paybill">
 				<thead>
 					<tr>
-						<th>Complaint ID</th>
-						<th>Contact Person</th>
-						<th>Mobile</th>
-						<th>Problem</th>
-						<th>Address</th>
+						<th>Bill ID</th>
+						<th>Due Amount</th>
+						<th>Payable Amount</th>
+						<th>Due Date</th>
 						<th>Status</th>
+						<th>Action</th>
+						
 					</tr>
 				</thead>
 				<tbody>
 					<%
-					List<HashMap<String, String>> l1 = (List<HashMap<String, String>>) session.getAttribute("view_all_comp");
+					List<HashMap<String, String>> l1 = (List<HashMap<String, String>>) session.getAttribute("view_all_bills");
 					if (l1 != null) {
-						for (HashMap<String, String> complaint : l1) {
-							if(complaint.get("status").equalsIgnoreCase("Not Solved")) {
+						for (HashMap<String, String> bill : l1) {
+							if(bill.get("status").equalsIgnoreCase("Unpaid"))
+							{
 					%>
+					<form action="<%= request.getContextPath() %>/PaymentScreenController" method="post">								
+					
 					<tr>
-						<td><%=complaint.get("complaint_id")%></td>
-						<td><%=complaint.get("contact_person")%></td>
-						<td><%=complaint.get("mobile")%></td>
-						<td><%=complaint.get("problem")%></td>
-						<td><%=complaint.get("address")%></td>
-						<td style="color:red; font-weight:500;"><%=complaint.get("status")%></td>
+						<td>
+							<%= bill.get("bill_id") %>
+						</td>
+						<td><%=bill.get("due_amt")%></td>
+						<td><%=bill.get("pay_amt")%></td>
+						<td><%=bill.get("date")%></td>
+						<td style="color:red; font-weight:500;"><%=bill.get("status")%></td>
+						<td>
+							<div class="button">
+				              <input type="submit" class="upbill" id="adstcmp" value="Pay" style="cursor: pointer">
+				            </div>
+							
+						</td>
+						<!-- Send complaint ID as a hidden input field -->
+						<input type="hidden" id="inbill" name="up_bill" value="<%= bill.get("bill_id") %>">
 					</tr>
-					<% } else { %>
+					</form>
+					<% } else{ %>
+					 <form action="<%= request.getContextPath() %>/PaymentScreenController" method="post">								
+					
 					<tr>
-						<td><%=complaint.get("complaint_id")%></td>
-						<td><%=complaint.get("contact_person")%></td>
-						<td><%=complaint.get("mobile")%></td>
-						<td><%=complaint.get("problem")%></td>
-						<td><%=complaint.get("address")%></td>
-						<td style="color:green; font-weight:500;"><%=complaint.get("status")%></td>
+						<td>
+							<%= bill.get("bill_id") %>
+						</td>
+						<td><%=bill.get("due_amt")%></td>
+						<td><%=bill.get("pay_amt")%></td>
+						<td><%=bill.get("date")%></td>
+						<td style="color:green; font-weight:500;"><%=bill.get("status")%></td>
+						<td>
+							<div class="button">
+				              <input type="submit" class="upbill" id="adstcmp" value="Pay" style="cursor: pointer">
+				            </div>
+							
+						</td>
+						<!-- Send complaint ID as a hidden input field -->
+						<input type="hidden" id="inbill"  name="up_bill" value="<%= bill.get("bill_id") %>">
 					</tr>
+					</form>
 					<%
 					}
 					}
@@ -110,11 +137,21 @@
 					%>
 				</tbody>
 			</table>
+			</div>
 		</div>
 	</div>
 </body>
 <script src="../scripts/script.js"></script>
 <script>
+	var btns = document.getElementsByClassName("upbill");
+	for (i = 0; i < btns.length; i++) {
+		btns[i].addEventListener('click', function () {
+			var n1 = this.value;
+			document.getElementById("inbill").value = n1;
+		});
+	}	
+	
+	console.log(document.getElementById("inbill").value);
 	if(document.getElementById("cu_name"))
 	{
 		var name = '<%=(session.getAttribute("consumer_lgname") != null) ? session.getAttribute("consumer_lgname") : ""%>';

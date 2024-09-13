@@ -20,10 +20,10 @@
 	                src="../assets/logo.png"></a>
 	          <ul>
 	            <li><a href="admin_home.jsp">Home</a></li>
-	            <li><a href="/SmartBillWeb/AdminViewConsumers">View Consumers</a></li>
+	            <li><a href="${pageContext.request.contextPath}/AdminViewConsumers">View Consumers</a></li>
 	            <li><a href="admin_addbill.jsp">Add Bills</a></li>
-	            <li><a href="/SmartBillWeb/AdminViewBills">View Bills</a></li>	            
-	            <li><a href="/SmartBillWeb/AdminViewComplaints">View Complaints</a></li>
+	            <li><a href="${pageContext.request.contextPath}/AdminViewBills">View Bills</a></li>	            
+	            <li><a href="${pageContext.request.contextPath}/AdminViewComplaints">View Complaints</a></li>
 	          </ul>
 	          <img src="../assets/user.png" class="user-pic" onclick="toggleMenu()">
 	          <div class="sub-menu-wrap" id="subMenu">
@@ -65,42 +65,62 @@
 				        </thead>			        
 				        
 				        <tbody>
-			            	<%
-								List<HashMap<String, String>> l1 = (List<HashMap<String, String>>)session.getAttribute("admin_complaints");
-			   					
-				            	if (l1 != null) {
-				                    for (HashMap<String, String> complaint : l1) {
-				                    	
-								
+				        
+							<%
+								List<HashMap<String, String>> l1 = (List<HashMap<String, String>>) session.getAttribute("admin_complaints");
+						
+								if (l1 != null) {
+								    for (HashMap<String, String> complaint : l1) {
+								    	if(complaint.get("status").equalsIgnoreCase("Not Solved"))
+										{
 							%>
-							<form name='complaint-form'  action="<%=request.getContextPath()%>/UpdateComplaint" method = "post">
-							
-			                <tr data-cmpid= <%= complaint.get("comp_no")  %>>
-			                    <td >
-			                    	<input style="width: 116px; height: 50px;border-style: none;font-size: 16px; type="text" readonly name="up_compno" value="<%= complaint.get("comp_no") %>">
-			                    </td>
-			                    <td><%= complaint.get("cons_no") %></td>
-			                    <td><%= complaint.get("mobile") %></td>
-			                    <td><%= complaint.get("contact_per") %></td>
-			                    <td><%= complaint.get("problem") %></td>
-			                    <td><%= complaint.get("status") %></td>
-			                    <td >
-			                    	<div class="button">
-					              		<button class="upcmp" type="submit" id="adstcmp"  value=<%= complaint.get("comp_no")  %> style="cursor: pointer" data-cmpno= <%= complaint.get("comp_no")  %>>Update</button>
-		
-					            	
-					            	</div>
-					            </td>
-					            <input id="incomp" type="hidden" name="up_comp" value="null">
-			                    
-			                </tr>
-			            	<%
-				                    }
-				                }
-				            %>
-				            </form>
-		        	</tbody>
-		        	
+								<form action="<%= request.getContextPath() %>/UpdateComplaint" method="post">	
+								<tr>
+									<td>
+										<%= complaint.get("comp_no") %>
+									</td>
+									<td><%= complaint.get("cons_no") %></td>
+									<td><%= complaint.get("mobile") %></td>
+									<td><%= complaint.get("contact_per") %></td>
+									<td><%= complaint.get("problem") %></td>
+									<td style="color:red; font-weight:500;"><%= complaint.get("status") %></td>
+									<td>
+										<div class="button">
+							              <input type="submit" class="upcmp" id="adstcmp" value="Update" style="cursor: pointer">
+							            </div>
+										
+									</td>
+									<!-- Send complaint ID as a hidden input field -->
+									<input type="hidden" id="incomp" name="up_comp" value="<%= complaint.get("comp_no") %>">
+								</tr>
+								</form>
+							<% } else{ %>
+							<form action="<%= request.getContextPath() %>/UpdateComplaint" method="post">								
+								<tr>
+									<td>
+										<%= complaint.get("comp_no") %>
+									</td>
+									<td><%= complaint.get("cons_no") %></td>
+									<td><%= complaint.get("mobile") %></td>
+									<td><%= complaint.get("contact_per") %></td>
+									<td><%= complaint.get("problem") %></td>
+									<td style="color:green; font-weight:500;"><%= complaint.get("status") %></td>
+									<td>
+										<div class="button">
+							              <input type="submit" class="upcmp" id="adstcmp" value="Update" style="cursor: pointer">
+							            </div>
+										
+									</td>
+									<!-- Send complaint ID as a hidden input field -->
+									<input type="hidden" id="incomp" name="up_comp" value="<%= complaint.get("comp_no") %>">
+								</tr>
+							</form>
+							<%
+							}
+								    }
+								}
+							%>
+					 </tbody>        	
 		    	</table>
 		    	
 		    	</div>
@@ -110,28 +130,19 @@
 	<script src="../scripts/script.js"></script>
 	<script>
 	
-	var btns = document.getElementsByClassName("upcmp");
-	for(i=0; i<btns.length;i++)
-		{
-			btns[i].addEventListener('click', function() {
+		var btns = document.getElementsByClassName("upcmp");
+		for (i = 0; i < btns.length; i++) {
+			btns[i].addEventListener('click', function () {
 				var n1 = this.value;
 				document.getElementById("incomp").value = n1;
-				
-			}
-		}
-	
-	var name = '<%= (session.getAttribute("consumer_lgname") != null) ? session.getAttribute("consumer_lgname") : "" %>';
-	var c1 = document.getElementById("acu_name");
+			});
+		}	
+		
+		var name = '<%= (session.getAttribute("consumer_lgname") != null) ? session.getAttribute("consumer_lgname") : "" %>';
+		var c1 = document.getElementById("acu_name");
+		
+		if(c1) c1.textContent = name;
 
-	if(c1) c1.textContent = name;
-	
-	function handleButtonClick(button) {
-        const compid = button.parentNode.parentNode.dataset.cmpid;
-        
-        console.log(`Sending data: Name - ${compid}`);
-        window.location.href ='/SmartBillWeb/UpdateComplaint';
-    }
-	
 	</script>
 	
 </html>

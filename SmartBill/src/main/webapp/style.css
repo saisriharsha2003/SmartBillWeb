@@ -13,6 +13,13 @@
 	color:red;
 	font-weight: 500;
 }
+
+.edit-message
+{
+	font-size: 15px;
+	color:red;
+	font-weight: 500;
+}
 .us_name
 {
 	background-color: white;
@@ -44,6 +51,31 @@
 	
 	margin-left: 9px;
 }
+
+.homep
+{
+	color: #fff;
+	overflow: hidden; 
+	border-right: .15em solid #CCBA78;
+	white-space: nowrap; 
+	margin-left: 10px;
+	letter-spacing: .1em; 
+	animation: 
+	  typing 3.5s steps(20, end) infinite,
+	  blink-caret .5s step-end infinite;
+}
+body{
+	height: 100vh;
+}
+@keyframes typing {
+	from { width: 0 }
+	to { width: 37% }
+}
+
+@keyframes blink-caret {
+	from, to { border-color: transparent }
+	50% { border-color: #CCBA78 }
+}
 .paybill
 {
 	border-collapse: collapse;
@@ -69,30 +101,6 @@
 		border: 1px solid #CCBA78;
 	
 }
-.homep
-{
-	color: #fff;
-	overflow: hidden; 
-	border-right: .15em solid #CCBA78;
-	white-space: nowrap; 
-	margin-left: 10px;
-	letter-spacing: .1em; 
-	animation: 
-	  typing 3.5s steps(20, end) infinite,
-	  blink-caret .5s step-end infinite;
-}
-body{
-	height: 100vh;
-}
-@keyframes typing {
-	from { width: 0 }
-	to { width: 37% }
-}
-
-@keyframes blink-caret {
-	from, to { border-color: transparent }
-	50% { border-color: #CCBA78 }
-}
 .paybill th 
 {
 	width: auto;
@@ -112,6 +120,46 @@ body{
 {
 	width: auto;
 }
+
+.paybilldet
+{
+	border-collapse: collapse;
+	border-radius: 10px;
+	overflow: hidden;
+	width: 90%;
+	
+}
+.paybilldet thead
+{
+	background: linear-gradient(-135deg, #e9c979, #CCBA78);
+}
+.paybilldet tbody
+{
+		border: 1px solid #CCBA78;
+		height: 50px;
+	
+}
+
+.flexcenter
+{
+	display: flex;
+	justify-content: center;
+}
+.paybilldet th 
+{
+	width: auto;
+	height: 15px;
+	padding: 10px;
+	text-align: center;
+}
+.paybilldet td
+{
+	width: auto;
+	height: 15px;
+	padding: 5px;
+	text-align: center;
+	
+}
 .col
 {
 	margin-left: 15px;
@@ -127,6 +175,11 @@ body{
 	margin-left: 25px;
 }
 .message.match
+{
+	color: green;
+	font-weight: 500;
+}
+.edit-message.match
 {
 	color: green;
 	font-weight: 500;
@@ -379,17 +432,7 @@ form .button input:hover
 	cursor: pointer;
 
 }
-nav
-{
-	font-weight: 700;
-	background: black;
-	padding: 10px 3%;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	position: relative;
-	
-}
+
 .sub-menu-wrap
 {
 	position: absolute;
@@ -466,25 +509,82 @@ nav
 {
 	font-weight: 700;
 }
-nav ul
-{
-	width: 100%;
-	text-align: right;
+
+nav {
+    font-weight: 700;
+    background: black;
+    padding: 10px 3%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
 }
-nav ul li
-{
-	display: inline-block;
-	list-style: none;
-	margin-left:  20px;
-	margin-right:20px;
-	margin-top: 10px;
-	margin-bottom:10px;
+
+nav ul {
+    width: 100%;
+    text-align: right;
 }
-nav ul li a
-{
-	color: #CCBA78 ;
-	text-decoration: none;
+
+nav ul li {
+    display: inline-block;
+    list-style: none;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    position: relative; 
 }
+
+nav ul li a {
+    color: #CCBA78;
+    text-decoration: none;
+    padding: 10px;
+    cursor: pointer;
+}
+
+nav ul li .dropdown-content {
+    display: none; 
+    position: absolute;
+    background-color: black;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    top: 100%; 
+    left: 0;
+    opacity: 0; 
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    visibility: hidden;
+}
+
+nav ul li .dropdown-content a {
+    color: #CCBA78;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+    cursor: pointer;
+}
+
+nav ul li .dropdown-content a:hover {
+    color: #fff;
+}
+
+nav ul li:hover .dropdown-content {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+}
+
+nav ul li:hover a {
+    color: #CCBA78;
+}
+
+nav ul li .dropdown-content a {
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+}
+
+
 .b1
 {
 	color: #000000;
