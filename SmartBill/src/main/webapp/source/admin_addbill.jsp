@@ -19,10 +19,10 @@
 	                src="../assets/logo.png"></a>
 	          <ul>
 	            <li><a href="admin_home.jsp">Home</a></li>
-	            <li><a href="/SmartBillWeb/AdminViewConsumers">View Consumers</a></li>
+	            <li><a href="${pageContext.request.contextPath}/AdminViewConsumers">View Consumers</a></li>
 	            <li><a href="admin_addbill.jsp">Add Bills</a></li>
-	            <li><a href="/SmartBillWeb/AdminViewBills">View Bills</a></li>	            
-	            <li><a href="/SmartBillWeb/AdminViewComplaints">View Complaints</a></li>
+	            <li><a href="${pageContext.request.contextPath}/AdminViewBills">View Bills</a></li>	            
+	            <li><a href="${pageContext.request.contextPath}/AdminViewComplaints">View Complaints</a></li>
 	          </ul>
 	          <img src="../assets/user.png" class="user-pic" onclick="toggleMenu()">
 	          <div class="sub-menu-wrap" id="subMenu">

@@ -6,12 +6,12 @@
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="icon" href="../assets/icon.png" type="image/icon type">
-    <title>View Bills</title>
+    <title>Pay Bills</title>
     
 </head>
 <body>
     <div class="hero">
-        <nav> 
+        <nav>
             <a href="../home.jsp"><img class="logo" src="../assets/logo.png"></a>
             <ul>
                 <li><a href="home.jsp">Home</a></li>
@@ -60,8 +60,8 @@
         </nav>
     </div>
     <div class="signup">
-        <div class="container1" style="width: 750px;">
-            <div class="title" style="margin-bottom: 20px;">View All Bills</div>
+        <div class="container1" style="width: 900px;">
+            <div class="title" style="margin-bottom: 20px;">Pay Bills</div>
             <div style="display: flex; justify-content: center;">
                 <table class="paybill">
                     <thead>
@@ -71,6 +71,7 @@
                             <th>Payable Amount</th>
                             <th>Due Date</th>
                             <th>Status</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -96,13 +97,21 @@
                                         break;
                                 }
                         %>
-                        <tr>
-                            <td><%= bill.get("bill_id") %></td>
-                            <td><%= bill.get("due_amt") %></td>
-                            <td><%= bill.get("pay_amt") %></td>
-                            <td><%= bill.get("date") %></td>
-                            <td class="<%= statusClass %>"><%= bill.get("status") %></td>
-                        </tr>
+                        <form action="<%= request.getContextPath() %>/PaymentScreenController" method="post">
+                            <tr>
+                                <td><%= bill.get("bill_id") %></td>
+                                <td><%= bill.get("due_amt") %></td>
+                                <td><%= bill.get("pay_amt") %></td>
+                                <td><%= bill.get("date") %></td>
+                                <td class="<%= statusClass %>"><%= bill.get("status") %></td>
+                                <td>
+                                    <div class="button">
+                                    	<button type="submit" class="upbill" id="adstcmp" style="cursor: pointer">Pay</button>
+						            </div>
+                                </td>
+                                <input type="hidden" name="up_bill" value="<%= bill.get("bill_id") %>">
+                            </tr>
+                        </form>
                         <%
                             }
                         }

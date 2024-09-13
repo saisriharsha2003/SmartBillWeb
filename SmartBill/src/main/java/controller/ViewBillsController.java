@@ -12,38 +12,40 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import view.AdminView;
+import view.BillsView;
+import view.ComplaintsView;
 
-@WebServlet("/AdminViewBills")
-public class AdminViewBillsController extends HttpServlet {
+/**
+ * Servlet implementation class ViewBillsController
+ */
+@WebServlet("/ViewBills")
+public class ViewBillsController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    
-    public AdminViewBillsController() {
+       
+    public ViewBillsController() {
         super();
         // TODO Auto-generated constructor stub
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		HttpSession session = request.getSession();
+		long conid = Long.parseLong(session.getAttribute("consumer_lgid").toString());
 		try {
-			List<HashMap<String, String>> h1 = AdminView.fetchAllBillsAdmin();
-			HttpSession session = request.getSession();
-			if(session.getAttribute("admin_bills") == null)
+			List<HashMap<String, String>> l1 = BillsView.fetchAllBills(conid);
+			if(session.getAttribute("view_all_bills") == null)
 			{
-				session.setAttribute("admin_bills", h1);
+				session.setAttribute("view_all_bills", l1);
 			}
 			else
 			{
-				session.removeAttribute("admin_bills");
-				session.setAttribute("admin_bills", h1);
+				session.removeAttribute("view_all_bills");
+				session.setAttribute("view_all_bills", l1);
 			}
-			response.sendRedirect("source/admin_view_bills.jsp");
+			response.sendRedirect("source/view_bills.jsp");
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 	}
 
-	
 }

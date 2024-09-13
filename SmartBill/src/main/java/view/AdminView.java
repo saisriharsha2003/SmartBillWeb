@@ -18,7 +18,7 @@ public class AdminView {
 		PreparedStatement p1 = Utility.getPreparedStatement(sql1);
 		p1.setInt(1, bill.getBillNuber());
 		p1.setDouble(2, bill.getDueAmount());
-		p1.setDouble(3, bill.getPayableAmount());
+		p1.setDouble(3, bill.getBillAmount());
 		p1.setString(4, bill.getDueDate());
 		p1.setString(5, bill.getStatus());
 		p1.setLong(6,  bill.getConsumerId());
@@ -47,7 +47,7 @@ public class AdminView {
 		return lh1;
 	}
 	
-	public static List<HashMap<String, String>> fetchAllBills() throws ClassNotFoundException, SQLException
+	public static List<HashMap<String, String>> fetchAllBillsAdmin() throws ClassNotFoundException, SQLException
 	{
 		List<HashMap<String, String>> lh1=new ArrayList<HashMap<String, String>>();
 		Statement p1 = Utility.getStatement();
@@ -58,7 +58,7 @@ public class AdminView {
 			h1.put("bill_id", String.valueOf(rs.getInt("bill_number")));
 			h1.put("consumer_id", String.valueOf(rs.getLong("consumer_id")));
 			h1.put("due_amount", String.valueOf(rs.getDouble("due_amount")));
-			h1.put("pay_amount", String.valueOf(rs.getDouble("payable_amount")));
+			h1.put("pay_amount", String.valueOf(rs.getDouble("bill_amount")));
 			h1.put("due_date", rs.getString("due_date"));
 			h1.put("status", rs.getString("status"));
 

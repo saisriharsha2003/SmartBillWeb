@@ -17,11 +17,32 @@
 			src="../assets/logo.png"></a>
 		<ul>
 			<li><a href="home.jsp">Home</a></li>
-			<li><a href="paybill.html">Pay Bill</a></li>
-			<li><a href="register_complaint.jsp">Register Complaint</a></li>
-			<li><a href="search_complaint.jsp">Search Complaint</a></li>
-			<li><a href="/SmartBillWeb/ComplaintStatus">Complaint Status</a></li>
+
+			<li class="dropdown"><a href="#" class="dropbtn">Bill</a>
+				<div class="dropdown-content">
+					<a href="${pageContext.request.contextPath}/PayBills">Pay Bills</a> 
+					<a	href="${pageContext.request.contextPath}/ViewBills">View Bills</a>
+					<a href="${pageContext.request.contextPath}/SearchBills">Search
+						Bill</a>
+				</div></li>
+
+			<li class="dropdown"><a href="#" class="dropbtn">Complaint</a>
+				<div class="dropdown-content">
+					<a href="register_complaint.jsp">Register Complaint</a> <a
+						href="search_complaint.jsp">Search Complaint</a> <a
+						href="${pageContext.request.contextPath}/ComplaintStatus">Complaint
+						Status</a>
+				</div></li>
+
+			<li class="dropdown"><a href="#" class="dropbtn">Payments</a>
+				<div class="dropdown-content">
+					<a href="">Payments History</a> 
+					<a href="">Search Payment Details</a>
+				</div>
+			</li>
+
 		</ul>
+
 		<img src="../assets/user.png" class="user-pic" onclick="toggleMenu()">
 		<div class="sub-menu-wrap" id="subMenu">
 			<div class="sub-menu">
@@ -39,7 +60,7 @@
 				</a>
 			</div>
 		</div>
-		</nav>
+	</nav>
 	</div>
 	<div class="signup">
 		<div class="container">

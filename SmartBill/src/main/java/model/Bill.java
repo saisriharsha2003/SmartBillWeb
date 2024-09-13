@@ -6,7 +6,7 @@ import java.time.*;
 public class Bill {
 	private int billNuber;
 	private double dueAmount;
-	private double payableAmount;
+	private double billAmount;
 	private String dueDate;
 	private String status;
 	private long consumerId;
@@ -27,12 +27,12 @@ public class Bill {
 		this.dueAmount = dueAmount;
 	}
 	
-	public double getPayableAmount() {
-		return payableAmount;
+	public double getBillAmount() {
+		return billAmount;
 	}
 	
-	public void setPayableAmount(double payableAmount) {
-		this.payableAmount = payableAmount;
+	public void setBillAmount(double billAmount) {
+		this.billAmount = billAmount;
 	}
 	
 	public String getDueDate() {
@@ -59,12 +59,12 @@ public class Bill {
 		this.consumerId = consumerId;
 	}
 	
-	public Bill(int billNuber, double dueAmount, double payableAmount, String dueDate, String status,
+	public Bill(int billNuber, double dueAmount, double billAmount, String dueDate, String status,
 			long consumerId) {
 
 		this.billNuber = billNuber;
 		this.dueAmount = dueAmount;
-		this.payableAmount = payableAmount;
+		this.billAmount = billAmount;
 		this.dueDate = dueDate;
 		this.status = status;
 		this.consumerId = consumerId;

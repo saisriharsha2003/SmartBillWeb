@@ -47,11 +47,9 @@ public class AdminAddBillController extends HttpServlet {
 				HttpSession session = request.getSession();
 				session.setAttribute("addbill_bn", bill.getBillNuber()); 
 				session.setAttribute("addbill_cn", bill.getConsumerId());
-				session.setAttribute("adbill_amt", bill.getPayableAmount());
+				session.setAttribute("adbill_amt", bill.getBillAmount());
 				session.setAttribute("adbill_date", bill.getDueDate());
-				
-				System.out.println(bill.getPayableAmount());
-				System.out.println(bill.getDueDate());
+
 				
 				response.sendRedirect("source/admin_addbill_success.jsp");
 
