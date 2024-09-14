@@ -5,18 +5,18 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/style.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="icon" href="../assets/icon.png" type="image/icon type">
+<link rel="icon" href="<%=request.getContextPath()%>/assets/icon.png" type="image/icon type">
 <title>View Bills</title>
 
 </head>
 <body>
 
 	<div class="hero">
-		<nav> <a href="../home.jsp"><img class="logo"
-			src="../assets/logo.png"></a>
+		<nav> <a href="<%=request.getContextPath()%>/home.jsp"><img class="logo"
+			src="<%=request.getContextPath()%>/assets/logo.png"></a>
 		<ul>
 			<li><a href="home.jsp">Home</a></li>
 
@@ -46,24 +46,24 @@
 
 		</ul>
 
-		<img src="../assets/user.png" class="user-pic" onclick="toggleMenu()">
+		<img src="<%=request.getContextPath()%>/assets/user.png" class="user-pic" onclick="toggleMenu()">
 		<div class="sub-menu-wrap" id="subMenu">
 			<div class="sub-menu">
 				<div class="user-info">
-					<img src="../assets/user.png" style="width: 80px; height: 80px">
+					<img src="<%=request.getContextPath()%>/assets/user.png" style="width: 80px; height: 80px">
 					<h2 id="cu_name" style="color: #CCBA78;"></h2>
 				</div>
 				<hr>
 				<a href="edit_profile.jsp" class="sub-menu-link"> 
-					<img src="../assets/edit.png" style="width: 50px; height: 50px">
+					<img src="<%=request.getContextPath()%>/assets/edit.png" style="width: 50px; height: 50px">
 					<p>Edit Profile</p> <span class="ext">></span>
 				</a> 
 				<a href="delete_profile.jsp" class="sub-menu-link"> 
-					<img src="../assets/delete.png" style="width: 50px; height: 50px">
+					<img src="<%=request.getContextPath()%>/assets/delete.png" style="width: 50px; height: 50px">
 					<p>Delete Account</p> <span class="ext">></span>
 				</a> 
 				<a href="login.jsp" class="sub-menu-link"> 
-				<img src="../assets/logout.png" style="width: 50px; height: 50px">
+				<img src="<%=request.getContextPath()%>/assets/logout.png" style="width: 50px; height: 50px">
 					<p>Logout</p> <span class="ext">></span>
 				</a>
 			</div>
@@ -74,7 +74,7 @@
 		<div class="container">
           <div class="title" style="margin-bottom: 20px;">Payment Screen</div>
           <div style="display: flex; align-items: center;">
-          <img src="../assets/visa-img.jpg" style="height: 20%; width: 70%;">
+          <img src="<%=request.getContextPath()%>/assets/visa-img.jpg" style="height: 20%; width: 70%;">
           <div>
           <% String pmt = (String)session.getAttribute("billdet_pamount"); %>
           <p><span style="font-size: 20px; font-weight: 700;">Payment Amount:</span> <span id = "ps_pamt" style="font-size: 20px; font-weight: 700; color: red;"></span></p>
@@ -105,7 +105,7 @@
 	                  placeholder="Enter your Card Number" required
 	                  oninvalid="this.setCustomValidity('Please Enter Card Number')"
 	                  onchange="this.setCustomValidity('')">
-	                 <img src="../assets/visa.jpg" style="width: 60px; height: 38px; border-radius: 3px;">
+	                 <img src="<%=request.getContextPath()%>/assets/visa.jpg" style="width: 60px; height: 38px; border-radius: 3px;">
 	              </div>
               </div>
               <div style="display: flex; align-items: center; width: 100%;">
@@ -158,7 +158,7 @@
         </div>
 	</div>
 </body>
-<script src="../scripts/script.js"></script>
+<script src="<%=request.getContextPath()%>/scripts/script.js"></script>
 <script>
 	var n1 = document.getElementById("ps_pamt");
 	n1.textContent = <%= pmt %>;

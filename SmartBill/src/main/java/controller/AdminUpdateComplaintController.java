@@ -32,15 +32,7 @@ public class AdminUpdateComplaintController extends HttpServlet {
 			if(res == 1)
 			{
 				HashMap<String, String> lh1 = AdminView.fetchUpdatedComplaint(cmpid);
-				if(session.getAttribute("upd_comp_det") == null)
-				{
-					session.setAttribute("upd_comp_det", lh1);
-				}
-				else
-				{
-					session.removeAttribute("upd_comp_det");
-					session.setAttribute("upd_comp_det", lh1);
-				}
+				session.setAttribute("upd_comp_det", lh1);
 			}
 			response.sendRedirect("source/admin_complaint_update.jsp");
 		} catch (ClassNotFoundException | SQLException e) {

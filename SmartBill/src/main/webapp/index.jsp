@@ -17,8 +17,8 @@
               <li><a href="index.jsp">Home</a></li>
               <li><a href="#">About</a></li>
               <li><a href="#">Contact</a></li>
-              <button class="ind_button"><a class="b1" href="source/register.jsp">Register</a></button>
-              <button class="ind_button"><a class="b1" href="source/login.jsp">Login</a></button>
+              <button class="ind_button"><a class="b1" href="register.jsp">Register</a></button>
+              <button class="ind_button"><a class="b1" href="login.jsp">Login</a></button>
             </ul>
         </nav>
       </div>

@@ -5,9 +5,11 @@ import model.RegisterModel;
 import view.LoginView;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.sql.SQLException;
 import java.util.HashMap;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -30,6 +32,8 @@ public class LoginController extends HttpServlet {
 		String uname = request.getParameter("lname");
 		String pwd = request.getParameter("lpwd");
 		String ut = request.getParameter("userType");
+		
+		System.out.println(uname+"  uname"+"  "+ut);
 
 		if(ut.equalsIgnoreCase("Admin"))
 		{
@@ -40,16 +44,17 @@ public class LoginController extends HttpServlet {
 				if(status == true)
 				{
 					HttpSession session = request.getSession();
-					if(session.getAttribute("consumer_lgname") == null)
-					{
-						session.setAttribute("consumer_lgname", "Admin");
-					}
-					else
-					{
-						session.removeAttribute("consumer_lgname");
-						session.setAttribute("consumer_lgname", "Admin");
-					}
+					session.setAttribute("consumer_lgname", "Admin");
+
 					response.sendRedirect("source/admin_home.jsp");
+				}
+				else
+				{
+					request.setAttribute("en_username", uname);
+	                request.setAttribute("user_type", ut);
+	                request.setAttribute("en_password", pwd);
+	                request.setAttribute("error_msg", "Invalid Admin credentials.");
+	                request.getRequestDispatcher("source/login.jsp").forward(request, response);
 				}
 			} catch (ClassNotFoundException | SQLException e) {
 				// TODO Auto-generated catch block
@@ -60,47 +65,54 @@ public class LoginController extends HttpServlet {
 		else
 		{
 			try {
-				LoginModel lg1=new LoginModel(uname, pwd);
-
-				boolean status1 = LoginView.authenticateConsumer(lg1);
-				System.out.println("status"+status1);
-				if(status1 == true)
+				
+				boolean isexist = LoginView.isUserExist(uname);
+				if(isexist)
 				{
-					String cname = LoginView.fetchConsumerName(uname);
-					long cid = LoginView.fetchConsumerId(uname);
-					HttpSession session = request.getSession();
-					if(session.getAttribute("consumer_lgid") == null)
+					LoginModel lg1=new LoginModel(uname, pwd);
+					boolean act_status = LoginView.fetchAccountStatus(uname);
+					
+					if(act_status)
 					{
-						session.setAttribute("consumer_lgid", cid);
-					}
-					else
-					{
-						session.removeAttribute("consumer_lgid");
-						session.setAttribute("consumer_lgid", cid);
-					}
-					if(session.getAttribute("consumer_lgname") == null)
-					{
-						session.setAttribute("consumer_lgname", cname);
-					}
-					else
-					{
-						session.removeAttribute("consumer_lgname");
-						session.setAttribute("consumer_lgname", cname);
-					}
-					HashMap<String, String> mp = LoginView.fetchUserDetails(uname);
+						boolean status1 = LoginView.authenticateConsumer(lg1);
+						if(status1 == true)
+						{
+							String cname = LoginView.fetchConsumerName(uname);
+							long cid = LoginView.fetchConsumerId(uname);
+							HttpSession session = request.getSession();
+							session.setAttribute("consumer_lgid", cid);
+							session.setAttribute("consumer_lgname", cname);
 
-					if(session.getAttribute("user-details") == null)
-					{
-						session.setAttribute("user-details", mp);
+							HashMap<String, String> mp = LoginView.fetchUserDetails(uname);
+							session.setAttribute("user-details", mp);
+							
+							response.sendRedirect("source/home.jsp");
+
+						}
+						else
+						{
+							request.setAttribute("en_username", uname);
+			                request.setAttribute("user_type", ut);
+			                request.setAttribute("en_password", pwd);
+			                request.setAttribute("error_msg", "Invalid login credentials. Kindly check once.");
+			                request.getRequestDispatcher("/source/login.jsp").forward(request, response);
+			            
+						}
 					}
 					else
 					{
-						session.removeAttribute("user-details");
-						session.setAttribute("user-details", mp);
+						HttpSession session = request.getSession();
+						session.setAttribute("reactivate_uname", uname);
+						response.sendRedirect("reactivate.jsp");
 					}
-						
-					response.sendRedirect("source/home.jsp");
-
+				}
+				else
+				{
+					request.setAttribute("en_username", uname);
+	                request.setAttribute("user_type", ut);
+	                request.setAttribute("en_password", pwd);
+	                request.setAttribute("error_msg", "Consumer doesn't exist. Kindly check the credentials once.");
+	                request.getRequestDispatcher("/source/login.jsp").forward(request, response);
 				}
 			} catch (ClassNotFoundException | SQLException e) {
 				// TODO Auto-generated catch block

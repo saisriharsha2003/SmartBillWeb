@@ -29,15 +29,7 @@ public class AdminViewComplaintsControler extends HttpServlet {
 		try {
 			List<HashMap<String, String>> h1 = AdminView.fetchAllComplaints();
 			HttpSession session = request.getSession();
-			if(session.getAttribute("admin_complaints") == null)
-			{
-				session.setAttribute("admin_complaints", h1);
-			}
-			else
-			{
-				session.removeAttribute("admin_complaints");
-				session.setAttribute("admin_complaints", h1);
-			}
+			session.setAttribute("admin_complaints", h1);
 			response.sendRedirect("source/admin_view_complaints.jsp");
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block

@@ -30,15 +30,8 @@ public class SearchBillController extends HttpServlet {
 		try {
 			HashMap<String, String> sbill = BillsView.fetchBillDetailsById(compid);
 			HttpSession session = request.getSession();
-			if(session.getAttribute("search_bill_id") == null)
-			{
-				session.setAttribute("search_bill_id", sbill);
-			}
-			else
-			{
-				session.removeAttribute("search_bill_id");
-				session.setAttribute("search_bill_id", sbill);
-			}
+			session.setAttribute("search_bill_id", sbill);
+
 			response.sendRedirect("source/bill_details_id.jsp");
 		} catch (ClassNotFoundException | SQLException | ParseException e) {
 			// TODO Auto-generated catch block

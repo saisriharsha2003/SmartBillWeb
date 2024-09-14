@@ -257,6 +257,15 @@ placeholder
 	 color:  #CCBA78;
 }
 
+.container .title1
+{
+	 font-size: 30px;
+	 font-weight: 600;
+	 display: flex;
+	 justify-content: center;
+	
+	 color:  #CCBA78;
+}
 .container form .user-details
 {
 	 display: flex;
@@ -367,6 +376,45 @@ form .user-details .input-box
 	background: linear-gradient(-135deg, #000000, #CCBA78);
 }
 
+.delete-button button
+{
+	height: 40px;
+	width: 100%;
+	outline: none;
+	color: #fff;
+	border: none;
+	font-size: 18px;
+	font-weight: 500;
+	border-radius: 5px;
+	margin-top: 10px;
+	letter-spacing: 1px;
+	background-color: red;
+	
+}
+.delete-button button:hover
+{
+	background-color: red;
+}
+
+.nodelete-button button
+{
+	height: 40px;
+	width: 100%;
+	outline: none;
+	color: #fff;
+	border: none;
+	font-size: 18px;
+	font-weight: 500;
+	border-radius: 5px;
+	margin-top: 10px;
+	letter-spacing: 1px;
+	background-color: green;
+	
+}
+.nodelete-button button:hover
+{
+	background-color: green;
+}
 #adstcmp 
 {
 	height: 50px;
@@ -469,7 +517,7 @@ form .button button:hover
 }
 .sub-menu-wrap.open-menu
 {
-	max-height:300px;
+	max-height:400px;
 }
 .sub-menu
 {

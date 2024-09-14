@@ -41,11 +41,8 @@ public class EditProfileController extends HttpServlet {
 				session.setAttribute("up-mob", mob);
 				session.setAttribute("up-uname", uuname);
 				
-				session.removeAttribute("consumer_lgname");
 				session.setAttribute("consumer_lgname", ucname);
-				
-				session.removeAttribute("user-detials");
-				
+								
 				HashMap<String, String> mp1 = new HashMap<>();
 				mp1.put("name", ucname);
 				mp1.put("email", email);
@@ -53,8 +50,7 @@ public class EditProfileController extends HttpServlet {
 				mp1.put("username", uuname);
 				mp1.put("password", upwd);
 				session.setAttribute("user-details", mp1);
-				
-				
+							
 				response.sendRedirect("source/update_success.jsp");
 			}
 		} catch (ClassNotFoundException | SQLException e) {

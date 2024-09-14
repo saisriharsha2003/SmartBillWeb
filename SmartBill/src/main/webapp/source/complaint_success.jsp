@@ -5,15 +5,15 @@
 	<html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-		<link rel="stylesheet" href="../style.css">
-    <link rel="icon" href="../assets/icon.png" type="image/icon type">
+		<link rel="stylesheet" href="<%=request.getContextPath()%>/style.css">
+    <link rel="icon" href="<%=request.getContextPath()%>/assets/icon.png" type="image/icon type">
     <title>Complaint Registered</title>
   </head>
   <body>
     <div>
       <div class="hero">
-        <nav> <a href="../home.jsp"><img class="logo"
-			src="../assets/logo.png"></a>
+        <nav> <a href="<%=request.getContextPath()%>/home.jsp"><img class="logo"
+			src="<%=request.getContextPath()%>/assets/logo.png"></a>
 		<ul>
 			<li><a href="home.jsp">Home</a></li>
 
@@ -43,24 +43,24 @@
 
 		</ul>
 
-		<img src="../assets/user.png" class="user-pic" onclick="toggleMenu()">
+		<img src="<%=request.getContextPath()%>/assets/user.png" class="user-pic" onclick="toggleMenu()">
 		<div class="sub-menu-wrap" id="subMenu">
 			<div class="sub-menu">
 				<div class="user-info">
-					<img src="../assets/user.png" style="width: 80px; height: 80px">
+					<img src="<%=request.getContextPath()%>/assets/user.png" style="width: 80px; height: 80px">
 					<h2 id="cu_name" style="color: #CCBA78;"></h2>
 				</div>
 				<hr>
 				<a href="edit_profile.jsp" class="sub-menu-link"> 
-					<img src="../assets/edit.png" style="width: 50px; height: 50px">
+					<img src="<%=request.getContextPath()%>/assets/edit.png" style="width: 50px; height: 50px">
 					<p>Edit Profile</p> <span class="ext">></span>
 				</a> 
 				<a href="delete_profile.jsp" class="sub-menu-link"> 
-					<img src="../assets/delete.png" style="width: 50px; height: 50px">
+					<img src="<%=request.getContextPath()%>/assets/delete.png" style="width: 50px; height: 50px">
 					<p>Delete Account</p> <span class="ext">></span>
 				</a> 
 				<a href="login.jsp" class="sub-menu-link"> 
-				<img src="../assets/logout.png" style="width: 50px; height: 50px">
+				<img src="<%=request.getContextPath()%>/assets/logout.png" style="width: 50px; height: 50px">
 					<p>Logout</p> <span class="ext">></span>
 				</a>
 			</div>
@@ -104,12 +104,11 @@
             </table>
           </div>
           <div class="sbutton">
-            <input type="submit" id="bButton" value="Back to Home" style="cursor: pointer;"
-              onclick="window.location='home.jsp';">
+            <button type="submit" id="bButton" value="" style="cursor: pointer;" onclick="window.location='home.jsp';">Back to Home</button>
           </div>
         </div>
       </div>
-      <script src="../scripts/script.js"></script>
+      <script src="<%=request.getContextPath()%>/scripts/script.js"></script>
       <%
 	      	HashMap<String, String> mp =(HashMap<String, String>)session.getAttribute("complaint-details");
 		  	String comp_id = mp.get("comp_id");

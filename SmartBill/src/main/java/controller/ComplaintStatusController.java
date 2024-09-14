@@ -31,15 +31,8 @@ public class ComplaintStatusController extends HttpServlet {
 		long conid = Long.parseLong(session.getAttribute("consumer_lgid").toString());
 		try {
 			List<HashMap<String, String>> l1 = ComplaintsView.fetchAllComplaints(conid);
-			if(session.getAttribute("view_all_comp") == null)
-			{
-				session.setAttribute("view_all_comp", l1);
-			}
-			else
-			{
-				session.removeAttribute("view_all_comp");
-				session.setAttribute("view_all_comp", l1);
-			}
+			session.setAttribute("view_all_comp", l1);
+
 			response.sendRedirect("source/view_all_complaints.jsp");
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block

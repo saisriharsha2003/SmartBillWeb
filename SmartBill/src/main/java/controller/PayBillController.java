@@ -32,15 +32,8 @@ public class PayBillController extends HttpServlet {
 		try {
 			int res = AdminView.updatePenalty();
 			List<HashMap<String, String>> l1 = BillsView.fetchAllBills(conid);
-			if(session.getAttribute("view_all_bills") == null)
-			{
-				session.setAttribute("view_all_bills", l1);
-			}
-			else
-			{
-				session.removeAttribute("view_all_bills");
-				session.setAttribute("view_all_bills", l1);
-			}
+			session.setAttribute("view_all_bills", l1);
+
 			response.sendRedirect("source/pay_bills.jsp");
 		} catch (ClassNotFoundException | SQLException | ParseException e) {
 			// TODO Auto-generated catch block

@@ -4,18 +4,18 @@
 <html>
 	<head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<link rel="stylesheet" href="../style.css">
-	    <link rel="icon" href="../assets/icon.png" type="image/icon type">
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/style.css">
+	    <link rel="icon" href="<%=request.getContextPath()%>/assets/icon.png" type="image/icon type">
 	    <title>Register</title>
   	</head>
 	  <body>
 	    <div>
 	      <div class="hero" >
 	        <nav>
-	            <a href="../index.jsp"><img class="logo"
-	                  src="../assets/logo.png"></a>
+	            <a href="<%=request.getContextPath()%>/index.jsp"><img class="logo"
+	                  src="<%=request.getContextPath()%>/assets/logo.png"></a>
 	            <ul>
-	              <li><a href="../index.jsp">Home</a></li>
+	              <li><a href="<%=request.getContextPath()%>/index.jsp">Home</a></li>
 	              <li><a href="#">About</a></li>
 	              <li><a href="#">Contact</a></li>
 	              <button class="ind_button"><a class="b1" href="register.jsp">Register</a></button>
@@ -98,13 +98,12 @@
 	               
 	            </div>
 	            <div class="button">
-	              <input type="submit" id="aButton" value="Register" style="cursor: pointer"
-	                >
+	              <button type="submit" id="aButton" style="cursor: pointer">Register</button>
 	            </div>
 	            <div class="asignup">Already have an account? <a href="login.jsp"
 	                class='bsignup'> Login </a> here</div>
 	          </form>
-	          <script src="../scripts/script.js"></script>
+	          <script src="<%=request.getContextPath()%>/scripts/script.js"></script>
 	        </div>
 	      </div>
 	    </div>
