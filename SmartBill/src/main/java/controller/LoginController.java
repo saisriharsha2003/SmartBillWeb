@@ -54,7 +54,7 @@ public class LoginController extends HttpServlet {
 	                request.setAttribute("user_type", ut);
 	                request.setAttribute("en_password", pwd);
 	                request.setAttribute("error_msg", "Invalid Admin credentials.");
-	                request.getRequestDispatcher("source/login.jsp").forward(request, response);
+	                request.getRequestDispatcher("login.jsp").forward(request, response);
 				}
 			} catch (ClassNotFoundException | SQLException e) {
 				// TODO Auto-generated catch block
@@ -95,7 +95,7 @@ public class LoginController extends HttpServlet {
 			                request.setAttribute("user_type", ut);
 			                request.setAttribute("en_password", pwd);
 			                request.setAttribute("error_msg", "Invalid login credentials. Kindly check once.");
-			                request.getRequestDispatcher("/source/login.jsp").forward(request, response);
+			                request.getRequestDispatcher("/login.jsp").forward(request, response);
 			            
 						}
 					}
@@ -112,7 +112,7 @@ public class LoginController extends HttpServlet {
 	                request.setAttribute("user_type", ut);
 	                request.setAttribute("en_password", pwd);
 	                request.setAttribute("error_msg", "Consumer doesn't exist. Kindly check the credentials once.");
-	                request.getRequestDispatcher("/source/login.jsp").forward(request, response);
+	                request.getRequestDispatcher("/login.jsp").forward(request, response);
 				}
 			} catch (ClassNotFoundException | SQLException e) {
 				// TODO Auto-generated catch block
