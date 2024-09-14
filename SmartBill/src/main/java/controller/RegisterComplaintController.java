@@ -54,17 +54,9 @@ public class RegisterComplaintController extends HttpServlet {
 				mp1.put("comp_per", comp.getContactPerson());
 				mp1.put("comp_mobile", String.valueOf(comp.getMobile()));
 				mp1.put("comp_problem", comp.getProlem());
-				mp1.put("comp_address", comp.getAddress());
-				
-				if(session.getAttribute("complaint-details") == null)
-				{
-					session.setAttribute("complaint-details", mp1);
-				}
-				else
-				{
-					session.removeAttribute("complaint-details");
-					session.setAttribute("complaint-details", mp1);
-				}
+				mp1.put("comp_address", comp.getAddress());				
+				session.setAttribute("complaint-details", mp1);
+
 				response.sendRedirect("source/complaint_success.jsp");
 			}
 		} catch (ClassNotFoundException | SQLException e) {

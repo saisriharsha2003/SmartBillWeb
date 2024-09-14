@@ -2,8 +2,6 @@ package controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,34 +10,31 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import view.AdminView;
+import view.LoginView;
 
-
-@WebServlet("/AdminViewConsumers")
-public class AdminViewConsumersController extends HttpServlet {
+@WebServlet("/DeleteAccount")
+public class DeleteAccountController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-   
-    public AdminViewConsumersController() {
+
+    public DeleteAccountController() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		long conid = (long)session.getAttribute("consumer_lgid");
 		try {
-			List<HashMap<String, String>> h1= AdminView.fetchAllConsumers();
-			HttpSession session = request.getSession();
-			session.setAttribute("admin_consumers", h1);
-
-			response.sendRedirect("source/admin_view_consumers.jsp");
+			int res = LoginView.softDeleteAccount(conid);
+			if(res == 1)
+			{
+				response.sendRedirect("source/delete_success.jsp");
+			}
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 	}
-
-	
 
 }

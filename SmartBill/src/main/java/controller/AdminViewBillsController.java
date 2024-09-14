@@ -30,15 +30,7 @@ public class AdminViewBillsController extends HttpServlet {
 			int res = AdminView.updatePenalty();
 			List<HashMap<String, String>> h1 = AdminView.fetchAllBillsAdmin();
 			HttpSession session = request.getSession();
-			if(session.getAttribute("admin_bills") == null)
-			{
-				session.setAttribute("admin_bills", h1);
-			}
-			else
-			{
-				session.removeAttribute("admin_bills");
-				session.setAttribute("admin_bills", h1);
-			}
+			session.setAttribute("admin_bills", h1);
 			response.sendRedirect("source/admin_view_bills.jsp");
 		} catch (ClassNotFoundException | SQLException | ParseException e) {
 			// TODO Auto-generated catch block

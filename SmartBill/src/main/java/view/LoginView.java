@@ -3,6 +3,7 @@ package view;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.HashMap;
 
 import model.LoginModel;
@@ -39,14 +40,15 @@ public class LoginView {
 		p1.setString(1, aun);
 		ResultSet r1 = p1.executeQuery();
 		String epwd = "";
+		String ac_status ="";
 		while(r1.next())
 		{
 			epwd = r1.getString("password");
+			ac_status = r1.getString("status");
 		}
-		if(apwd.equalsIgnoreCase(epwd))
-		{
-			return true;
-		}
+		if (apwd.equals(epwd) && "Active".equalsIgnoreCase(ac_status)) {
+            return true;
+        }
 		return false;
 	}
 	
@@ -101,5 +103,69 @@ public class LoginView {
 		p1.setString(2, pwd);
 		int res = p1.executeUpdate();
 		return res;
+	}
+	
+	public static boolean isUserExist(String username) throws ClassNotFoundException, SQLException
+	{
+		Statement p1 = Utility.getStatement();
+		ResultSet r1= p1.executeQuery("select * from login");
+		while(r1.next())
+		{
+			if(username.equalsIgnoreCase(r1.getString("username")))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public static boolean fetchAccountStatus(String uname) throws ClassNotFoundException, SQLException
+	{
+		PreparedStatement p1= Utility.getPreparedStatement("select * from login where username = ?");
+		p1.setString(1, uname);
+		ResultSet r1= p1.executeQuery();
+		while(r1.next())
+		{
+			if(r1.getString("status").equalsIgnoreCase("Active"))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public static int softDeleteAccount(long conid) throws ClassNotFoundException, SQLException
+	{
+		PreparedStatement p1 = Utility.getPreparedStatement("update login set status = ? where consumer_id = ?");
+		p1.setString(1, "Inactive");
+		p1.setLong(2, conid);
+		int res = p1.executeUpdate();
+		return res;
+	}
+	
+	public static int reactivateAccount(String uname) throws ClassNotFoundException, SQLException
+	{
+		PreparedStatement p1 = Utility.getPreparedStatement("update login set status = ? where username = ?");
+		p1.setString(1, "Active");
+		p1.setString(2, uname);
+		int res = p1.executeUpdate();
+		return res;
+	}
+	
+	public static boolean reauthenticateConsumer(String uname, String pwd) throws ClassNotFoundException, SQLException
+	{
+		PreparedStatement p1 = Utility.getPreparedStatement("select * from login where username = ?");
+		String epwd = "";
+		p1.setString(1, uname);
+		ResultSet r1= p1.executeQuery();
+		while(r1.next())
+		{
+			epwd = r1.getString("password");
+		}
+		if(epwd.equalsIgnoreCase(pwd))
+		{
+			return true;
+		}
+		return false;
 	}
 }

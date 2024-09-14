@@ -27,15 +27,8 @@ public class SearchComplaintController extends HttpServlet {
 		try {
 			HashMap<String, String> scomp = ComplaintsView.fetchComplaintDetailsById(compid);
 			HttpSession session = request.getSession();
-			if(session.getAttribute("search_complaint_id") == null)
-			{
-				session.setAttribute("search_complaint_id", scomp);
-			}
-			else
-			{
-				session.removeAttribute("search_complaint_id");
-				session.setAttribute("search_complaint_id", scomp);
-			}
+			session.setAttribute("search_complaint_id", scomp);
+
 			response.sendRedirect("source/complaint_details_id.jsp");
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block

@@ -3,17 +3,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
   <head>
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/style.css">
     
   </head>
   <body>
     <div>
       <div class="hero">
         <nav>
-            <a href="../index.jsp"><img class="logo"
-                  src="../assets/logo.png"></a>
+            <a href="<%=request.getContextPath()%>/index.jsp"><img class="logo"
+                  src="<%=request.getContextPath()%>/assets/logo.png"></a>
             <ul>
-              <li><a href="../index.jsp">Home</a></li>
+              <li><a href="<%=request.getContextPath()%>/index.jsp">Home</a></li>
               <li><a href="#">About</a></li>
               <li><a href="#">Contact</a></li>
               <button class="ind_button"><a class="b1" href="register.jsp">Register</a></button>
@@ -48,8 +48,7 @@
             </table>
           </div>
           <div class="sbutton">
-            <input type="submit" id="bButton" value="Login to SmartBill" style="cursor:pointer"
-              onclick="window.location='login.jsp';">
+            <button type="submit" id="bButton" style="cursor:pointer" onclick="window.location='login.jsp';">Login to SmartBill</button>
           </div>
         </div>
       </div>

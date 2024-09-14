@@ -23,24 +23,9 @@ public class PaymentScreenController extends HttpServlet {
 		String pay_mode = (String)request.getParameter("pay_mode");
 		HttpSession session = request.getSession();
 		System.out.println(pay_amount+"  "+ pay_mode);
-		if(session.getAttribute("billdet_pamount") == null)
-		{
-			session.setAttribute("billdet_pamount", pay_amount);
-		}
-		else
-		{
-			session.removeAttribute("billdet_pamount");
-			session.setAttribute("billdet_pamount", pay_amount);
-		}
-		if(session.getAttribute("billdet_paymode") == null)
-		{
-			session.setAttribute("billdet_paymode", pay_mode);
-		}
-		else
-		{
-			session.removeAttribute("billdet_paymode");
-			session.setAttribute("billdet_paymode", pay_mode);
-		}
+		session.setAttribute("billdet_pamount", pay_amount);
+		session.setAttribute("billdet_paymode", pay_mode);
+
 		response.sendRedirect("source/payment_screen.jsp");
 	}
 	

@@ -58,15 +58,7 @@ public class PaymentSuccessController extends HttpServlet {
 				paymentDetails.put("payment_paidamt", String.valueOf(paid_amt));
 				paymentDetails.put("payment_mode", pay_mode);
 				paymentDetails.put("payment_date", formattedDisplayDate);
-				if( session.getAttribute("payment_details") ==null)
-				{
-					session.setAttribute("payment_details", paymentDetails);
-				}
-				else
-				{
-					session.removeAttribute("payment_details");
-					session.setAttribute("payment_details", paymentDetails);
-				}
+				session.setAttribute("payment_details", paymentDetails);
 
 				response.sendRedirect("source/payment_success.jsp");
 			}

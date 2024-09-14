@@ -32,27 +32,8 @@ public class BillDetailsController extends HttpServlet {
 			double due_amt = PaymentsView.fetchDueAmount(billid);
 
 			mp = BillsView.fetchPaymentBillDetails(billid);
-			if(session.getAttribute("payment_billdet") == null)
-			{
-				session.setAttribute("payment_billdet", mp);
-				
-			}
-			else
-			{
-				session.removeAttribute("payment_billdet");
-				session.setAttribute("payment_billdet", mp);
-			}
-			
-			if(session.getAttribute("payment_due_amount") == null)
-			{
-				session.setAttribute("payment_due_amount", due_amt);
-				
-			}
-			else
-			{
-				session.removeAttribute("payment_due_amount");
-				session.setAttribute("payment_due_amount", due_amt);
-			}
+			session.setAttribute("payment_billdet", mp);
+			session.setAttribute("payment_due_amount", due_amt);
 			
 			response.sendRedirect("source/bill_details.jsp");
 		} catch (ClassNotFoundException | SQLException e) {

@@ -3,18 +3,18 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/style.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="icon" href="../assets/icon.png" type="image/icon type">
+<link rel="icon" href="<%=request.getContextPath()%>/assets/icon.png" type="image/icon type">
 <title>Register Complaint</title>
 
 </head>
 <body>
 
 	<div class="hero">
-		<nav> <a href="../home.jsp"><img class="logo"
-			src="../assets/logo.png"></a>
+		<nav> <a href="<%=request.getContextPath()%>/home.jsp"><img class="logo"
+			src="<%=request.getContextPath()%>/assets/logo.png"></a>
 		<ul>
 			<li><a href="home.jsp">Home</a></li>
 
@@ -44,24 +44,24 @@
 
 		</ul>
 
-		<img src="../assets/user.png" class="user-pic" onclick="toggleMenu()">
+		<img src="<%=request.getContextPath()%>/assets/user.png" class="user-pic" onclick="toggleMenu()">
 		<div class="sub-menu-wrap" id="subMenu">
 			<div class="sub-menu">
 				<div class="user-info">
-					<img src="../assets/user.png" style="width: 80px; height: 80px">
+					<img src="<%=request.getContextPath()%>/assets/user.png" style="width: 80px; height: 80px">
 					<h2 id="cu_name" style="color: #CCBA78;"></h2>
 				</div>
 				<hr>
 				<a href="edit_profile.jsp" class="sub-menu-link"> 
-					<img src="../assets/edit.png" style="width: 50px; height: 50px">
+					<img src="<%=request.getContextPath()%>/assets/edit.png" style="width: 50px; height: 50px">
 					<p>Edit Profile</p> <span class="ext">></span>
 				</a> 
 				<a href="delete_profile.jsp" class="sub-menu-link"> 
-					<img src="../assets/delete.png" style="width: 50px; height: 50px">
+					<img src="<%=request.getContextPath()%>/assets/delete.png" style="width: 50px; height: 50px">
 					<p>Delete Account</p> <span class="ext">></span>
 				</a> 
 				<a href="login.jsp" class="sub-menu-link"> 
-				<img src="../assets/logout.png" style="width: 50px; height: 50px">
+				<img src="<%=request.getContextPath()%>/assets/logout.png" style="width: 50px; height: 50px">
 					<p>Logout</p> <span class="ext">></span>
 				</a>
 			</div>
@@ -143,8 +143,7 @@
 
 				</div>
 				<div class="button">
-					<input type="submit" id="compButton" value="Submit Complaint"
-						style="margin-bottom: 5px; cursor: pointer;">
+					<button type="submit" id="compButton" style="margin-bottom: 5px; cursor: pointer;">Submit Complaint</button>
 				</div>
 
 			</form>

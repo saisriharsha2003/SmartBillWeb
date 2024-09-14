@@ -22,11 +22,12 @@ public class RegisterView {
 		pst.setString(7, reg.getUserName());
 		pst.setString(8, reg.getPassword());
 		
-		String sql1 = "insert into login values(?,?,?)";
+		String sql1 = "insert into login values(?,?,?,?)";
 		PreparedStatement pst1 = Utility.getPreparedStatement(sql1);
 		pst1.setString(1, reg.getUserName());
 		pst1.setString(2, reg.getPassword());
 		pst1.setLong(3, reg.getConsumerId());
+		pst1.setString(4, "Active");
 		pst1.executeUpdate();
 		
 		int res = pst.executeUpdate();

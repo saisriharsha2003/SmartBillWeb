@@ -27,17 +27,8 @@ public class ReceiptController extends HttpServlet {
 		long max = 99999999999L;
 		long randomNumber = min + (long) (random.nextDouble() * (max - min + 1));
 		HttpSession session = request.getSession();
-		
-		if(session.getAttribute("receipt_number") == null)
-		{
-			session.setAttribute("receipt_number", randomNumber);
-			
-		}
-		else
-		{
-			session.removeAttribute("receipt_number");
-			session.setAttribute("receipt_number", randomNumber);
-		}
+		session.setAttribute("receipt_number", randomNumber);
+
 		response.sendRedirect("source/view_receipt.jsp");
 	}
 

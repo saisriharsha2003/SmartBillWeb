@@ -28,15 +28,8 @@ public class PaymentHistoryController extends HttpServlet {
 		long conid = Long.parseLong(session.getAttribute("consumer_lgid").toString());
 		try {
 			List<HashMap<String, String>> mp1 = PaymentsView.fetchAllPayments(conid);
-			if(session.getAttribute("payment_details_con") == null)
-			{
-				session.setAttribute("payment_details_con", mp1);
-			}
-			else
-			{
-				session.removeAttribute("payment_details_con");
-				session.setAttribute("payment_details_con", mp1);
-			}
+			session.setAttribute("payment_details_con", mp1);
+
 			response.sendRedirect("source/payment_history.jsp");
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
