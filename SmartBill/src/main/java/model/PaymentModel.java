@@ -6,15 +6,7 @@ public class PaymentModel {
 	private double paidAmount;
 	private String transactionMode;
 	private String transactionDate;
-	
-	public PaymentModel(int transactionNumber, int billNumber, double paidAmount, String transactionMode,
-			String transactionDate) {
-		this.transactionNumber = transactionNumber;
-		this.billNumber = billNumber;
-		this.paidAmount = paidAmount;
-		this.transactionMode = transactionMode;
-		this.transactionDate = transactionDate;
-	}
+	private long consumerId;
 	
 	public int getTransactionNumber() {
 		return transactionNumber;
@@ -55,4 +47,25 @@ public class PaymentModel {
 	public void setTransactionDate(String transactionDate) {
 		this.transactionDate = transactionDate;
 	}
+	
+	public long getConsumerId() {
+		return consumerId;
+	}
+	
+	public PaymentModel(int transactionNumber, int billNumber, double paidAmount, String transactionMode,
+			String transactionDate, long consumerId) {
+		super();
+		this.transactionNumber = transactionNumber;
+		this.billNumber = billNumber;
+		this.paidAmount = paidAmount;
+		this.transactionMode = transactionMode;
+		this.transactionDate = transactionDate;
+		this.consumerId = consumerId;
+	}
+	
+	public void setConsumerId(long consumerId) {
+		this.consumerId = consumerId;
+	}
+	
+	
 }

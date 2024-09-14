@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="icon" href="../assets/icon.png" type="image/icon type">
-    <title>Search Complaint</title>
+    <title>Bill Details By BillId</title>
     
   </head>
   <body>
@@ -70,48 +70,73 @@
       </div>
       <div class="signup">
         <div class="container">
-          <div class='title' style="font-size: 25px; color: #CCBA78">Your Complaint Details</div>
+          <div class='title' style="font-size: 25px; color: #CCBA78">Your Bill Details</div>
           <div class='details-cont'>
             <table>
+            <%
+            HashMap<String, String> m1 = (HashMap<String, String>)session.getAttribute("search_bill_id");
+    	    if (m1 != null) {
+    	            String status = m1.get("status");
+    	            String statusClass;
+    	            switch (status.toLowerCase()) {
+    	                case "unpaid":
+    	                    statusClass = "status-unpaid";
+    	                    break;
+    	                case "partially paid":
+    	                    statusClass = "status-partially-paid";
+    	                    break;
+    	                case "overdue":
+    	                    statusClass = "status-overdue";
+    	                    break;
+    	                case "paid":
+    	                default:
+    	                    statusClass = "status-paid";
+    	                    break;
+    	     		}
+            %>
               <tbody>
                 <tr>
-                  <td><span class='cust'> Complaint ID </span></td>
+                  <td><span class='cust'> Bill ID </span></td>
                   <td><span class='col'>:</span><span class='cust1'
-                      id='fcompid'></span></td>
+                      id='scbbillid'></span></td>
                 </tr>
                 <tr>
-                  <td><span class='cust'> Contact Person </span></td>
+                  <td><span class='cust'> Due Amount </span></td>
                   <td><span class='col'>:</span><span class='cust1'
-                      id='fcompper'></span></td>
+                      id='scbdamt'></span></td>
+                </tr>
+                <tr>
+                  <td><span class='cust'> Bill Amount </span></td>
+                  <td><span class='col'>:</span><span class='cust1'
+                      id='scbbamt'></span></td>
+                </tr>
+                <tr>
+                  <td><span class='cust'> Due Date </span></td>
+                  <td><span class='col'>:</span><span class='cust1'
+                      id='scbddate'></span></td>
+                </tr>
+                <tr>
+                  <td><span class='cust'> Penalty </span></td>
+                  <td><span class='col'>:</span><span class='cust1'
+                      id='scbpen'></span></td>
                 </tr>
                 <tr>
                   <td><span class='cust'> Status </span></td>
-                  <td><span class='col'>:</span><span class='cust1'
-                      id='fcompstatus'></span></td>
-                </tr>
-                <tr>
-                  <td><span class='cust'> Mobile Number </span></td>
-                  <td><span class='col'>:</span><span class='cust1'
-                      id='fcompmob'></span></td>
-                </tr>
-                <tr>
-                  <td><span class='cust'> Problem </span></td>
-                  <td><span class='col'>:</span><span class='cust1'
-                      id='fcomprob'></span></td>
-                </tr>
-                <tr>
-                  <td><span class='cust'> Address </span></td>
-                  <td><span class='col'>:</span><span class='cust1'
-                      id='fcompaddr'></span></td>
+                  <td><span class='col'>:</span><span class= "<%= statusClass %>" style="margin-left: 25px;"
+                      id='scbst'></span></td>
                 </tr>
                 
                 
               </tbody>
+              <%
+                      }
+                  
+              %>
             </table>
           </div>
          
        	<div class="sbutton" style="width:100%;">
-           	<input type="submit" id="bButton" value="Back to Home" style="cursor:pointer" onclick="window.location='home.jsp';">
+           	<button type="submit" id="bButton" style="cursor:pointer" onclick="window.location='home.jsp';">Back to Home</button>
         </div>	
      
           
@@ -119,12 +144,12 @@
       </div>
     </div>
     <%
-    	HashMap<String, String> m1 = (HashMap<String, String>)session.getAttribute("search_complaint_id");
-    	String p1 = m1.get("complaint_id");
-    	String p2 = m1.get("contact_person");
-    	String p3 = m1.get("mobile");
-    	String p4 = m1.get("problem");
-    	String p5 = m1.get("address");
+
+    	String p1 = m1.get("bill_id");
+    	String p2 = m1.get("due_amt");
+    	String p3 = m1.get("bill_amt");
+    	String p4 = m1.get("due_date");
+    	String p5 = m1.get("penalty");
     	String p6 = m1.get("status");
     %>
     <script src="../scripts/script.js"></script>
@@ -133,12 +158,12 @@
 		var c6 = document.getElementById("cu_name");
 		if(c6) c6.textContent = name;
 		
-	   var cn1 = document.getElementById("fcompid");
-	   var cn2 = document.getElementById("fcompper");
-	   var cn3 = document.getElementById("fcompmob");
-	   var cn4 = document.getElementById("fcomprob");  
-	   var cn5 = document.getElementById("fcompaddr");
-	   var cn6 = document.getElementById("fcompstatus");  
+	   var cn1 = document.getElementById("scbbillid");
+	   var cn2 = document.getElementById("scbdamt");
+	   var cn3 = document.getElementById("scbbamt");
+	   var cn4 = document.getElementById("scbddate");  
+	   var cn5 = document.getElementById("scbpen");
+	   var cn6 = document.getElementById("scbst");  
 	
 	   var n1 = "<%= p1 %>";
 	   if (cn1) cn1.textContent = n1;
