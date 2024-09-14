@@ -64,7 +64,7 @@
                         <button type="submit" id="aButton" style="cursor: pointer">Login</button>
                         <span class="lmessage1" id='llogin_message'><%= request.getAttribute("error_msg") != null ? request.getAttribute("error_msg") : "" %></span>
                     </div>
-                    <div class="asignup">Don't have an account? <a href="<%= request.getContextPath() %>/register.jsp" class='bsignup'> Register </a> here</div>
+                    <div class="asignup">Don't have an account? <a href="<%= request.getContextPath() %>/register.jsp" class='bsignup'> <u>Register</u></a> here</div>
                 </form>
                 <script src="<%= request.getContextPath() %>/scripts/script.js"></script>
             </div>
