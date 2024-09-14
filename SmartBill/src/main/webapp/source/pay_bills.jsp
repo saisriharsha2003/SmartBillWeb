@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="icon" href="../assets/icon.png" type="image/icon type">
     <title>Pay Bills</title>
-    
 </head>
 <body>
     <div class="hero">
@@ -34,29 +33,33 @@
                 <li class="dropdown">
                     <a href="#" class="dropbtn">Payments</a>
                     <div class="dropdown-content">
-                        <a href="">Payments History</a>
+						<a href="${pageContext.request.contextPath}/PaymentHistory">Payments History</a> 
                         <a href="">Search Payment Details</a>
                     </div>
                 </li>
             </ul>
             <img src="../assets/user.png" class="user-pic" onclick="toggleMenu()">
             <div class="sub-menu-wrap" id="subMenu">
-                <div class="sub-menu">
-                    <div class="user-info">
-                        <img src="../assets/user.png" style="width: 80px; height: 80px">
-                        <h2 id="cu_name" style="color: #CCBA78;"></h2>
-                    </div>
-                    <hr>
-                    <a href="edit_profile.jsp" class="sub-menu-link">
-                        <img src="../assets/edit.png" style="width: 50px; height: 50px">
-                        <p>Edit Profile</p> <span class="ext">></span>
-                    </a>
-                    <a href="login.jsp" class="sub-menu-link">
-                        <img src="../assets/logout.png" style="width: 50px; height: 50px">
-                        <p>Logout</p> <span class="ext">></span>
-                    </a>
-                </div>
-            </div>
+			<div class="sub-menu">
+				<div class="user-info">
+					<img src="../assets/user.png" style="width: 80px; height: 80px">
+					<h2 id="cu_name" style="color: #CCBA78;"></h2>
+				</div>
+				<hr>
+				<a href="edit_profile.jsp" class="sub-menu-link"> 
+					<img src="../assets/edit.png" style="width: 50px; height: 50px">
+					<p>Edit Profile</p> <span class="ext">></span>
+				</a> 
+				<a href="delete_profile.jsp" class="sub-menu-link"> 
+					<img src="../assets/delete.png" style="width: 50px; height: 50px">
+					<p>Delete Account</p> <span class="ext">></span>
+				</a> 
+				<a href="login.jsp" class="sub-menu-link"> 
+				<img src="../assets/logout.png" style="width: 50px; height: 50px">
+					<p>Logout</p> <span class="ext">></span>
+				</a>
+			</div>
+		</div>
         </nav>
     </div>
     <div class="signup">
@@ -70,15 +73,31 @@
                             <th>Due Amount</th>
                             <th>Payable Amount</th>
                             <th>Due Date</th>
+                            <th>Penalty</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         <%
-                        List<HashMap<String, String>> l1 = (List<HashMap<String, String>>) session.getAttribute("view_all_bills");
-                        if (l1 != null) {
-                            for (HashMap<String, String> bill : l1) {
+                        List<HashMap<String, String>> billList = (List<HashMap<String, String>>) session.getAttribute("view_all_bills");
+
+                        int currentPage = 1;
+                        int recordsPerPage = 4;
+                        int totalRecords = 0;
+
+                        if (billList != null) {
+                            totalRecords = billList.size();
+
+                            if (request.getParameter("page") != null) {
+                                currentPage = Integer.parseInt(request.getParameter("page"));
+                            }
+
+                            int start = (currentPage - 1) * recordsPerPage;
+                            int end = Math.min(start + recordsPerPage, totalRecords);
+                            List<HashMap<String, String>> paginatedBills = billList.subList(start, end);
+
+                            for (HashMap<String, String> bill : paginatedBills) {
                                 String status = bill.get("status");
                                 String statusClass;
                                 switch (status.toLowerCase()) {
@@ -97,17 +116,18 @@
                                         break;
                                 }
                         %>
-                        <form action="<%= request.getContextPath() %>/PaymentScreenController" method="post">
+                        <form action="<%= request.getContextPath() %>/BillDetails" method="post">
                             <tr>
                                 <td><%= bill.get("bill_id") %></td>
                                 <td><%= bill.get("due_amt") %></td>
                                 <td><%= bill.get("pay_amt") %></td>
                                 <td><%= bill.get("date") %></td>
+                                <td><%= bill.get("penalty") %></td>
                                 <td class="<%= statusClass %>"><%= bill.get("status") %></td>
                                 <td>
-                                    <div class="button">
-                                    	<button type="submit" class="upbill" id="adstcmp" style="cursor: pointer">Pay</button>
-						            </div>
+                                    
+                                        <button type="submit" class="upbill" id="adstcmp" style="cursor: pointer">Pay</button>
+                                    
                                 </td>
                                 <input type="hidden" name="up_bill" value="<%= bill.get("bill_id") %>">
                             </tr>
@@ -118,6 +138,35 @@
                         %>
                     </tbody>
                 </table>
+            </div>
+
+            <%
+            int totalPages = (int) Math.ceil((double) totalRecords / recordsPerPage);
+            %>
+            <div class="pagination">
+                <%
+                if (currentPage > 1) {
+                %>
+                    <a href="pay_bills.jsp?page=<%= currentPage - 1 %>">&laquo; Previous</a>
+                <%
+                }
+                for (int i = 1; i <= totalPages; i++) {
+                    if (i == currentPage) {
+                %>
+                    <span><%= i %></span>
+                <%
+                    } else {
+                %>
+                    <a href="pay_bills.jsp?page=<%= i %>"><%= i %></a>
+                <%
+                    }
+                }
+                if (currentPage < totalPages) {
+                %>
+                    <a href="pay_bills.jsp?page=<%= currentPage + 1 %>">Next &raquo;</a>
+                <%
+                }
+                %>
             </div>
         </div>
     </div>

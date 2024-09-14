@@ -3,11 +3,12 @@ package model;
 import java.util.*;
 import java.time.*;
 
-public class Bill {
+public class BillModel {
 	private int billNuber;
 	private double dueAmount;
 	private double billAmount;
 	private String dueDate;
+	private double penalty;
 	private String status;
 	private long consumerId;
 	
@@ -59,7 +60,15 @@ public class Bill {
 		this.consumerId = consumerId;
 	}
 	
-	public Bill(int billNuber, double dueAmount, double billAmount, String dueDate, String status,
+	public double getPenalty() {
+		return penalty;
+	}
+	
+	public void setPenalty(double penalty) {
+		this.penalty = penalty;
+	}
+	
+	public BillModel(int billNuber, double dueAmount, double billAmount, String dueDate, double penalty, String status, 
 			long consumerId) {
 
 		this.billNuber = billNuber;

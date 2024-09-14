@@ -7,10 +7,11 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="icon" href="../assets/icon.png" type="image/icon type">
-<title>Home</title>
+<title>Search Bill</title>
 
 </head>
 <body>
+
 	<div class="hero">
 		<nav> <a href="../home.jsp"><img class="logo"
 			src="../assets/logo.png"></a>
@@ -32,13 +33,15 @@
 						href="${pageContext.request.contextPath}/ComplaintStatus">Complaint
 						Status</a>
 				</div></li>
-			
+
 			<li class="dropdown"><a href="#" class="dropbtn">Payments</a>
 				<div class="dropdown-content">
 					<a href="${pageContext.request.contextPath}/PaymentHistory">Payments History</a> 
-					<a href="search_complaint.jsp">Search Payment Details</a>
+
+					<a href="">Search Payment Details</a>
 				</div>
 			</li>
+
 		</ul>
 
 		<img src="../assets/user.png" class="user-pic" onclick="toggleMenu()">
@@ -64,22 +67,31 @@
 			</div>
 		</div>
 	</nav>
-
 	</div>
 	<div class="signup">
-		<div class="container" style="background-color: black; opacity: 0.8;">
-			<p
-				style="font-size: 40px; font-weight: 600; color: #CCBA78; display: flex; justify-content: center; align-items: center">
-				Welcome to <span class="homep">SmartBill</span>
-			</p>
+		<div class="container">
+			<div class="title" style="margin-bottom: 20px;">Search
+				Bill</div>
+			<form class="complaint_status_form" action="<%=request.getContextPath()%>/SearchBills" method = "post">
+				<span class="details" style="font-weight: 600">Bill Number</span>
+				<div class="user-details">
+
+					<div class="input-box" style="width: 100%">
+						<input type="text" class="searchi" name="search_billid"
+							placeholder="Enter your Complaint Number" required
+							oninvalid="this.setCustomValidity('Please Enter Complaint Number')"
+							onchange="this.setCustomValidity('')">
+						<button class="searchb">
+							<i class="fa fa-search"></i>
+						</button>
+					</div>
+				</div>
+				<div class="sbutton">
+					<button type="submit" id="aButton" style="cursor: pointer">Get Bill Status</button>
+				</div>
+			</form>
+			
 		</div>
 	</div>
-	<script src="../scripts/script.js"></script>
-	<script>
-	var name = ' <%=(session.getAttribute("consumer_lgname") != null) ? session.getAttribute("consumer_lgname") : ""%> ' ;
-	var c1 = document.getElementById("cu_name");
-	if (c1) c1.textContent = name;
-	</script>
 </body>
-</html>
 </html>

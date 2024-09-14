@@ -77,8 +77,8 @@
             </table>
           </div>
           <div class="sbutton">
-            <input type="submit" id="bButton" value="Back to Home" style = "cursor:pointer"
-              onclick="window.location='admin_home.jsp';">
+            <button type="submit" id="bButton" style = "cursor:pointer"
+              onclick="window.location='admin_home.jsp';">Back to Home</button>
           </div>
         </div>
       </div>

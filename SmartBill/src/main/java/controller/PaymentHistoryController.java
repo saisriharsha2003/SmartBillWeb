@@ -2,7 +2,6 @@ package controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.text.ParseException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -13,39 +12,37 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import view.AdminView;
+import view.PaymentsView;
 
-@WebServlet("/AdminViewBills")
-public class AdminViewBillsController extends HttpServlet {
+@WebServlet("/PaymentHistory")
+public class PaymentHistoryController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    
-    public AdminViewBillsController() {
+       
+    public PaymentHistoryController() {
         super();
         // TODO Auto-generated constructor stub
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		HttpSession session = request.getSession();
+		long conid = Long.parseLong(session.getAttribute("consumer_lgid").toString());
 		try {
-			int res = AdminView.updatePenalty();
-			List<HashMap<String, String>> h1 = AdminView.fetchAllBillsAdmin();
-			HttpSession session = request.getSession();
-			if(session.getAttribute("admin_bills") == null)
+			List<HashMap<String, String>> mp1 = PaymentsView.fetchAllPayments(conid);
+			if(session.getAttribute("payment_details_con") == null)
 			{
-				session.setAttribute("admin_bills", h1);
+				session.setAttribute("payment_details_con", mp1);
 			}
 			else
 			{
-				session.removeAttribute("admin_bills");
-				session.setAttribute("admin_bills", h1);
+				session.removeAttribute("payment_details_con");
+				session.setAttribute("payment_details_con", mp1);
 			}
-			response.sendRedirect("source/admin_view_bills.jsp");
-		} catch (ClassNotFoundException | SQLException | ParseException e) {
+			response.sendRedirect("source/payment_history.jsp");
+		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
 
-	
 }

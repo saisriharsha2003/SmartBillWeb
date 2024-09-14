@@ -104,15 +104,15 @@ body{
 .paybill th 
 {
 	width: auto;
-	height: 30px;
-	padding: 20px;
+	height: 10px;
+	padding: 15px;
 	text-align: center;
 }
 .paybill td
 {
 	width: auto;
-	height: 30px;
-	padding: 20px;
+	height: 10px;
+	padding: 13px;
 	text-align: center;
 	
 }
@@ -173,7 +173,7 @@ body{
     font-weight: 700;
 }
 .status-overdue {
-    color: #B71C1C; 
+    color: #800080; 
     font-weight: 700;
 }
 .col
@@ -691,4 +691,37 @@ nav ul li .dropdown-content a {
 	border: 5px solid black;
 	height:50%;
 	background-color: white;
+}
+
+.pagination {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 20px;
+        margin-right: 40px;
+}
+
+.pagination a, .pagination span {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+    margin: 4px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.pagination span {
+    background-color: #CCBA78;
+    color: white;
+    border: 1px solid #CCBA78;
+}
+
+.pagination a:hover {
+    background-color: #8E8254;
+    border: 1px solid #999;
+}
+
+.pagination a {
+    background-color: #f9f9f9;
 }

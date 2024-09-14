@@ -29,7 +29,8 @@ public class PaymentSuccessController extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		
+		long conid = Long.parseLong(session.getAttribute("consumer_lgid").toString());
+
 		HashMap<String, String> mp = (HashMap<String, String>) session.getAttribute("payment_billdet");
 		System.out.println(mp);
 		int bill_id = Integer.parseInt(mp.get("bill_id"));
@@ -45,10 +46,10 @@ public class PaymentSuccessController extends HttpServlet {
 		int max = 999999999;
 		int randomNumber = min + random.nextInt(max - min + 1);
 
-		PaymentModel pm = new PaymentModel(randomNumber, bill_id, paid_amt, pay_mode, formattedDisplayDate);
+		PaymentModel pm = new PaymentModel(randomNumber, bill_id, paid_amt, pay_mode, formattedDisplayDate, conid);
 
 		try {
-			int res = PaymentsView.makePayment(pm);
+			int res = PaymentsView.makePayment(pm, conid);
 			
 			if (res == 1) {
 				HashMap<String, String> paymentDetails = new HashMap<>();

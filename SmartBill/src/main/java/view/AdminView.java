@@ -4,24 +4,28 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
-import model.Bill;
+import model.BillModel;
 import utility.Utility;
 
 public class AdminView {
-	public static int adminAddBill(Bill bill) throws ClassNotFoundException, SQLException
+	public static int adminAddBill(BillModel bill) throws ClassNotFoundException, SQLException
 	{
-		String sql1 = "insert into bill values(?,?,?,?,?,?)";
+		String sql1 = "insert into bill values(?,?,?,?,?,?, ?)";
 		PreparedStatement p1 = Utility.getPreparedStatement(sql1);
 		p1.setInt(1, bill.getBillNuber());
 		p1.setDouble(2, bill.getDueAmount());
 		p1.setDouble(3, bill.getBillAmount());
 		p1.setString(4, bill.getDueDate());
-		p1.setString(5, bill.getStatus());
-		p1.setLong(6,  bill.getConsumerId());
+		p1.setDouble(5, bill.getPenalty());
+		p1.setString(6, bill.getStatus());
+		p1.setLong(7,  bill.getConsumerId());
 		
 		int res = p1.executeUpdate();
 		return res;
@@ -47,8 +51,64 @@ public class AdminView {
 		return lh1;
 	}
 	
-	public static List<HashMap<String, String>> fetchAllBillsAdmin() throws ClassNotFoundException, SQLException
+	public class DateUtils {
+	    public static String getTodayDate() {
+	        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+	        Date date = new Date();
+	        return formatter.format(date);
+	    }
+	}
+	
+	public static int updatePenalty() throws ClassNotFoundException, SQLException, ParseException
 	{
+		String today = DateUtils.getTodayDate();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+
+        String selectQuery = "SELECT * FROM bill ";
+        
+        PreparedStatement selectStmt = Utility.getPreparedStatement(selectQuery);
+        ResultSet rs = selectStmt.executeQuery();
+        
+        int res = 0;
+
+        while (rs.next()) {
+            int billNumber = rs.getInt("bill_number");
+            String dueDate = rs.getString("due_date");
+            double bamt = rs.getDouble("bill_amount");
+            double dueamt = rs.getDouble("due_amount");
+            double pen = rs.getDouble("penalty");
+
+            Date dueDateParsed = formatter.parse(dueDate);
+            Date todayParsed = formatter.parse(today);
+            
+            if (dueDateParsed.before(todayParsed)) {
+            	if(dueamt == bamt && pen>0)
+            	{
+            		String req1 = "UPDATE bill SET status = ? WHERE bill_number = ?";
+                    PreparedStatement p1 = Utility.getPreparedStatement(req1);
+                    p1.setString(1, "Overdue");
+                    p1.setInt(2, billNumber);
+                    res = p1.executeUpdate();
+            	}
+            	
+                
+                if(bamt == dueamt)
+                {
+                	String req = "update bill set penalty = ? where bill_number = ?";
+                	PreparedStatement p2 = Utility.getPreparedStatement(req);
+                    p2.setDouble(1, 100);
+                    p2.setInt(2, billNumber);
+                    res = p2.executeUpdate();
+                }
+                
+            }
+            
+        }
+        return res; 
+	}
+	public static List<HashMap<String, String>> fetchAllBillsAdmin() throws ClassNotFoundException, SQLException, ParseException
+	{
+		updatePenalty();
 		List<HashMap<String, String>> lh1=new ArrayList<HashMap<String, String>>();
 		Statement p1 = Utility.getStatement();
 		ResultSet rs= p1.executeQuery("select * from bill");
@@ -60,6 +120,7 @@ public class AdminView {
 			h1.put("due_amount", String.valueOf(rs.getDouble("due_amount")));
 			h1.put("pay_amount", String.valueOf(rs.getDouble("bill_amount")));
 			h1.put("due_date", rs.getString("due_date"));
+			h1.put("penalty", String.valueOf(rs.getDouble("penalty")));
 			h1.put("status", rs.getString("status"));
 
 			lh1.add(h1);

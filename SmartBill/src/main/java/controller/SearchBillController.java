@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.HashMap;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,33 +12,34 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import view.AdminView;
+import view.BillsView;
+import view.ComplaintsView;
 
-@WebServlet("/AdminViewBills")
-public class AdminViewBillsController extends HttpServlet {
+@WebServlet("/SearchBills")
+public class SearchBillController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    
-    public AdminViewBillsController() {
+       
+    public SearchBillController() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		int compid = Integer.parseInt(request.getParameter("search_billid"));
 		try {
-			int res = AdminView.updatePenalty();
-			List<HashMap<String, String>> h1 = AdminView.fetchAllBillsAdmin();
+			HashMap<String, String> sbill = BillsView.fetchBillDetailsById(compid);
 			HttpSession session = request.getSession();
-			if(session.getAttribute("admin_bills") == null)
+			if(session.getAttribute("search_bill_id") == null)
 			{
-				session.setAttribute("admin_bills", h1);
+				session.setAttribute("search_bill_id", sbill);
 			}
 			else
 			{
-				session.removeAttribute("admin_bills");
-				session.setAttribute("admin_bills", h1);
+				session.removeAttribute("search_bill_id");
+				session.setAttribute("search_bill_id", sbill);
 			}
-			response.sendRedirect("source/admin_view_bills.jsp");
+			response.sendRedirect("source/bill_details_id.jsp");
 		} catch (ClassNotFoundException | SQLException | ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -47,5 +47,4 @@ public class AdminViewBillsController extends HttpServlet {
 		
 	}
 
-	
 }

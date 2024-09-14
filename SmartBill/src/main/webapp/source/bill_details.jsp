@@ -24,7 +24,7 @@
 				<div class="dropdown-content">
 					<a href="${pageContext.request.contextPath}/PayBills">Pay Bills</a> 
 					<a	href="${pageContext.request.contextPath}/ViewBills">View Bills</a>
-					<a href="${pageContext.request.contextPath}/SearchBills">Search
+					<a href="search_bill.jsp">Search
 						Bill</a>
 				</div></li>
 
@@ -38,7 +38,8 @@
 
 			<li class="dropdown"><a href="#" class="dropbtn">Payments</a>
 				<div class="dropdown-content">
-					<a href="">Payments History</a> 
+					<a href="${pageContext.request.contextPath}/PaymentHistory">Payments History</a> 
+
 					<a href="">Search Payment Details</a>
 				</div>
 			</li>
@@ -53,11 +54,16 @@
 					<h2 id="cu_name" style="color: #CCBA78;"></h2>
 				</div>
 				<hr>
-				<a href="edit_profile.jsp" class="sub-menu-link"> <img
-					src="../assets/edit.png" style="width: 50px; height: 50px">
+				<a href="edit_profile.jsp" class="sub-menu-link"> 
+					<img src="../assets/edit.png" style="width: 50px; height: 50px">
 					<p>Edit Profile</p> <span class="ext">></span>
-				</a> <a href="login.jsp" class="sub-menu-link"> <img
-					src="../assets/logout.png" style="width: 50px; height: 50px">
+				</a> 
+				<a href="delete_profile.jsp" class="sub-menu-link"> 
+					<img src="../assets/delete.png" style="width: 50px; height: 50px">
+					<p>Delete Account</p> <span class="ext">></span>
+				</a> 
+				<a href="login.jsp" class="sub-menu-link"> 
+				<img src="../assets/logout.png" style="width: 50px; height: 50px">
 					<p>Logout</p> <span class="ext">></span>
 				</a>
 			</div>
@@ -66,7 +72,7 @@
 	</div>
 	<div class="signup">
 		<div class="container" style="padding: 15px 15px; width: 1000px;">
-		<form action="<%= request.getContextPath() %>/BillDetailsController" method="post">
+		<form action="<%= request.getContextPath() %>/PaymentScreen" method="post">
 		         <div class='title' style="font-size: 30px">Bill Payment</div>
 		         <div style="display: flex; justify-content: center">
 		         <%
@@ -75,6 +81,7 @@
 		         	String det_bamt = hm.get("bill_amt");
 		         	String det_conid = hm.get("cons_id");
 					String pay_damt = String.valueOf((double)session.getAttribute("payment_due_amount"));
+					String pen = hm.get("penalty");
 		         %>
 	        	<table class="paybilldet" >
 	        		<thead style="height: 15px; padding: 10px;">
@@ -106,9 +113,8 @@
 	        				</td>
 	        			</tr>
 	        			<tr>
-	        				<td style="text-align: left;">PG Charge</td>
-	        				<td>As Applicable
-	        				</td>
+	        				<td style="text-align: left;">Penalty</td>
+	        				<td id="billdet_penalty"></td>
 	        				
 	        			</tr>
 	        		</tbody>
@@ -181,18 +187,18 @@
 	var n4 = document.getElementById("billdet_bno");
 	var n5 = document.getElementById("bill_pamt");
 	var n6 = document.getElementById("billdet_dueamt");
-	
-	console.log(n6);
+	var n7 = document.getElementById("billdet_penalty");
 
 	function setValue()
 	{
 		n5.value = n2.value;
 		}
-	n4.textContent = <%= det_bno %>;
-	n1.textContent = <%= det_bamt %> ;
-	n3.textContent = <%= det_conid %> ;
+	n4.textContent = '<%= det_bno %>';
+	n1.textContent = '<%= det_bamt %>' ;
+	n3.textContent = '<%= det_conid %>' ;
 	n5.textContent = n2.value;
-	n6.textContent = <%= pay_damt %> 
+	n6.textContent = '<%= pay_damt %>'; 
+	n7.textContent = '<%= pen %>';
 
 </script>
 

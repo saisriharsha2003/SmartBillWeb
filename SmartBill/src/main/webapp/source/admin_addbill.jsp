@@ -77,7 +77,7 @@
 	              
 	            </div>
 	            <div class="sbutton">
-	              <input type="submit" id="aButton" value="Add Bill" style = "cursor: pointer">
+	              <button type="submit" id="aButton" style = "cursor: pointer">Add Bill</button>
 	              <span class="lmessage1" id='llogin_message'></span>
 	            </div>
 	            

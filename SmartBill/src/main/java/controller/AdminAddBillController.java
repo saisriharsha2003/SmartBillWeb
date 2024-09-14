@@ -3,7 +3,7 @@ package controller;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Random;
-import model.Bill;
+import model.BillModel;
 import view.AdminView;
 
 import javax.servlet.ServletException;
@@ -32,13 +32,14 @@ public class AdminAddBillController extends HttpServlet {
 		String date = request.getParameter("addd");
 		String status = "Unpaid";
 		double pamt = amt;
+		double penalty = 0;
 		
 		Random random = new Random();
 		int min = 1000000;
 		int max = 9999999;
 		int billno = min + (int) (random.nextDouble() * (max - min + 1));
 		
-		Bill bill = new model.Bill(billno, amt, pamt, date, status, cno );
+		BillModel bill = new model.BillModel(billno, amt, pamt, date, penalty, status, cno );
 		
 		try {
 			int res = AdminView.adminAddBill(bill);
