@@ -19,7 +19,7 @@
                     <div class="dropdown-content">
                         <a href="${pageContext.request.contextPath}/PayBills">Pay Bills</a>
                         <a href="${pageContext.request.contextPath}/ViewBills">View Bills</a>
-                        <a href="${pageContext.request.contextPath}/SearchBills">Search Bill</a>
+                        <a href="${pageContext.request.contextPath}/source/search_bill.jsp">Search Bill</a>
                     </div>
                 </li>
                 <li class="dropdown">
@@ -63,7 +63,13 @@
         </nav>
     </div>
     <div class="signup">
-        <div class="container1" style="width: 800px;">
+    	<%
+        	List<HashMap<String, String>> billList = (List<HashMap<String, String>>) session.getAttribute("view_all_bills");
+    		if(billList.size()!=0)
+    		{
+
+    	%>
+        <div class="container1">
             <div class="title" style="margin-bottom: 20px;">View All Bills</div>
             <div style="display: flex; justify-content: center;">
                 <table class="paybill" style="width: 90%">
@@ -79,7 +85,6 @@
                     </thead>
                     <tbody>
                         <%
-                        List<HashMap<String, String>> billList = (List<HashMap<String, String>>) session.getAttribute("view_all_bills");
 
                         int currentPage = 1;
                         int recordsPerPage = 5;
@@ -160,6 +165,24 @@
                 %>
             </div>
         </div>
+        <% } else { %>
+        <div class = "container">
+            <div class="flexcenter" style="text-align: center; align-items: center; gap: 20px;">
+                <img src="<%=request.getContextPath()%>/assets/smile.webp" alt="Delete Emoji" style="height: 70px; width: 70px; border-radius: 100%">
+                <p class="title1" style="font-size: 30px;">No Bills Found!</p>
+            </div>
+            <div class="flexcenter">
+            	<p style="font-size: 20px; font-weight: 600; margin-top: 20px; maring-bottom:10px;">Currently no bills found come back later.</p>
+            </div>
+            
+            <div class="flexcenter">
+            	<div class="sbutton" style="width: 100%; padding: 20px; ">
+					<button id="aButton" style="cursor: pointer; " onclick="window.location.href='home.jsp'">Back to Home</button>
+				</div>
+            </div>
+          
+    	</div>
+    <%} %>
     </div>
     <script src="<%=request.getContextPath()%>/scripts/script.js"></script>
     <script>

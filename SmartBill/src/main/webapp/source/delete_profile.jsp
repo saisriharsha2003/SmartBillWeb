@@ -19,7 +19,7 @@
                     <div class="dropdown-content">
                         <a href="${pageContext.request.contextPath}/PayBills">Pay Bills</a>
                         <a href="${pageContext.request.contextPath}/ViewBills">View Bills</a>
-                        <a href="${pageContext.request.contextPath}/SearchBills">Search Bill</a>
+                        <a href="${pageContext.request.contextPath}/source/search_bill.jsp">Search Bill</a>
                     </div>
                 </li>
                 <li class="dropdown">
@@ -54,7 +54,7 @@
 					<img src="<%=request.getContextPath()%>/assets/delete.png" style="width: 50px; height: 50px">
 					<p>Delete Account</p> <span class="ext">></span>
 				</a> 
-				<a href="login.jsp" class="sub-menu-link"> 
+				<a href="<%=request.getContextPath()%>/LogoutServlet" class="sub-menu-link">  
 				<img src="<%=request.getContextPath()%>/assets/logout.png" style="width: 50px; height: 50px">
 					<p>Logout</p> <span class="ext">></span>
 				</a>
@@ -64,7 +64,7 @@
     </div>
     <div class="signup">
         <div class="container" style="width: 800px;">
-        <div class="flexcenter" style="text-align: center; align-items: center; gap: 20px;">
+        	<div class="flexcenter" style="text-align: center; align-items: center; gap: 20px;">
                 <img src="<%=request.getContextPath()%>/assets/sure.png" alt="Delete Emoji" style="height: 70px; width: 80px; border-radius: 100%">
                 <p class="title1" style="font-size: 30px;">Account Deletion</p>
             </div>
@@ -82,4 +82,13 @@
 	            </div>
             </form>
         </div>
+        <script type="text/javascript" src = "${pageContext.request.contextPath}/scripts/script.js"></script>
+        <script>
+        if(document.getElementById("cu_name")) {
+            var name = '<%=(session.getAttribute("consumer_lgname") != null) ? session.getAttribute("consumer_lgname") : ""%>';
+            var c1 = document.getElementById("cu_name");
+            if (c1)
+                c1.textContent = name;
+        }
+        </script>
     </div>

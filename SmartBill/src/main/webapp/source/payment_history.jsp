@@ -62,7 +62,7 @@
 					<img src="<%=request.getContextPath()%>/assets/delete.png" style="width: 50px; height: 50px">
 					<p>Delete Account</p> <span class="ext">></span>
 				</a> 
-				<a href="login.jsp" class="sub-menu-link"> 
+				<a href="<%=request.getContextPath()%>/LogoutServlet" class="sub-menu-link">  
 				<img src="<%=request.getContextPath()%>/assets/logout.png" style="width: 50px; height: 50px">
 					<p>Logout</p> <span class="ext">></span>
 				</a>
@@ -71,6 +71,12 @@
 	</nav>
 	</div>
 	<div class="signup">
+	<%
+    	List<HashMap<String, String>> paymentDetails = (List<HashMap<String, String>>) session.getAttribute("payment_details_con");
+		if(paymentDetails.size()>0)
+		{
+
+	%>
     <div class="container1">
         <div class="title" style="margin-bottom: 20px;">Payment History</div>
         <div class="flexcenter">
@@ -86,8 +92,7 @@
             </thead>
             <tbody>
                 <%
-                List<HashMap<String, String>> paymentDetails = (List<HashMap<String, String>>) session.getAttribute("payment_details_con");
-
+                
                 int currentPage = 1;
                 int recordsPerPage = 5;
                 int totalRecords = 0;
@@ -149,6 +154,24 @@
             %>
         </div>
     </div>
+    <% } else { %>
+        <div class = "container">
+            <div class="flexcenter" style="text-align: center; align-items: center; gap: 20px;">
+                <img src="<%=request.getContextPath()%>/assets/smile.webp" alt="Delete Emoji" style="height: 70px; width: 70px; border-radius: 100%">
+                <p class="title1" style="font-size: 30px;">No Transactions Found!</p>
+            </div>
+            <div class="flexcenter">
+            	<p style="font-size: 20px; font-weight: 600; margin-top: 20px; maring-bottom:10px;">There are currently no transactions available at this time.</p>
+            </div>
+            
+            <div class="flexcenter">
+            	<div class="sbutton" style="width: 100%; padding: 20px; ">
+					<button id="aButton" style="cursor: pointer; " onclick="window.location.href='home.jsp'">Back to Home</button>
+				</div>
+            </div>
+          
+    	</div>
+    <%} %>
 </div>
 
 </body>

@@ -24,22 +24,29 @@ public class EditProfileController extends HttpServlet {
     }
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+
 		String ucname = request.getParameter("edit-name");
 		String email = request.getParameter("edit-email");
 		Long mob = Long.parseLong(request.getParameter("edit-mobile"));
 		String uuname = request.getParameter("edit-uname");
 		String upwd = request.getParameter("edit-password");
+		long cid = (long)session.getAttribute("consumer_lgid");
 		
 		try {
-			int res1 = RegisterView.updateRegisterDetails(ucname, email, mob, uuname, upwd);
-			int res2 = LoginView.updateLoginDetails(uuname, upwd);
+			int res1 = RegisterView.updateRegisterDetails(cid, ucname, email, mob, uuname, upwd);
+			int res2 = LoginView.updateLoginDetails(cid, uuname, upwd);
+			System.out.println(res1+" "+res2);
 			if(res1 == 1 && res2 == 1)
 			{
-				HttpSession session = request.getSession();
-				session.setAttribute("up-cname", ucname);
-				session.setAttribute("up-email", email);
-				session.setAttribute("up-mob", mob);
-				session.setAttribute("up-uname", uuname);
+				HashMap<String, String> mp=new HashMap<String, String>();
+				
+				mp.put("up-cname", ucname);
+				mp.put("up-email", email);
+				mp.put("up-mob", mob.toString());
+				mp.put("up-uname", uuname);
+				
+				session.setAttribute("updated_user_details", mp);
 				
 				session.setAttribute("consumer_lgname", ucname);
 								

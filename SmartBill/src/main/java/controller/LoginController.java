@@ -2,6 +2,7 @@ package controller;
 
 import model.LoginModel;
 import model.RegisterModel;
+import view.AdminView;
 import view.LoginView;
 
 import java.io.IOException;
@@ -37,28 +38,39 @@ public class LoginController extends HttpServlet {
 
 		if(ut.equalsIgnoreCase("Admin"))
 		{
-			try {
-				LoginModel lg=new LoginModel(uname, pwd);
-
-				boolean status = LoginView.authenticateAdmin(lg);
-				if(status == true)
-				{
-					HttpSession session = request.getSession();
-					session.setAttribute("consumer_lgname", "Admin");
-
-					response.sendRedirect("source/admin_home.jsp");
+			if(uname.equalsIgnoreCase("admin")) {
+				try {
+					LoginModel lg=new LoginModel(uname, pwd);
+	
+					boolean status = LoginView.authenticateAdmin(lg);
+					if(status == true)
+					{
+						HttpSession session = request.getSession();
+						session.setAttribute("consumer_lgname", "Admin");
+						int count = AdminView.fetchCountConsumers();
+						session.setAttribute("cons_count", count);
+						response.sendRedirect("source/admin_home.jsp");
+					}
+					else
+					{
+						request.setAttribute("en_username", uname);
+		                request.setAttribute("user_type", ut);
+		                request.setAttribute("en_password", pwd);
+		                request.setAttribute("error_msg", "Invalid Admin credentials.");
+		                request.getRequestDispatcher("login.jsp").forward(request, response);
+					}
+				} catch (ClassNotFoundException | SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
-				else
-				{
-					request.setAttribute("en_username", uname);
-	                request.setAttribute("user_type", ut);
-	                request.setAttribute("en_password", pwd);
-	                request.setAttribute("error_msg", "Invalid Admin credentials.");
-	                request.getRequestDispatcher("source/login.jsp").forward(request, response);
-				}
-			} catch (ClassNotFoundException | SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			}
+			else
+			{
+				request.setAttribute("en_username", uname);
+                request.setAttribute("user_type", ut);
+                request.setAttribute("en_password", pwd);
+                request.setAttribute("error_msg", "Invalid Admin username.");
+                request.getRequestDispatcher("login.jsp").forward(request, response);
 			}
 				
 		}
@@ -95,7 +107,7 @@ public class LoginController extends HttpServlet {
 			                request.setAttribute("user_type", ut);
 			                request.setAttribute("en_password", pwd);
 			                request.setAttribute("error_msg", "Invalid login credentials. Kindly check once.");
-			                request.getRequestDispatcher("/source/login.jsp").forward(request, response);
+			                request.getRequestDispatcher("/login.jsp").forward(request, response);
 			            
 						}
 					}
@@ -112,7 +124,7 @@ public class LoginController extends HttpServlet {
 	                request.setAttribute("user_type", ut);
 	                request.setAttribute("en_password", pwd);
 	                request.setAttribute("error_msg", "Consumer doesn't exist. Kindly check the credentials once.");
-	                request.getRequestDispatcher("/source/login.jsp").forward(request, response);
+	                request.getRequestDispatcher("/login.jsp").forward(request, response);
 				}
 			} catch (ClassNotFoundException | SQLException e) {
 				// TODO Auto-generated catch block

@@ -52,7 +52,7 @@ public class RegisterController extends HttpServlet {
 				session.setAttribute("username", reg.getUserName());
 
 				
-				response.sendRedirect("source/success.jsp");
+				response.sendRedirect("success.jsp");
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block

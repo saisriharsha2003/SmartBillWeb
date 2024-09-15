@@ -17,7 +17,9 @@
             <ul>
                 <li><a href="admin_home.jsp">Home</a></li>
                 <li><a href="${pageContext.request.contextPath}/AdminViewConsumers">View Consumers</a></li>
-                <li><a href="admin_addbill.jsp">Add Bills</a></li>
+                	            <li><a href="${pageContext.request.contextPath}/source/admin_addbill.jsp"
+>Add Bills</a></li>
+
                 <li><a href="${pageContext.request.contextPath}/AdminViewBills">View Bills</a></li>
                 <li><a href="${pageContext.request.contextPath}/AdminViewComplaints">View Complaints</a></li>
             </ul>
@@ -34,7 +36,7 @@
                         <p>Edit Profile</p>
                         <span class="ext">></span>
                     </a>
-                    <a href="login.jsp" class="sub-menu-link">
+                    <a href="<%=request.getContextPath()%>/LogoutServlet" class="sub-menu-link"> 
                         <img src="<%=request.getContextPath()%>/assets/logout.png" style="width: 50px; height: 50px">
                         <p>Logout</p>
                         <span class="ext">></span>
@@ -45,6 +47,16 @@
     </div>
 
     <div class="signup">
+    	<% 
+	      		int count = (int)session.getAttribute("cons_count");
+       			List<HashMap<String, String>> complaintList = (List<HashMap<String, String>>) session.getAttribute("admin_complaints");
+
+	      		if(count>0)
+	      		{
+	      			if(complaintList.size()>0)
+	      			{
+ 		
+	      %>
         <div class="container1">
             <div class="title" style="margin-bottom: 20px;">View Complaints</div>
             <div style="display: flex; justify-content: center;">
@@ -62,25 +74,29 @@
                     </thead>
                     <tbody>
                         <%
-                        List<HashMap<String, String>> complaintList = (List<HashMap<String, String>>) session.getAttribute("admin_complaints");
 
                         int currentPage = 1;
-                        int recordsPerPage = 5;
+                        int recordsPerPage = 4;
                         int totalRecords = 0;
 
                         if (complaintList != null) {
                             totalRecords = complaintList.size();
 
-                            if (request.getParameter("page") != null) {
-                                currentPage = Integer.parseInt(request.getParameter("page"));
-                            }
+                            if (totalRecords > recordsPerPage) {
+                                if (request.getParameter("page") != null) {
+                                    currentPage = Integer.parseInt(request.getParameter("page"));
+                                }
 
-                            int start = (currentPage - 1) * recordsPerPage;
-                            int end = Math.min(start + recordsPerPage, totalRecords);
-                            List<HashMap<String, String>> paginatedComplaints = complaintList.subList(start, end);
+                                int start = (currentPage - 1) * recordsPerPage;
+                                int end = Math.min(start + recordsPerPage, totalRecords);
+                                List<HashMap<String, String>> paginatedComplaints = complaintList.subList(start, end);
 
-                            for (HashMap<String, String> complaint : paginatedComplaints) {
-                                if (complaint.get("status").equalsIgnoreCase("Not Solved")) {
+                                for (HashMap<String, String> complaint : paginatedComplaints) {
+                                    String status = complaint.get("status");
+                                    String statusColor = "red";
+                                    if (status.equalsIgnoreCase("Solved")) {
+                                        statusColor = "green";
+                                    }
                         %>
                         <form action="<%= request.getContextPath() %>/UpdateComplaint" method="post">
                             <tr>
@@ -89,26 +105,7 @@
                                 <td><%= complaint.get("mobile") %></td>
                                 <td><%= complaint.get("contact_per") %></td>
                                 <td><%= complaint.get("problem") %></td>
-                                <td style="color:red; font-weight:700;"><%= complaint.get("status") %></td>
-                                <td>
-                                    <div class="button">
-                                        <input type="submit" class="upcmp" id="adstcmp" value="Update" style="cursor: pointer">
-                                    </div>
-                                </td>
-                                <input type="hidden" id="incomp" name="up_comp" value="<%= complaint.get("comp_no") %>">
-                            </tr>
-                        </form>
-                        <%
-                                } else {
-                        %>
-                        <form action="<%= request.getContextPath() %>/UpdateComplaint" method="post">
-                            <tr>
-                                <td><%= complaint.get("comp_no") %></td>
-                                <td><%= complaint.get("cons_no") %></td>
-                                <td><%= complaint.get("mobile") %></td>
-                                <td><%= complaint.get("contact_per") %></td>
-                                <td><%= complaint.get("problem") %></td>
-                                <td style="color:green; font-weight:700;"><%= complaint.get("status") %></td>
+                                <td style="color:<%= statusColor %>; font-weight:700;"><%= status %></td>
                                 <td>
                                     <div class="button">
                                         <input type="submit" class="upcmp" id="adstcmp" value="Update" style="cursor: pointer">
@@ -119,58 +116,114 @@
                         </form>
                         <%
                                 }
+                        %>
+                        </tbody>
+                    </table>
+                    </div>
+                    <% 
+                    int totalPages = (int) Math.ceil((double) totalRecords / recordsPerPage);
+                    if (totalPages > 1) { %>
+                    <div class="pagination">
+                        <% if (currentPage > 1) { %>
+                            <a href="admin_view_complaints.jsp?page=<%= currentPage - 1 %>">&laquo; Previous</a>
+                        <% } %>
+                        <% for (int i = 1; i <= totalPages; i++) {
+                            if (i == currentPage) { %>
+                            <span><%= i %></span>
+                        <% } else { %>
+                            <a href="admin_view_complaints.jsp?page=<%= i %>"><%= i %></a>
+                        <% }
+                        } 
+                        if (currentPage < totalPages) { %>
+                            <a href="admin_view_complaints.jsp?page=<%= currentPage + 1 %>">Next &raquo;</a>
+                        <% } %>
+                    </div>
+                    <% } %>
+                    <% } else { 
+                        // Display all complaints if 5 or fewer records
+                        for (HashMap<String, String> complaint : complaintList) {
+                            String status = complaint.get("status");
+                            String statusColor = "red";
+                            if (status.equalsIgnoreCase("Solved")) {
+                                statusColor = "green";
+                            }
+                        %>
+                        <form action="<%= request.getContextPath() %>/UpdateComplaint" method="post">
+                            <tr>
+                                <td><%= complaint.get("comp_no") %></td>
+                                <td><%= complaint.get("cons_no") %></td>
+                                <td><%= complaint.get("mobile") %></td>
+                                <td><%= complaint.get("contact_per") %></td>
+                                <td><%= complaint.get("problem") %></td>
+                                <td style="color:<%= statusColor %>; font-weight:700;"><%= status %></td>
+                                <td>
+                                    <div class="button">
+                                        <input type="submit" class="upcmp" id="adstcmp" value="Update" style="cursor: pointer">
+                                    </div>
+                                </td>
+                                <input type="hidden" id="incomp" name="up_comp" value="<%= complaint.get("comp_no") %>">
+                            </tr>
+                        </form>
+                        <%
                             }
                         }
-                        %>
-                    </tbody>
-                </table>
-            </div>
-
-            <%
-            int totalPages = (int) Math.ceil((double) totalRecords / recordsPerPage);
-            %>
-            <div class="pagination">
-                <%
-                if (currentPage > 1) {
-                %>
-                    <a href="admin_view_complaints.jsp?page=<%= currentPage - 1 %>">&laquo; Previous</a>
-                <%
-                }
-                for (int i = 1; i <= totalPages; i++) {
-                    if (i == currentPage) {
-                %>
-                    <span><%= i %></span>
-                <%
-                    } else {
-                %>
-                    <a href="admin_view_complaints.jsp?page=<%= i %>"><%= i %></a>
-                <%
                     }
-                }
-                if (currentPage < totalPages) {
-                %>
-                    <a href="admin_view_complaints.jsp?page=<%= currentPage + 1 %>">Next &raquo;</a>
-                <%
-                }
-                %>
-            </div>
+                    %>
+            
         </div>
+        <% } else { %>
+        <div class="container" style="width: 800px;">
+        	<div class="flexcenter" style="text-align: center; align-items: center; gap: 20px;">
+                <img src="<%=request.getContextPath()%>/assets/smile.webp" alt="Delete Emoji" style="height: 70px; width: 70px; border-radius: 100%">
+                <p class="title1" style="font-size: 30px;">No Complaints Found</p>
+            </div>
+            <div class="flexcenter" style="text-align: center;">
+            	<p style="font-size: 20px; font-weight: 600; margin-top: 20px;">Current no complaints found to resolve. Kindly come back later.</p>
+            </div>
+            
+            <div class="flexcenter">
+	           	<div class="sbutton" style="width: 100%; padding: 20px; ">
+					<button id="aButton" style="cursor: pointer; " onclick="window.location.href='home.jsp'">Back to Home</button>
+				</div>		
+            </div>
+            
+        </div>
+        <%} } else { %>
+	        <div class="container" style="width: 800px;">
+				<div class="flexcenter"
+					style="text-align: center; align-items: center; gap: 20px;">
+					<img src="<%=request.getContextPath()%>/assets/smile.webp" style="height: 70px; width: 70px; border-radius: 100%">
+					<p class="title1" style="font-size: 30px;">No Consumers Found</p>
+				</div>
+				<div class="flexcenter" style="text-align: center; margin-top:20px;">
+					<p style="font-size: 20px; font-weight: 600; color: black;">Currently no consumers registered to SmartBill. Kindly comeback later.</p>
+				</div>
+				<div class="flexcenter">
+					<div class="sbutton" style="width: 100%; padding: 20px;">
+						<button id="aButton" style="cursor: pointer; " onclick="window.location.href='admin_home.jsp'">Back to Home</button>
+					</div>
+				</div>
+			
+			</div>
+		<%} %>
     </div>
 
     <script src="<%=request.getContextPath()%>/scripts/script.js"></script>
+    
     <script>
-        var btns = document.getElementsByClassName("upcmp");
-        for (i = 0; i < btns.length; i++) {
-            btns[i].addEventListener('click', function () {
-                var n1 = this.value;
-                document.getElementById("incomp").value = n1;
-            });
-        }
+    var btns = document.getElementsByClassName("upcmp");
+    for (i = 0; i < btns.length; i++) {
+        btns[i].addEventListener('click', function () {
+            var n1 = this.value;
+            document.getElementById("incomp").value = n1;
+        });
+    }
 
-        var name = '<%= (session.getAttribute("consumer_lgname") != null) ? session.getAttribute("consumer_lgname") : "" %>';
-        var c1 = document.getElementById("acu_name");
+    var name = '<%= (session.getAttribute("consumer_lgname") != null) ? session.getAttribute("consumer_lgname") : "" %>';
+    var c1 = document.getElementById("acu_name");
 
-        if (c1) c1.textContent = name;
+    if (c1) c1.textContent = name;
+
     </script>
 </body>
 </html>

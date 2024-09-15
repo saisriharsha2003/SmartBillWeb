@@ -62,7 +62,7 @@
 					<img src="<%=request.getContextPath()%>/assets/delete.png" style="width: 50px; height: 50px">
 					<p>Delete Account</p> <span class="ext">></span>
 				</a> 
-				<a href="login.jsp" class="sub-menu-link"> 
+				<a href="<%=request.getContextPath()%>/LogoutServlet" class="sub-menu-link">  
 				<img src="<%=request.getContextPath()%>/assets/logout.png" style="width: 50px; height: 50px">
 					<p>Logout</p> <span class="ext">></span>
 				</a>
@@ -73,11 +73,8 @@
 	<div class="signup">
 		<div class="container">
 			<div class="title" style="margin-bottom: 20px;">Edit Profile</div>
-			<form name='myform'
-				action="<%=request.getContextPath()%>/EditProfile" method="post">
+			<form name='myform' action="<%=request.getContextPath()%>/EditProfile" method="post">
 				<div class="user-details">
-
-
 
 					<div class="input-box">
 						<span class="details">Full Name</span> <input type="text"
@@ -114,13 +111,13 @@
 				</div>
 				<div style="display: flex; justify-content: center;">
 					<div class="sbutton" style="width: 50%; padding-right: 10px;">
-						<input id="aButton" value="Back to Home"
+						<button type="button"
 							style="cursor: pointer; text-align: center"
-							onclick="window.location='home.jsp'">
+							onclick="window.location='home.jsp'">Back to Home</button>
 					</div>
 					<div class="sbutton" style="width: 50%;">
-						<input type="submit" id="up-Button" value="Update Profile"
-							style="cursor: pointer;">
+						<button type="submit" 
+							style="cursor: pointer;">Update Profile</button>
 					</div>
 				</div>
 

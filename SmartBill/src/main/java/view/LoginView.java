@@ -96,11 +96,12 @@ public class LoginView {
 		return mp;
 	}
 	
-	public static int updateLoginDetails(String uname, String pwd) throws ClassNotFoundException, SQLException
+	public static int updateLoginDetails(long cid, String uname, String pwd) throws ClassNotFoundException, SQLException
 	{
-		PreparedStatement p1=Utility.getPreparedStatement("update login set username = ?, password = ?");
+		PreparedStatement p1=Utility.getPreparedStatement("update login set username = ?, password = ? where consumer_id = ?");
 		p1.setString(1, uname);
 		p1.setString(2, pwd);
+		p1.setLong(3, cid);
 		int res = p1.executeUpdate();
 		return res;
 	}

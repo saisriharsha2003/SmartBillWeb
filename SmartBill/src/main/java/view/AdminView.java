@@ -15,6 +15,19 @@ import model.BillModel;
 import utility.Utility;
 
 public class AdminView {
+	public static int fetchCountConsumers() throws ClassNotFoundException, SQLException
+	{
+		Statement st = Utility.getStatement();
+		ResultSet r1= st.executeQuery("select count(*) as cons_count from consumer");
+		int c = 0;
+		while(r1.next())
+		{
+			c=r1.getInt("cons_count");
+		}
+		return c;
+		
+	}
+	
 	public static int adminAddBill(BillModel bill) throws ClassNotFoundException, SQLException
 	{
 		String sql1 = "insert into bill values(?,?,?,?,?,?, ?)";
@@ -131,8 +144,10 @@ public class AdminView {
 	public static List<HashMap<String, String>> fetchAllComplaints() throws ClassNotFoundException, SQLException
 	{
 		List<HashMap<String, String>> lh1=new ArrayList<HashMap<String, String>>();
-		Statement p1 = Utility.getStatement();
-		ResultSet rs= p1.executeQuery("select * from complaint");
+		PreparedStatement p1= Utility.getPreparedStatement("select * from complaint where complaint_status = ?");
+		p1.setString(1, "Not Solved");
+		ResultSet rs= p1.executeQuery();
+		
 		while(rs.next())
 		{
 			HashMap<String, String> h1=new HashMap<String, String>();

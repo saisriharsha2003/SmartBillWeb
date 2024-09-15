@@ -13,8 +13,8 @@
                 <a href="<%= request.getContextPath() %>/index.jsp"><img class="logo" src="<%= request.getContextPath() %>/assets/logo.png"></a>
                 <ul>
                     <li><a href="<%= request.getContextPath() %>/index.jsp">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li><a href="about.jsp">About</a></li>
+                    <li><a href="contact.jsp">Contact</a></li>
                     <button class="ind_button"><a class="b1" href="<%= request.getContextPath() %>/register.jsp">Register</a></button>
                     <button class="ind_button"><a class="b1" href="<%= request.getContextPath() %>/login.jsp">Login</a></button>
                 </ul>
@@ -64,7 +64,7 @@
                         <button type="submit" id="aButton" style="cursor: pointer">Login</button>
                         <span class="lmessage1" id='llogin_message'><%= request.getAttribute("error_msg") != null ? request.getAttribute("error_msg") : "" %></span>
                     </div>
-                    <div class="asignup">Don't have an account? <a href="<%= request.getContextPath() %>/register.jsp" class='bsignup'> Register </a> here</div>
+                    <div class="asignup">Don't have an account? <a href="<%= request.getContextPath() %>/register.jsp" class='bsignup'> <u>Register</u></a> here</div>
                 </form>
                 <script src="<%= request.getContextPath() %>/scripts/script.js"></script>
             </div>

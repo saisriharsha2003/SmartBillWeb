@@ -60,7 +60,7 @@
 					<img src="<%=request.getContextPath()%>/assets/delete.png" style="width: 50px; height: 50px">
 					<p>Delete Account</p> <span class="ext">></span>
 				</a> 
-				<a href="login.jsp" class="sub-menu-link"> 
+				<a href="<%=request.getContextPath()%>/LogoutServlet" class="sub-menu-link">  
 				<img src="<%=request.getContextPath()%>/assets/logout.png" style="width: 50px; height: 50px">
 					<p>Logout</p> <span class="ext">></span>
 				</a>
@@ -87,7 +87,7 @@
 					</div>
 				</div>
 				<div class="sbutton">
-					<input type="submit" id="aButton" value="Get Complaint Status" style="cursor: pointer">
+					<button type="submit" id="aButton" style="cursor: pointer">Get Complaint Status</button>
 				</div>
 			</form>
 			

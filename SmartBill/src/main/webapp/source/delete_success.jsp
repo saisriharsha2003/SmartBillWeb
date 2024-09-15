@@ -17,8 +17,8 @@
             <a href="<%= request.getContextPath() %>/index.jsp"><img class="logo" src="<%= request.getContextPath() %>/assets/logo.png" alt="Logo"></a>
             <ul>
                 <li><a href="<%= request.getContextPath() %>/index.jsp">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a href="about.jsp">About</a></li>
+                    <li><a href="contact.jsp">Contact</a></li>
                 <li><button class="ind_button"><a class="b1" href="<%= request.getContextPath() %>/register.jsp">Register</a></button></li>
                 <li><button class="ind_button"><a class="b1" href="<%= request.getContextPath() %>/login.jsp">Login</a></button></li>
             </ul>
@@ -37,7 +37,6 @@
             <div class="flexcenter">
             <div class="sbutton" class="flexcenter" style="display: flex; justify-content: center; gap:10px;margin-bottom: 30px; width: 90%;">
                 <button id="bButton" style="cursor: pointer;" onclick="window.location='<%=request.getContextPath()%>/index.jsp';">Back to Home</button>
-                <button id="bButton" style="cursor: pointer;">Reactivate</button>
             </div>
             </div>
         </div>

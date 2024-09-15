@@ -20,7 +20,9 @@
 	          <ul>
 	            <li><a href="admin_home.jsp">Home</a></li>
 	            <li><a href="${pageContext.request.contextPath}/AdminViewConsumers">View Consumers</a></li>
-	            <li><a href="admin_addbill.jsp">Add Bills</a></li>
+	            	            <li><a href="${pageContext.request.contextPath}/source/admin_addbill.jsp"
+>Add Bills</a></li>
+
 	            <li><a href="${pageContext.request.contextPath}/AdminViewBills">View Bills</a></li>	            
 	            <li><a href="${pageContext.request.contextPath}/AdminViewComplaints">View Complaints</a></li>
 	          </ul>
@@ -37,7 +39,7 @@
 	        		<p>Edit Profile</p>
 	        		<span class="ext">></span>
 	        	</a>
-	        	<a href="login.jsp" class="sub-menu-link">
+	        	<a href="<%=request.getContextPath()%>/LogoutServlet" class="sub-menu-link"> 
 	        		<img src="<%=request.getContextPath()%>/assets/logout.png" style="width: 50px; height: 50px">
 	        		<p>Logout</p>
 	        		<span class="ext">></span>
@@ -46,6 +48,12 @@
 	      	</div>  
 	      </nav>
 	      <div class="signup">
+	      <% 
+	      		int count = (int)session.getAttribute("cons_count");
+	      		if(count>0)
+	      		{
+	      		
+	      %>
 	        <div class="container">
 	         <div class='title' style="font-size: 25px">Add Bill</div>
 	         <form id="my_login_form" action="<%=request.getContextPath()%>/AdminAddBill" method = "post">
@@ -83,6 +91,24 @@
 	            
 	          </form>
 	        </div>
+	        <% } else { %>
+		        <div class="container" style="width: 800px;">
+					<div class="flexcenter"
+						style="text-align: center; align-items: center; gap: 20px;">
+						<img src="<%=request.getContextPath()%>/assets/smile.webp" style="height: 70px; width: 70px; border-radius: 100%">
+						<p class="title1" style="font-size: 30px;">No Consumers Found</p>
+					</div>
+					<div class="flexcenter" style="text-align: center; margin-top:20px;">
+						<p style="font-size: 20px; font-weight: 600; color: black;">Currently no consumers registered to SmartBill. Kindly comeback later.</p>
+					</div>
+					<div class="flexcenter">
+						<div class="sbutton" style="width: 100%; padding: 20px;">
+							<button id="aButton" style="cursor: pointer; " onclick="window.location.href='admin_home.jsp'">Back to Home</button>
+						</div>
+					</div>
+				
+				</div>
+			<%} %>
 	        </div>
 		</div>
 		</body>

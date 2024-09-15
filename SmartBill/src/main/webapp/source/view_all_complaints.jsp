@@ -40,32 +40,41 @@
             </ul>
             <img src="<%=request.getContextPath()%>/assets/user.png" class="user-pic" onclick="toggleMenu()">
             <div class="sub-menu-wrap" id="subMenu">
-			<div class="sub-menu">
-				<div class="user-info">
-					<img src="<%=request.getContextPath()%>/assets/user.png" style="width: 80px; height: 80px">
-					<h2 id="cu_name" style="color: #CCBA78;"></h2>
-				</div>
-				<hr>
-				<a href="edit_profile.jsp" class="sub-menu-link"> 
-					<img src="<%=request.getContextPath()%>/assets/edit.png" style="width: 50px; height: 50px">
-					<p>Edit Profile</p> <span class="ext">></span>
-				</a> 
-				<a href="delete_profile.jsp" class="sub-menu-link"> 
-					<img src="<%=request.getContextPath()%>/assets/delete.png" style="width: 50px; height: 50px">
-					<p>Delete Account</p> <span class="ext">></span>
-				</a> 
-				<a href="login.jsp" class="sub-menu-link"> 
-				<img src="<%=request.getContextPath()%>/assets/logout.png" style="width: 50px; height: 50px">
-					<p>Logout</p> <span class="ext">></span>
-				</a>
-			</div>
-		</div>
+                <div class="sub-menu">
+                    <div class="user-info">
+                        <img src="<%=request.getContextPath()%>/assets/user.png" style="width: 80px; height: 80px">
+                        <h2 id="cu_name" style="color: #CCBA78;"></h2>
+                    </div>
+                    <hr>
+                    <a href="edit_profile.jsp" class="sub-menu-link"> 
+                        <img src="<%=request.getContextPath()%>/assets/edit.png" style="width: 50px; height: 50px">
+                        <p>Edit Profile</p> <span class="ext">></span>
+                    </a> 
+                    <a href="delete_profile.jsp" class="sub-menu-link"> 
+                        <img src="<%=request.getContextPath()%>/assets/delete.png" style="width: 50px; height: 50px">
+                        <p>Delete Account</p> <span class="ext">></span>
+                    </a> 
+                    <a href="<%=request.getContextPath()%>/LogoutServlet" class="sub-menu-link">  
+                        <img src="<%=request.getContextPath()%>/assets/logout.png" style="width: 50px; height: 50px">
+                        <p>Logout</p> <span class="ext">></span>
+                    </a>
+                </div>
+            </div>
         </nav>
     </div>
 
     <div class="signup">
-        <div class="container1">
+        
+            
+            <%
+            	List<HashMap<String, String>> complaintsList = (List<HashMap<String, String>>) session.getAttribute("view_all_comp");
+            	if(complaintsList.size()!=0)
+            	{
+
+            %>
+            <div class="container1">
             <div class="title" style="margin-bottom: 20px;">View All Complaints</div>
+            <div class="flexcenter">
             <table class="paybill">
                 <thead>
                     <tr>
@@ -79,7 +88,6 @@
                 </thead>
                 <tbody>
                     <%
-                    List<HashMap<String, String>> complaintsList = (List<HashMap<String, String>>) session.getAttribute("view_all_comp");
 
                     int currentPage = 1;
                     int recordsPerPage = 5;
@@ -88,16 +96,18 @@
                     if (complaintsList != null) {
                         totalRecords = complaintsList.size();
 
-                        if (request.getParameter("page") != null) {
-                            currentPage = Integer.parseInt(request.getParameter("page"));
-                        }
+                        if (totalRecords > recordsPerPage) {
+                            // Apply pagination logic only if there are more than 5 records
+                            if (request.getParameter("page") != null) {
+                                currentPage = Integer.parseInt(request.getParameter("page"));
+                            }
 
-                        int start = (currentPage - 1) * recordsPerPage;
-                        int end = Math.min(start + recordsPerPage, totalRecords);
-                        List<HashMap<String, String>> paginatedComplaints = complaintsList.subList(start, end);
+                            int start = (currentPage - 1) * recordsPerPage;
+                            int end = Math.min(start + recordsPerPage, totalRecords);
+                            List<HashMap<String, String>> paginatedComplaints = complaintsList.subList(start, end);
 
-                        for (HashMap<String, String> complaint : paginatedComplaints) {
-                            if (complaint.get("status").equalsIgnoreCase("Not Solved")) {
+                            for (HashMap<String, String> complaint : paginatedComplaints) {
+                                if (complaint.get("status").equalsIgnoreCase("Not Solved")) {
                     %>
                     <tr>
                         <td><%= complaint.get("complaint_id") %></td>
@@ -108,7 +118,7 @@
                         <td style="color:red; font-weight:500;"><%= complaint.get("status") %></td>
                     </tr>
                     <%
-                            } else {
+                                } else {
                     %>
                     <tr>
                         <td><%= complaint.get("complaint_id") %></td>
@@ -119,15 +129,44 @@
                         <td style="color:green; font-weight:500;"><%= complaint.get("status") %></td>
                     </tr>
                     <%
+                                }
+                            }
+                        } else {
+                            // If 5 or fewer complaints, display all without pagination
+                            for (HashMap<String, String> complaint : complaintsList) {
+                                if (complaint.get("status").equalsIgnoreCase("Not Solved")) {
+                    %>
+                    <tr>
+                        <td><%= complaint.get("complaint_id") %></td>
+                        <td><%= complaint.get("contact_person") %></td>
+                        <td><%= complaint.get("mobile") %></td>
+                        <td><%= complaint.get("problem") %></td>
+                        <td><%= complaint.get("address") %></td>
+                        <td style="color:red; font-weight:500;"><%= complaint.get("status") %></td>
+                    </tr>
+                    <%
+                                } else {
+                    %>
+                    <tr>
+                        <td><%= complaint.get("complaint_id") %></td>
+                        <td><%= complaint.get("contact_person") %></td>
+                        <td><%= complaint.get("mobile") %></td>
+                        <td><%= complaint.get("problem") %></td>
+                        <td><%= complaint.get("address") %></td>
+                        <td style="color:green; font-weight:500;"><%= complaint.get("status") %></td>
+                    </tr>
+                    <%
+                                }
                             }
                         }
                     }
                     %>
                 </tbody>
             </table>
-
+			</div>
             <%
             int totalPages = (int) Math.ceil((double) totalRecords / recordsPerPage);
+            if (totalRecords > recordsPerPage) { // Only show pagination if more than 5 records
             %>
             <div class="pagination">
                 <%
@@ -154,8 +193,32 @@
                 }
                 %>
             </div>
+            </div>
+            <%
+            }
+            	}else{
+            %>
+            <div class = "container">
+            <div class="flexcenter" style="text-align: center; align-items: center; gap: 20px;">
+                <img src="<%=request.getContextPath()%>/assets/smile.webp" alt="Delete Emoji" style="height: 70px; width: 70px; border-radius: 100%">
+                <p class="title1" style="font-size: 30px;">No Complaints Found!</p>
+            </div>
+            <div class="flexcenter">
+            	<p style="font-size: 20px; font-weight: 600; margin-top: 20px; maring-bottom:10px;">Kindly click below to register a new complaint.</p>
+            </div>
+            
+            <div class="flexcenter">
+            	<div class="sbutton" style="width: 100%; padding: 20px; ">
+					<button id="aButton" style="cursor: pointer; " onclick="window.location.href='home.jsp'">Back to Home</button>
+				</div>
+				<div class="sbutton" style="width: 100% ; padding: 20px;">
+					<button type="submit" id="aButton" style="cursor: pointer; " onclick="window.location.href='register_complaint.jsp'">Register Complaint</button>
+				</div>
+            </div>
+            <%} %>
+            
         </div>
-    </div>
+
 </body>
 <script src="<%=request.getContextPath()%>/scripts/script.js"></script>
 <script>
