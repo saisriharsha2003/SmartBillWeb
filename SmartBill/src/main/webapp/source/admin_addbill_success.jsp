@@ -20,7 +20,9 @@
 	          <ul>
 	            <li><a href="admin_home.jsp">Home</a></li>
 	            <li><a href="${pageContext.request.contextPath}/AdminViewConsumers">View Consumers</a></li>
-	            <li><a href="admin_addbill.jsp">Add Bills</a></li>
+	            	            <li><a href="${pageContext.request.contextPath}/source/admin_addbill.jsp"
+>Add Bills</a></li>
+
 	            <li><a href="/SmartBillWeb/AdminViewBills">View Bills</a></li>	            	            
 	            <li><a href="${pageContext.request.contextPath}/AdminViewComplaints">View Complaints</a></li>
 	          </ul>
@@ -37,7 +39,7 @@
 	        		<p>Edit Profile</p>
 	        		<span class="ext">></span>
 	        	</a>
-	        	<a href="login.jsp" class="sub-menu-link">
+	        	<a href="<%=request.getContextPath()%>/LogoutServlet" class="sub-menu-link"> 
 	        		<img src="<%=request.getContextPath()%>/assets/logout.png" style="width: 50px; height: 50px">
 	        		<p>Logout</p>
 	        		<span class="ext">></span>

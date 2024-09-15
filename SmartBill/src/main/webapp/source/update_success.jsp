@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ page import = "java.util.*"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -60,7 +61,7 @@
 					<img src="<%=request.getContextPath()%>/assets/delete.png" style="width: 50px; height: 50px">
 					<p>Delete Account</p> <span class="ext">></span>
 				</a> 
-				<a href="<%=request.getContextPath()%>/login.jsp" class="sub-menu-link"> 
+				<a href="<%=request.getContextPath()%>/LogoutServlet" class="sub-menu-link">  
 				<img src="<%=request.getContextPath()%>/assets/logout.png" style="width: 50px; height: 50px">
 					<p>Logout</p> <span class="ext">></span>
 				</a>
@@ -102,35 +103,31 @@
 				</div>
 
 				<div class="sbutton" style="width: 100%;">
-					<input type="submit" id="bButton" value="Back to Home"
-						style="cursor: pointer" onclick="window.location='home.jsp';">
+					<button type="submit" id="bButton"
+						style="cursor: pointer" onclick="window.location='home.jsp';">Back to Home</button>
 				</div>
 
 
 			</div>
 		</div>
 	</div>
+	<%
+		HashMap<String, String> m1 = (HashMap<String, String>)session.getAttribute("updated_user_details");
+		String p1 = m1.get("up-cname");
+		String p2 = m1.get("up-email");
+		String p3 = m1.get("up-mob");
+		String p4 = m1.get("up-uname");
+	%>
 	<script type="text/javascript">
         var cn1 = document.getElementById("up_name");
         var cn2 = document.getElementById("up_email");
         var cn3 = document.getElementById("up_mobile");
         var cn4 = document.getElementById("up_uname");
 
-        
-        var p1 = '<%=(session.getAttribute("up-cname") != null) ? session.getAttribute("up-cname") : ""%>';
-        var p2 = '<%=(session.getAttribute("up-email") != null) ? session.getAttribute("up-email") : ""%>';
-        var p3 = '<%=(session.getAttribute("up-mob") != null) ? session.getAttribute("up-mob") : ""%>';
-        var p4 = '<%=(session.getAttribute("up-uname") != null) ? session.getAttribute("up-uname") : ""%>
-		';
-
-		if (cn1)
-			cn1.textContent = p1;
-		if (cn2)
-			cn2.textContent = p2;
-		if (cn3)
-			cn3.textContent = p3;
-		if (cn4)
-			cn4.textContent = p4;
+		if (cn1) cn1.textContent = '<%= p1 %>';
+		if (cn2) cn2.textContent = '<%= p2 %>';
+		if (cn3) cn3.textContent = '<%= p3 %>';
+		if (cn4) cn4.textContent = '<%= p4 %>';
 	</script>
 </body>
 </html>

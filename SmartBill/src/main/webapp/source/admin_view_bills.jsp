@@ -17,7 +17,9 @@
             <ul>
                 <li><a href="admin_home.jsp">Home</a></li>
                 <li><a href="${pageContext.request.contextPath}/AdminViewConsumers">View Consumers</a></li>
-                <li><a href="admin_addbill.jsp">Add Bills</a></li>
+                	            <li><a href="${pageContext.request.contextPath}/source/admin_addbill.jsp"
+>Add Bills</a></li>
+
                 <li><a href="${pageContext.request.contextPath}/AdminViewBills">View Bills</a></li>               
                 <li><a href="${pageContext.request.contextPath}/AdminViewComplaints">View Complaints</a></li>
             </ul>
@@ -34,7 +36,7 @@
                         <p>Edit Profile</p>
                         <span class="ext">></span>
                     </a>
-                    <a href="login.jsp" class="sub-menu-link">
+                    <a href="<%=request.getContextPath()%>/LogoutServlet" class="sub-menu-link"> 
                         <img src="<%=request.getContextPath()%>/assets/logout.png" style="width: 50px; height: 50px">
                         <p>Logout</p>
                         <span class="ext">></span>
@@ -45,7 +47,17 @@
     </div>
 
     <div class="signup">
-        <div class="container1">
+    	<% 
+	      		int count = (int)session.getAttribute("cons_count");
+        		List<HashMap<String, String>> billList = (List<HashMap<String, String>>) session.getAttribute("admin_bills");
+
+	      		if(count>0)
+	      		{
+	      			if(billList.size()>0)
+	      			{
+ 		
+	      %>
+        <div class="container1" style="width: 900px">
             <div class="title" style="margin-bottom: 20px;">View Bills</div>
             <div style="display: flex; justify-content: center;">
                 <table class="paybill">
@@ -62,7 +74,6 @@
                     </thead>
                     <tbody>
                         <%
-                        List<HashMap<String, String>> billList = (List<HashMap<String, String>>) session.getAttribute("admin_bills");
 
                         int currentPage = 1;
                         int recordsPerPage = 5;
@@ -70,28 +81,28 @@
 
                         if (billList != null) {
                             totalRecords = billList.size();
-
-                            if (request.getParameter("page") != null) {
-                                currentPage = Integer.parseInt(request.getParameter("page"));
-                            }
-
-                            int start = (currentPage - 1) * recordsPerPage;
-                            int end = Math.min(start + recordsPerPage, totalRecords);
-                            List<HashMap<String, String>> paginatedBills = billList.subList(start, end);
-
-                            for (HashMap<String, String> bill : paginatedBills) {
-                                String status = bill.get("status");
-                                String statusClass;
-
-                                if (status.equalsIgnoreCase("unpaid")) {
-                                    statusClass = "status-unpaid";
-                                } else if (status.equalsIgnoreCase("partially paid")) {
-                                    statusClass = "status-partially-paid";
-                                } else if (status.equalsIgnoreCase("overdue")) {
-                                    statusClass = "status-overdue";
-                                } else {
-                                    statusClass = "status-paid";
+                            if(totalRecords > 5) {
+                                if (request.getParameter("page") != null) {
+                                    currentPage = Integer.parseInt(request.getParameter("page"));
                                 }
+
+                                int start = (currentPage - 1) * recordsPerPage;
+                                int end = Math.min(start + recordsPerPage, totalRecords);
+                                List<HashMap<String, String>> paginatedBills = billList.subList(start, end);
+
+                                for (HashMap<String, String> bill : paginatedBills) {
+                                    String status = bill.get("status");
+                                    String statusClass;
+
+                                    if (status.equalsIgnoreCase("unpaid")) {
+                                        statusClass = "status-unpaid";
+                                    } else if (status.equalsIgnoreCase("partially paid")) {
+                                        statusClass = "status-partially-paid";
+                                    } else if (status.equalsIgnoreCase("overdue")) {
+                                        statusClass = "status-overdue";
+                                    } else {
+                                        statusClass = "status-paid";
+                                    }
                         %>
                         <tr>
                             <td><%= bill.get("bill_id") %></td>
@@ -103,6 +114,33 @@
                             <td class="<%= statusClass %>"><%= bill.get("status") %></td>
                         </tr>
                         <%
+                                }
+                            } else {
+                                for (HashMap<String, String> bill : billList) {
+                                    String status = bill.get("status");
+                                    String statusClass;
+
+                                    if (status.equalsIgnoreCase("unpaid")) {
+                                        statusClass = "status-unpaid";
+                                    } else if (status.equalsIgnoreCase("partially paid")) {
+                                        statusClass = "status-partially-paid";
+                                    } else if (status.equalsIgnoreCase("overdue")) {
+                                        statusClass = "status-overdue";
+                                    } else {
+                                        statusClass = "status-paid";
+                                    }
+                        %>
+                        <tr>
+                            <td><%= bill.get("bill_id") %></td>
+                            <td><%= bill.get("consumer_id") %></td>
+                            <td><%= bill.get("due_amount") %></td>
+                            <td><%= bill.get("pay_amount") %></td>
+                            <td><%= bill.get("due_date") %></td>
+                            <td><%= bill.get("penalty") %></td>
+                            <td class="<%= statusClass %>"><%= bill.get("status") %></td>
+                        </tr>
+                        <%
+                                }
                             }
                         }
                         %>
@@ -111,7 +149,8 @@
             </div>
 
             <%
-            int totalPages = (int) Math.ceil((double) totalRecords / recordsPerPage);
+            if(totalRecords > 5) {
+                int totalPages = (int) Math.ceil((double) totalRecords / recordsPerPage);
             %>
             <div style="margin-right: 30px;" class="pagination">
                 <%
@@ -138,7 +177,48 @@
                 }
                 %>
             </div>
+            <%
+            }
+            %>
         </div>
+        <% } else { %>
+        <div class="container" style="width: 800px;">
+        	<div class="flexcenter" style="text-align: center; align-items: center; gap: 20px;">
+                <img src="<%=request.getContextPath()%>/assets/smile.webp" alt="Delete Emoji" style="height: 70px; width: 70px; border-radius: 100%">
+                <p class="title1" style="font-size: 30px;">No Bills Found</p>
+            </div>
+            <div class="flexcenter">
+            	<p style="font-size: 20px; font-weight: 600; margin-top: 20px;">Current no bills found. Kindly click below to add bills.</p>
+            </div>
+            
+            <div class="flexcenter">
+            	<div class="sbutton" style="width: 100%; padding: 20px; ">
+					<button id="aButton" style="cursor: pointer; " onclick="window.location.href='home.jsp'">Back to Home</button>
+				</div>
+				<div class="sbutton" style="width: 100% ; padding: 20px;">
+					<button type="submit" id="aButton" style="cursor: pointer; " onclick="window.location.href='admin_adbill.jsp'">Add Bill</button>
+				</div>
+            </div>
+            
+        </div>
+        <%} } else { %>
+	        <div class="container" style="width: 800px;">
+				<div class="flexcenter"
+					style="text-align: center; align-items: center; gap: 20px;">
+					<img src="<%=request.getContextPath()%>/assets/smile.webp" style="height: 70px; width: 70px; border-radius: 100%">
+					<p class="title1" style="font-size: 30px;">No Consumers Found</p>
+				</div>
+				<div class="flexcenter" style="text-align: center; margin-top:20px;">
+					<p style="font-size: 20px; font-weight: 600; color: black;">Currently no consumers registered to SmartBill. Kindly comeback later.</p>
+				</div>
+				<div class="flexcenter">
+					<div class="sbutton" style="width: 100%; padding: 20px;">
+						<button id="aButton" style="cursor: pointer; " onclick="window.location.href='admin_home.jsp'">Back to Home</button>
+					</div>
+				</div>
+			
+			</div>
+		<%} %>
     </div>
 
     <script src="<%=request.getContextPath()%>/scripts/script.js"></script>
