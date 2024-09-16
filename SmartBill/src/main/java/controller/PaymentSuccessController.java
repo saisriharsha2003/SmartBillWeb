@@ -16,8 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import logic.PaymentsLogic;
 import model.PaymentModel;
-import view.PaymentsView;
 
 @WebServlet("/PaymentSuccess")
 public class PaymentSuccessController extends HttpServlet {
@@ -32,7 +32,6 @@ public class PaymentSuccessController extends HttpServlet {
 		long conid = Long.parseLong(session.getAttribute("consumer_lgid").toString());
 
 		HashMap<String, String> mp = (HashMap<String, String>) session.getAttribute("payment_billdet");
-		System.out.println(mp);
 		int bill_id = Integer.parseInt(mp.get("bill_id"));
 		String pay_mode = (String) session.getAttribute("billdet_paymode");
 		double paid_amt = Double.parseDouble((String) session.getAttribute("billdet_pamount"));
@@ -49,7 +48,7 @@ public class PaymentSuccessController extends HttpServlet {
 		PaymentModel pm = new PaymentModel(randomNumber, bill_id, paid_amt, pay_mode, formattedDisplayDate, conid);
 
 		try {
-			int res = PaymentsView.makePayment(pm, conid);
+			int res = PaymentsLogic.makePayment(pm, conid);
 			
 			if (res == 1) {
 				HashMap<String, String> paymentDetails = new HashMap<>();

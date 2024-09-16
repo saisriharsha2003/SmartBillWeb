@@ -1,21 +1,18 @@
-package view;
+package logic;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
-
 import model.LoginModel;
-import model.RegisterModel;
 import utility.Utility;
 
-public class LoginView {
+public class LoginLogic {
 	public static boolean authenticateAdmin(LoginModel lg) throws ClassNotFoundException, SQLException
 	{
 		String aun = lg.getUserName();
 		String apwd = lg.getPassword();
-		System.out.println(apwd);
 		PreparedStatement p1 = Utility.getPreparedStatement("select * from admin_login where username = ?");
 		p1.setString(1, "admin");
 		ResultSet r1 = p1.executeQuery();
@@ -24,7 +21,6 @@ public class LoginView {
 		{
 			epwd = r1.getString("password");
 		}
-		System.out.println(epwd);
 		if(apwd.equalsIgnoreCase(epwd))
 		{
 			return true;

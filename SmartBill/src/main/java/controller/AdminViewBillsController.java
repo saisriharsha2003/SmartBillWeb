@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import view.AdminView;
+import logic.AdminLogic;
 
 @WebServlet("/AdminViewBills")
 public class AdminViewBillsController extends HttpServlet {
@@ -27,8 +27,8 @@ public class AdminViewBillsController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		try {
-			int res = AdminView.updatePenalty();
-			List<HashMap<String, String>> h1 = AdminView.fetchAllBillsAdmin();
+			int res = AdminLogic.updatePenalty();
+			List<HashMap<String, String>> h1 = AdminLogic.fetchAllBillsAdmin();
 			HttpSession session = request.getSession();
 			session.setAttribute("admin_bills", h1);
 			response.sendRedirect("source/admin_view_bills.jsp");

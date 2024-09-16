@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import view.PaymentsView;
+import logic.PaymentsLogic;
 
 @WebServlet("/PaymentHistory")
 public class PaymentHistoryController extends HttpServlet {
@@ -27,7 +27,7 @@ public class PaymentHistoryController extends HttpServlet {
 		HttpSession session = request.getSession();
 		long conid = Long.parseLong(session.getAttribute("consumer_lgid").toString());
 		try {
-			List<HashMap<String, String>> mp1 = PaymentsView.fetchAllPayments(conid);
+			List<HashMap<String, String>> mp1 = PaymentsLogic.fetchAllPayments(conid);
 			session.setAttribute("payment_details_con", mp1);
 
 			response.sendRedirect("source/payment_history.jsp");

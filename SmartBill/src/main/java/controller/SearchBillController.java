@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import view.BillsView;
-import view.ComplaintsView;
+import logic.BillsLogic;
+import logic.ComplaintsLogic;
 
 @WebServlet("/SearchBills")
 public class SearchBillController extends HttpServlet {
@@ -28,7 +28,7 @@ public class SearchBillController extends HttpServlet {
 		
 		int compid = Integer.parseInt(request.getParameter("search_billid"));
 		try {
-			HashMap<String, String> sbill = BillsView.fetchBillDetailsById(compid);
+			HashMap<String, String> sbill = BillsLogic.fetchBillDetailsById(compid);
 			HttpSession session = request.getSession();
 			session.setAttribute("search_bill_id", sbill);
 

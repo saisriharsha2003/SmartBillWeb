@@ -13,9 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import view.AdminView;
-import view.BillsView;
-import view.ComplaintsView;
+import logic.AdminLogic;
+import logic.BillsLogic;
+import logic.ComplaintsLogic;
 
 @WebServlet("/ViewBills")
 public class ViewBillsController extends HttpServlet {
@@ -31,8 +31,8 @@ public class ViewBillsController extends HttpServlet {
 		
 		long conid = Long.parseLong(session.getAttribute("consumer_lgid").toString());
 		try {
-			int res = AdminView.updatePenalty();
-			List<HashMap<String, String>> l1 = BillsView.fetchAllBills(conid);
+			int res = AdminLogic.updatePenalty();
+			List<HashMap<String, String>> l1 = BillsLogic.fetchAllBills(conid);
 			session.setAttribute("view_all_bills", l1);
 
 			response.sendRedirect("source/view_bills.jsp");

@@ -1,4 +1,4 @@
-package view;
+package logic;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,10 +10,10 @@ import java.util.List;
 
 import utility.Utility;
 
-public class BillsView {
+public class BillsLogic {
 	public static List<HashMap<String, String>> fetchAllBills(long conid) throws ClassNotFoundException, SQLException, ParseException
 	{
-		AdminView.updatePenalty();
+		AdminLogic.updatePenalty();
 		List<HashMap<String, String>> lm = new ArrayList<HashMap<String, String>>();
 
 		PreparedStatement p1 = Utility.getPreparedStatement("select * from bill where consumer_id = ?");
@@ -54,7 +54,7 @@ public class BillsView {
 	
 	public static HashMap<String, String> fetchBillDetailsById(int bill_id) throws SQLException, ClassNotFoundException, ParseException
 	{
-		AdminView.updatePenalty();
+		AdminLogic.updatePenalty();
 		HashMap<String, String> m1= new HashMap<String, String>();
 		
 		PreparedStatement p1 = Utility.getPreparedStatement("select * from bill where bill_number = ?");

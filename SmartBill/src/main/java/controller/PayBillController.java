@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import view.AdminView;
-import view.BillsView;
+import logic.AdminLogic;
+import logic.BillsLogic;
 
 
 @WebServlet("/PayBills")
@@ -30,8 +30,8 @@ public class PayBillController extends HttpServlet {
 		HttpSession session = request.getSession();
 		long conid = Long.parseLong(String.valueOf(session.getAttribute("consumer_lgid")));
 		try {
-			int res = AdminView.updatePenalty();
-			List<HashMap<String, String>> l1 = BillsView.fetchAllBills(conid);
+			int res = AdminLogic.updatePenalty();
+			List<HashMap<String, String>> l1 = BillsLogic.fetchAllBills(conid);
 			session.setAttribute("view_all_bills", l1);
 
 			response.sendRedirect("source/pay_bills.jsp");

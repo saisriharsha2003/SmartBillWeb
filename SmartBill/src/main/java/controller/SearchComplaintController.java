@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import view.ComplaintsView;
+import logic.ComplaintsLogic;
 
 @WebServlet("/SearchComplaint")
 public class SearchComplaintController extends HttpServlet {
@@ -25,7 +25,7 @@ public class SearchComplaintController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int compid = Integer.parseInt(request.getParameter("search_compid"));
 		try {
-			HashMap<String, String> scomp = ComplaintsView.fetchComplaintDetailsById(compid);
+			HashMap<String, String> scomp = ComplaintsLogic.fetchComplaintDetailsById(compid);
 			HttpSession session = request.getSession();
 			session.setAttribute("search_complaint_id", scomp);
 

@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import view.AdminView;
+import logic.AdminLogic;
 
 @WebServlet("/UpdateComplaint")
 public class AdminUpdateComplaintController extends HttpServlet {
@@ -26,12 +26,11 @@ public class AdminUpdateComplaintController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		int cmpid = Integer.parseInt(request.getParameter("up_comp"));
-		System.out.println(cmpid);
 		try {
-			int res = AdminView.updateComplaint(cmpid);
+			int res = AdminLogic.updateComplaint(cmpid);
 			if(res == 1)
 			{
-				HashMap<String, String> lh1 = AdminView.fetchUpdatedComplaint(cmpid);
+				HashMap<String, String> lh1 = AdminLogic.fetchUpdatedComplaint(cmpid);
 				session.setAttribute("upd_comp_det", lh1);
 			}
 			response.sendRedirect("source/admin_complaint_update.jsp");

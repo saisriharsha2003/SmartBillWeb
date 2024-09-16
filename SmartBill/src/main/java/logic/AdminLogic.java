@@ -1,4 +1,4 @@
-package view;
+package logic;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,7 +14,7 @@ import java.util.List;
 import model.BillModel;
 import utility.Utility;
 
-public class AdminView {
+public class AdminLogic {
 	public static int fetchCountConsumers() throws ClassNotFoundException, SQLException
 	{
 		Statement st = Utility.getStatement();
@@ -48,7 +48,6 @@ public class AdminView {
 	{
 		List<HashMap<String, String>> lh1=new ArrayList<HashMap<String, String>>();
 		Statement p1 = Utility.getStatement();
-		System.out.println("hello");
 		ResultSet rs= p1.executeQuery("select * from consumer");
 		while(rs.next())
 		{
@@ -60,7 +59,6 @@ public class AdminView {
 			h1.put("user_name", rs.getString("user_name"));
 			lh1.add(h1);
 		}
-		System.out.println(lh1.size());
 		return lh1;
 	}
 	

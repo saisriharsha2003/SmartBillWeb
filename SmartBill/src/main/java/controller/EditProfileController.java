@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import view.LoginView;
-import view.RegisterView;
+import logic.LoginLogic;
+import logic.RegisterLogic;
 
 @WebServlet("/EditProfile")
 public class EditProfileController extends HttpServlet {
@@ -34,9 +34,8 @@ public class EditProfileController extends HttpServlet {
 		long cid = (long)session.getAttribute("consumer_lgid");
 		
 		try {
-			int res1 = RegisterView.updateRegisterDetails(cid, ucname, email, mob, uuname, upwd);
-			int res2 = LoginView.updateLoginDetails(cid, uuname, upwd);
-			System.out.println(res1+" "+res2);
+			int res1 = RegisterLogic.updateRegisterDetails(cid, ucname, email, mob, uuname, upwd);
+			int res2 = LoginLogic.updateLoginDetails(cid, uuname, upwd);
 			if(res1 == 1 && res2 == 1)
 			{
 				HashMap<String, String> mp=new HashMap<String, String>();

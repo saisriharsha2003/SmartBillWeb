@@ -1,4 +1,4 @@
-package view;
+package logic;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,7 +13,7 @@ import java.util.List;
 import model.PaymentModel;
 import utility.Utility;
 
-public class PaymentsView {
+public class PaymentsLogic {
 	public static int makePayment(PaymentModel pm, long conid) throws ClassNotFoundException, SQLException, ParseException {
 	    PreparedStatement p1 = Utility.getPreparedStatement("insert into payment values(?,?,?,?,?,?)");
 	    p1.setInt(1, pm.getTransactionNumber());
@@ -43,7 +43,6 @@ public class PaymentsView {
 
 	    String nstatus = "";
 	    double t1 = edamt - pm.getPaidAmount() ;
-	    System.out.println(t1);
 	    if(t1==0 && pen == 0)
 	    {
 	    	t1=0;
@@ -84,7 +83,6 @@ public class PaymentsView {
 	    		nstatus = "Paid";
 	    	}
 	    }
-	    System.out.println("status"+nstatus);
 	    PreparedStatement p3 = Utility.getPreparedStatement("update bill set status = ? , due_amount = ?, penalty = ? where bill_number = ?");
 	    p3.setString(1, nstatus);
 	    p3.setInt(4, pm.getBillNumber());

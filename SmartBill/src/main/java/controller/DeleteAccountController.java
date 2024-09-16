@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import view.LoginView;
+import logic.LoginLogic;
 
 @WebServlet("/DeleteAccount")
 public class DeleteAccountController extends HttpServlet {
@@ -25,7 +25,7 @@ public class DeleteAccountController extends HttpServlet {
 		HttpSession session = request.getSession();
 		long conid = (long)session.getAttribute("consumer_lgid");
 		try {
-			int res = LoginView.softDeleteAccount(conid);
+			int res = LoginLogic.softDeleteAccount(conid);
 			if(res == 1)
 			{
 				response.sendRedirect("source/delete_success.jsp");

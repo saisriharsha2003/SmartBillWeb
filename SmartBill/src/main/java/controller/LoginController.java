@@ -2,8 +2,6 @@ package controller;
 
 import model.LoginModel;
 import model.RegisterModel;
-import view.AdminView;
-import view.LoginView;
 
 import java.io.IOException;
 import java.net.URLEncoder;
@@ -17,6 +15,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import logic.AdminLogic;
+import logic.LoginLogic;
 
 
 @WebServlet("/Login")
@@ -34,20 +35,18 @@ public class LoginController extends HttpServlet {
 		String pwd = request.getParameter("lpwd");
 		String ut = request.getParameter("userType");
 		
-		System.out.println(uname+"  uname"+"  "+ut);
-
 		if(ut.equalsIgnoreCase("Admin"))
 		{
 			if(uname.equalsIgnoreCase("admin")) {
 				try {
 					LoginModel lg=new LoginModel(uname, pwd);
 	
-					boolean status = LoginView.authenticateAdmin(lg);
+					boolean status = LoginLogic.authenticateAdmin(lg);
 					if(status == true)
 					{
 						HttpSession session = request.getSession();
 						session.setAttribute("consumer_lgname", "Admin");
-						int count = AdminView.fetchCountConsumers();
+						int count = AdminLogic.fetchCountConsumers();
 						session.setAttribute("cons_count", count);
 						response.sendRedirect("source/admin_home.jsp");
 					}
@@ -78,24 +77,24 @@ public class LoginController extends HttpServlet {
 		{
 			try {
 				
-				boolean isexist = LoginView.isUserExist(uname);
+				boolean isexist = LoginLogic.isUserExist(uname);
 				if(isexist)
 				{
 					LoginModel lg1=new LoginModel(uname, pwd);
-					boolean act_status = LoginView.fetchAccountStatus(uname);
+					boolean act_status = LoginLogic.fetchAccountStatus(uname);
 					
 					if(act_status)
 					{
-						boolean status1 = LoginView.authenticateConsumer(lg1);
+						boolean status1 = LoginLogic.authenticateConsumer(lg1);
 						if(status1 == true)
 						{
-							String cname = LoginView.fetchConsumerName(uname);
-							long cid = LoginView.fetchConsumerId(uname);
+							String cname = LoginLogic.fetchConsumerName(uname);
+							long cid = LoginLogic.fetchConsumerId(uname);
 							HttpSession session = request.getSession();
 							session.setAttribute("consumer_lgid", cid);
 							session.setAttribute("consumer_lgname", cname);
 
-							HashMap<String, String> mp = LoginView.fetchUserDetails(uname);
+							HashMap<String, String> mp = LoginLogic.fetchUserDetails(uname);
 							session.setAttribute("user-details", mp);
 							
 							response.sendRedirect("source/home.jsp");

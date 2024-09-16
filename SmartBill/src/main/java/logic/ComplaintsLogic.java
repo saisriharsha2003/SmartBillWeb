@@ -1,4 +1,4 @@
-package view;
+package logic;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,7 +10,7 @@ import java.util.List;
 import model.ComplaintModel;
 import utility.Utility;
 
-public class ComplaintsView {
+public class ComplaintsLogic {
 	public static int registerComplaint(ComplaintModel cmp) throws ClassNotFoundException, SQLException
 	{
 		String s1 = "insert into complaint values(?,?,?,?,?,?,?,?,?,?)";
