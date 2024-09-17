@@ -16,11 +16,11 @@ import logic.ComplaintsLogic;
 import model.ComplaintModel;
 
 @WebServlet("/RegisterComplaintController")
-public class RegisterComplaintController extends HttpServlet {
+public class RegisterComplaintServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     
-    public RegisterComplaintController() {
+    public RegisterComplaintServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

@@ -14,30 +14,32 @@ import javax.servlet.http.HttpSession;
 
 import logic.AdminLogic;
 
-@WebServlet("/UpdateComplaint")
-public class AdminUpdateComplaintController extends HttpServlet {
+
+@WebServlet("/AdminViewConsumers")
+public class AdminViewConsumersServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public AdminUpdateComplaintController() {
+   
+    public AdminViewConsumersServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		int cmpid = Integer.parseInt(request.getParameter("up_comp"));
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			int res = AdminLogic.updateComplaint(cmpid);
-			if(res == 1)
-			{
-				HashMap<String, String> lh1 = AdminLogic.fetchUpdatedComplaint(cmpid);
-				session.setAttribute("upd_comp_det", lh1);
-			}
-			response.sendRedirect("source/admin_complaint_update.jsp");
+			List<HashMap<String, String>> h1= AdminLogic.fetchAllConsumers();
+			HttpSession session = request.getSession();
+			session.setAttribute("admin_consumers", h1);
+
+			response.sendRedirect("source/admin_view_consumers.jsp");
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 	}
+
+	
 
 }

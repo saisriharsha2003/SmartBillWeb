@@ -15,10 +15,10 @@ import logic.LoginLogic;
 import logic.RegisterLogic;
 
 @WebServlet("/EditProfile")
-public class EditProfileController extends HttpServlet {
+public class EditProfileServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public EditProfileController() {
+    public EditProfileServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

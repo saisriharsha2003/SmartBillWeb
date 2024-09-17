@@ -44,8 +44,8 @@
                     <a href="#" class="dropbtn">Payments</a>
                     <div class="dropdown-content">
                         <a href="${pageContext.request.contextPath}/PaymentHistory">Payments History</a>
-                        <a href="search_complaint.jsp">Search Payment Details</a>
-                    </div>
+						<a href="search_payment.jsp">Search Payment Details</a>                    
+					</div>
                 </li>
             </ul>
 

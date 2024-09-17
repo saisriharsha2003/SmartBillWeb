@@ -16,11 +16,11 @@ import logic.RegisterLogic;
 import model.RegisterModel;
 
 @WebServlet("/Register")
-public class RegisterController extends HttpServlet {
+public class RegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     
-    public RegisterController() {
+    public RegisterServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

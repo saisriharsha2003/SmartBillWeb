@@ -1,8 +1,6 @@
 package controller;
 
 import java.io.IOException;
-import java.util.Random;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,26 +9,24 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 
-@WebServlet("/ReceiptController")
-public class ReceiptController extends HttpServlet {
+@WebServlet("/PaymentScreen")
+public class PaymentScreenServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public ReceiptController() {
+    public PaymentScreenServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Random random = new Random();
-		long min = 10000000000L;
-		long max = 99999999999L;
-		long randomNumber = min + (long) (random.nextDouble() * (max - min + 1));
+		String pay_amount = (String)request.getParameter("billdet_pamt");
+		String pay_mode = (String)request.getParameter("pay_mode");
 		HttpSession session = request.getSession();
-		session.setAttribute("receipt_number", randomNumber);
+		session.setAttribute("billdet_pamount", pay_amount);
+		session.setAttribute("billdet_paymode", pay_mode);
 
-		response.sendRedirect("source/view_receipt.jsp");
+		response.sendRedirect("source/payment_screen.jsp");
 	}
-
 	
+
 }

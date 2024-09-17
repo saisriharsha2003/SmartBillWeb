@@ -11,30 +11,39 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import logic.ComplaintsLogic;
+import logic.AdminLogic;
+import logic.BillsLogic;
+import logic.PaymentsLogic;
 
-@WebServlet("/SearchComplaint")
-public class SearchComplaintController extends HttpServlet {
+@WebServlet("/BillDetails")
+public class BillDetailsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public SearchComplaintController() {
+    public BillDetailsServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int compid = Integer.parseInt(request.getParameter("search_compid"));
+		HttpSession session = request.getSession();
+		int billid = Integer.parseInt(request.getParameter("up_bill"));
+		HashMap<String, String> mp;
 		try {
-			HashMap<String, String> scomp = ComplaintsLogic.fetchComplaintDetailsById(compid);
-			HttpSession session = request.getSession();
-			session.setAttribute("search_complaint_id", scomp);
+			double due_amt = PaymentsLogic.fetchDueAmount(billid);
 
-			response.sendRedirect("source/complaint_details_id.jsp");
+			mp = BillsLogic.fetchPaymentBillDetails(billid);
+			session.setAttribute("payment_billdet", mp);
+			session.setAttribute("payment_due_amount", due_amt);
+			
+			response.sendRedirect("source/bill_details.jsp");
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
+		
 	}
+
+	
 
 }

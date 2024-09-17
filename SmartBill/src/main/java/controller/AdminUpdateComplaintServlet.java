@@ -12,30 +12,32 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import logic.PaymentsLogic;
+import logic.AdminLogic;
 
-@WebServlet("/PaymentHistory")
-public class PaymentHistoryController extends HttpServlet {
+@WebServlet("/UpdateComplaint")
+public class AdminUpdateComplaintServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public PaymentHistoryController() {
+    public AdminUpdateComplaintServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		long conid = Long.parseLong(session.getAttribute("consumer_lgid").toString());
+		int cmpid = Integer.parseInt(request.getParameter("up_comp"));
 		try {
-			List<HashMap<String, String>> mp1 = PaymentsLogic.fetchAllPayments(conid);
-			session.setAttribute("payment_details_con", mp1);
-
-			response.sendRedirect("source/payment_history.jsp");
+			int res = AdminLogic.updateComplaint(cmpid);
+			if(res == 1)
+			{
+				HashMap<String, String> lh1 = AdminLogic.fetchUpdatedComplaint(cmpid);
+				session.setAttribute("upd_comp_det", lh1);
+			}
+			response.sendRedirect("source/admin_complaint_update.jsp");
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 	}
 
 }

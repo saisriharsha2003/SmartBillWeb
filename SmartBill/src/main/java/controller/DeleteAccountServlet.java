@@ -1,6 +1,8 @@
 package controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,25 +10,31 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import logic.LoginLogic;
 
-@WebServlet("/PaymentScreen")
-public class PaymentScreenController extends HttpServlet {
+@WebServlet("/DeleteAccount")
+public class DeleteAccountServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    public PaymentScreenController() {
+
+    public DeleteAccountServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String pay_amount = (String)request.getParameter("billdet_pamt");
-		String pay_mode = (String)request.getParameter("pay_mode");
 		HttpSession session = request.getSession();
-		session.setAttribute("billdet_pamount", pay_amount);
-		session.setAttribute("billdet_paymode", pay_mode);
-
-		response.sendRedirect("source/payment_screen.jsp");
+		long conid = (long)session.getAttribute("consumer_lgid");
+		try {
+			int res = LoginLogic.softDeleteAccount(conid);
+			if(res == 1)
+			{
+				response.sendRedirect("source/delete_success.jsp");
+			}
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
-	
 
 }

@@ -16,11 +16,11 @@ import logic.AdminLogic;
 
 
 @WebServlet("/AdminAddBill")
-public class AdminAddBillController extends HttpServlet {
+public class AdminAddBillServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     
-    public AdminAddBillController() {
+    public AdminAddBillServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

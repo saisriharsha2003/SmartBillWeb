@@ -2,7 +2,6 @@ package controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.text.ParseException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -13,33 +12,30 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import logic.AdminLogic;
-import logic.BillsLogic;
+import logic.PaymentsLogic;
 
-
-@WebServlet("/PayBills")
-public class PayBillController extends HttpServlet {
+@WebServlet("/PaymentHistory")
+public class PaymentHistoryServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    
-    public PayBillController() {
+       
+    public PaymentHistoryServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
-    
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		long conid = Long.parseLong(String.valueOf(session.getAttribute("consumer_lgid")));
+		long conid = Long.parseLong(session.getAttribute("consumer_lgid").toString());
 		try {
-			int res = AdminLogic.updatePenalty();
-			List<HashMap<String, String>> l1 = BillsLogic.fetchAllBills(conid);
-			session.setAttribute("view_all_bills", l1);
+			List<HashMap<String, String>> mp1 = PaymentsLogic.fetchAllPayments(conid);
+			session.setAttribute("payment_details_con", mp1);
 
-			response.sendRedirect("source/pay_bills.jsp");
-		} catch (ClassNotFoundException | SQLException | ParseException e) {
+			response.sendRedirect("source/payment_history.jsp");
+		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
 	}
 
-	
 }

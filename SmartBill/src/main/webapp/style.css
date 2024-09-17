@@ -678,10 +678,7 @@ nav ul li .dropdown-content a {
 {
 	position: relative;
 }
-.searchi
-{
-	display: block;
-}
+
 .paybll_pg td
 {
 	width: 30%;
@@ -690,21 +687,34 @@ nav ul li .dropdown-content a {
 	
 }
 
-.searchb
-{
-	position: absolute;
-	top:0;
-	padding-top: 31px;
-	cursor: pointer;
-	right:0;
-	background: none;
-	border: none;
+.input-box {
+    position: relative;
+    width: 100%;
 }
-.searchb i
-{
-	font-size: 20px;
-	color: grey;
+
+.searchi {
+    width: 100%;
+    padding: 10px;
+    padding-right: 40px; 
+    display: block;
+    box-sizing: border-box; 
 }
+
+.searchb {
+    position: absolute;
+    top: 50%;
+    right: 10px; 
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.searchb i {
+    font-size: 20px;
+    color: grey;
+}
+
 .bg1
 {
 	background: url(assets/image1.jpg);

@@ -7,7 +7,7 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="icon" href="<%=request.getContextPath()%>/assets/icon.png" type="image/icon type">
-<title>Search Complaint</title>
+<title>Search Payment Details</title>
 
 </head>
 <body>
@@ -70,24 +70,27 @@
 	</div>
 	<div class="signup">
 		<div class="container">
-			<div class="title" style="margin-bottom: 20px;">Search
-				Complaint</div>
-			<form class="complaint_status_form" action="<%=request.getContextPath()%>/SearchComplaint" method = "post">
-				<span class="details" style="font-weight: 600">Complaint Number</span>
+			<div class="title" style="margin-bottom: 20px;">Search Transaction Details </div>
+			<form class="payment_status_form" action="<%=request.getContextPath()%>/SearchPayment" method = "post">
+				<span class="details" style="font-weight: 600">Transaction Number</span>
 				<div class="user-details">
 
 					<div class="input-box" style="width: 100%">
-						<input type="text" class="searchi" name="search_compid"
-							placeholder="Enter your Complaint Number" required
-							oninvalid="this.setCustomValidity('Please Enter Complaint Number')"
+						<input type="text" class="searchi" name="search_tranid"
+							placeholder="Enter your Transaction Number" required
+							value="<%= request.getAttribute("er_tranid") != null ? request.getAttribute("er_tranid") : "" %>"
+							
+							oninvalid="this.setCustomValidity('Please Enter transaction Number')"
 							onchange="this.setCustomValidity('')">
-						<button class="searchb">
+						<button class="searchb" style="color: black;">
 							<i class="fa fa-search"></i>
 						</button>
 					</div>
 				</div>
 				<div class="sbutton">
-					<button type="submit" id="aButton" style="cursor: pointer">Get Complaint Status</button>
+					<button type="submit" id="aButton" style="cursor: pointer">Get Transaction Details</button>
+					<span class="lmessage1" id='llogin_message'><%= request.getAttribute("error_msg") != null ? request.getAttribute("error_msg") : "" %></span>
+					
 				</div>
 			</form>
 			

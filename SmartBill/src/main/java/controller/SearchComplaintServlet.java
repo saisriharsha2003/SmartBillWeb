@@ -3,7 +3,6 @@ package controller;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.HashMap;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,29 +11,30 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import logic.AdminLogic;
+import logic.ComplaintsLogic;
 
-
-@WebServlet("/AdminViewComplaints")
-public class AdminViewComplaintsControler extends HttpServlet {
+@WebServlet("/SearchComplaint")
+public class SearchComplaintServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-
-    public AdminViewComplaintsControler() {
+    public SearchComplaintServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int compid = Integer.parseInt(request.getParameter("search_compid"));
 		try {
-			List<HashMap<String, String>> h1 = AdminLogic.fetchAllComplaints();
+			HashMap<String, String> scomp = ComplaintsLogic.fetchComplaintDetailsById(compid);
 			HttpSession session = request.getSession();
-			session.setAttribute("admin_complaints", h1);
-			response.sendRedirect("source/admin_view_complaints.jsp");
+			session.setAttribute("search_complaint_id", scomp);
+
+			response.sendRedirect("source/complaint_details_id.jsp");
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 	}
 
 }

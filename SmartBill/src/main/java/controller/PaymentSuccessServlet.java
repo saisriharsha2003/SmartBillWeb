@@ -20,10 +20,10 @@ import logic.PaymentsLogic;
 import model.PaymentModel;
 
 @WebServlet("/PaymentSuccess")
-public class PaymentSuccessController extends HttpServlet {
+public class PaymentSuccessServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public PaymentSuccessController() {
+    public PaymentSuccessServlet() {
         super();
     }
 

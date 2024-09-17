@@ -13,10 +13,10 @@ import javax.servlet.http.HttpSession;
 import logic.LoginLogic;
 
 @WebServlet("/ReactivateAccount")
-public class ReactivateAccountController extends HttpServlet {
+public class ReactivateAccountServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public ReactivateAccountController() {
+    public ReactivateAccountServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
