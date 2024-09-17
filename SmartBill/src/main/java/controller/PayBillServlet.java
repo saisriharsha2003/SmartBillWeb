@@ -31,7 +31,7 @@ public class PayBillServlet extends HttpServlet {
 		long conid = Long.parseLong(String.valueOf(session.getAttribute("consumer_lgid")));
 		try {
 			int res = AdminLogic.updatePenalty();
-			List<HashMap<String, String>> l1 = BillsLogic.fetchAllBills(conid);
+			List<HashMap<String, String>> l1 = BillsLogic.fetchAllBillsPay(conid);
 			session.setAttribute("view_all_bills", l1);
 
 			response.sendRedirect("source/pay_bills.jsp");

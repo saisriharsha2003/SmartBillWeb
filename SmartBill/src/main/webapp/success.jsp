@@ -4,6 +4,8 @@
 <html>
   <head>
     <link rel="stylesheet" href="<%=request.getContextPath()%>/style.css">
+    <link rel="icon" href="assets/icon.png" type="image/icon type">
+	<title>Registration Success</title>
     
   </head>
   <body>

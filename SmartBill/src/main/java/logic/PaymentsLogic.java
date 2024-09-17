@@ -117,7 +117,7 @@ public class PaymentsLogic {
 		ResultSet rs = p1.executeQuery();
 		while(rs.next()) {
 			HashMap<String, String> mp1=new HashMap<String, String>();
-			mp1.put("tran_no", String.valueOf(rs.getInt("transcation_number")));
+			mp1.put("tran_no", String.valueOf(rs.getInt("transaction_number")));
 			mp1.put("bill_no", String.valueOf(rs.getString("bill_number")));
 			mp1.put("paid_amt", String.valueOf(rs.getDouble("paid_amount")));
 			mp1.put("tran_mode", rs.getString("transaction_mode"));
@@ -133,8 +133,8 @@ public class PaymentsLogic {
 		ResultSet r1 = st.executeQuery("select * from payment");
 		while(r1.next())
 		{
-			System.out.println(r1.getInt("transcation_number") +"  "+tran_id);
-			int tran_no = r1.getInt("transcation_number");
+			System.out.println(r1.getInt("transaction_number") +"  "+tran_id);
+			int tran_no = r1.getInt("transaction_number");
 			if(tran_id == tran_no);
 			{
 				return true;
@@ -146,11 +146,11 @@ public class PaymentsLogic {
 	public static HashMap<String, String> searchTransaction(int tran_id) throws ClassNotFoundException, SQLException
 	{
 		HashMap<String, String> mp1=new HashMap<String, String>();
-		PreparedStatement p1= Utility.getPreparedStatement("select * from payment where transcation_number = ?");
+		PreparedStatement p1= Utility.getPreparedStatement("select * from payment where transaction_number = ?");
 		p1.setLong(1, tran_id);
 		ResultSet rs = p1.executeQuery();
 		while(rs.next()) {
-			mp1.put("tran_no", String.valueOf(rs.getInt("transcation_number")));
+			mp1.put("tran_no", String.valueOf(rs.getInt("transaction_number")));
 			mp1.put("bill_no", String.valueOf(rs.getString("bill_number")));
 			mp1.put("paid_amt", String.valueOf(rs.getDouble("paid_amount")));
 			mp1.put("tran_mode", rs.getString("transaction_mode"));

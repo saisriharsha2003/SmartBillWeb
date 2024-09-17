@@ -181,7 +181,7 @@
                 <p class="title1" style="font-size: 30px;">No Bills Found!</p>
             </div>
             <div class="flexcenter">
-            	<p style="font-size: 20px; font-weight: 600; margin-top: 20px; maring-bottom:10px;">Currently no bills found come back later.</p>
+            	<p style="font-size: 20px; font-weight: 600; margin-top: 20px; maring-bottom:10px;">Currently no bills are there to pay come back later.</p>
             </div>
             
             <div class="flexcenter">

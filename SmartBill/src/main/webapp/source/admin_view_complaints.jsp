@@ -158,7 +158,7 @@
                                 <td style="color:<%= statusColor %>; font-weight:700;"><%= status %></td>
                                 <td>
                                     <div class="button">
-                                        <input type="submit" class="upcmp" id="adstcmp" value="Update" style="cursor: pointer">
+                                        <button type="submit" class="upcmp" id="adstcmp" style="cursor: pointer">Update</button>
                                     </div>
                                 </td>
                                 <input type="hidden" id="incomp" name="up_comp" value="<%= complaint.get("comp_no") %>">
@@ -211,13 +211,6 @@
     <script src="<%=request.getContextPath()%>/scripts/script.js"></script>
     
     <script>
-    var btns = document.getElementsByClassName("upcmp");
-    for (i = 0; i < btns.length; i++) {
-        btns[i].addEventListener('click', function () {
-            var n1 = this.value;
-            document.getElementById("incomp").value = n1;
-        });
-    }
 
     var name = '<%= (session.getAttribute("consumer_lgname") != null) ? session.getAttribute("consumer_lgname") : "" %>';
     var c1 = document.getElementById("acu_name");

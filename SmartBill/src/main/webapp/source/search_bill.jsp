@@ -78,8 +78,8 @@
 
 					<div class="input-box" style="width: 100%">
 						<input type="text" class="searchi" name="search_billid"
-							placeholder="Enter your Complaint Number" required
-							oninvalid="this.setCustomValidity('Please Enter Complaint Number')"
+							placeholder="Enter your Bill ID" required
+							oninvalid="this.setCustomValidity('Please Enter Bill ID')"
 							onchange="this.setCustomValidity('')">
 						<button class="searchb">
 							<i class="fa fa-search"></i>

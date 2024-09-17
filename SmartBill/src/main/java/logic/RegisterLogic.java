@@ -22,7 +22,8 @@ public class RegisterLogic {
 		pst.setString(6, reg.getGender());
 		pst.setString(7, reg.getUserName());
 		pst.setString(8, reg.getPassword());
-		
+		int res = pst.executeUpdate();
+
 		String sql1 = "insert into login values(?,?,?,?)";
 		PreparedStatement pst1 = Utility.getPreparedStatement(sql1);
 		pst1.setString(1, reg.getUserName());
@@ -31,7 +32,6 @@ public class RegisterLogic {
 		pst1.setString(4, "Active");
 		pst1.executeUpdate();
 		
-		int res = pst.executeUpdate();
 		return res;
 		
 	}

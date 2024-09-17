@@ -34,6 +34,30 @@ public class BillsLogic {
 		return lm;
 	}
 	
+	public static List<HashMap<String, String>> fetchAllBillsPay(long conid) throws ClassNotFoundException, SQLException, ParseException
+	{
+		AdminLogic.updatePenalty();
+		List<HashMap<String, String>> lm = new ArrayList<HashMap<String, String>>();
+
+		PreparedStatement p1 = Utility.getPreparedStatement("select * from bill where consumer_id = ? and status != ? ");
+		p1.setLong(1, conid);
+		p1.setString(2, "Paid");
+		ResultSet rs = p1.executeQuery();
+		while(rs.next())
+		{
+			HashMap<String, String> mp1=new HashMap<String, String>();
+			mp1.put("bill_id", String.valueOf(rs.getString("bill_number")));
+			mp1.put("due_amt", String.valueOf(rs.getDouble("due_amount")));
+			mp1.put("pay_amt", String.valueOf(rs.getDouble("bill_amount")));
+			mp1.put("date", rs.getString("due_date"));
+			mp1.put("penalty", String.valueOf(rs.getString("penalty")));
+			mp1.put("status", rs.getString("status"));
+			lm.add(mp1);
+		}
+		
+		return lm;
+	}
+	
 	public static HashMap<String, String> fetchPaymentBillDetails(int bill_id) throws SQLException, ClassNotFoundException
 	{
 		HashMap<String, String> m1= new HashMap<String, String>();
