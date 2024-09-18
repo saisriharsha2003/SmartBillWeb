@@ -13,23 +13,23 @@
   <body>
     <div>
       <div class="hero">
-        <nav> <a href="<%=request.getContextPath()%>/home.jsp"><img class="logo"
-			src="<%=request.getContextPath()%>/assets/logo.png"></a>
+        <nav> <a href="${pageContext.request.contextPath}/source/home.jsp"><img class="logo"
+			src="${pageContext.request.contextPath}/assets/logo.png"></a>
 		<ul>
-			<li><a href="home.jsp">Home</a></li>
+			<li><a href="${pageContext.request.contextPath}/source/home.jsp">Home</a></li>
 
 			<li class="dropdown"><a href="#" class="dropbtn">Bill</a>
 				<div class="dropdown-content">
 					<a href="${pageContext.request.contextPath}/PayBills">Pay Bills</a> 
 					<a href="${pageContext.request.contextPath}/ViewBills">View Bills</a>
-					<a href="search_bill.jsp">Search
+					<a href="${pageContext.request.contextPath}/source/search_bill.jsp">Search
 						Bill</a>
 				</div></li>
 
 			<li class="dropdown"><a href="#" class="dropbtn">Complaint</a>
 				<div class="dropdown-content">
-					<a href="register_complaint.jsp">Register Complaint</a> <a
-						href="search_complaint.jsp">Search Complaint</a> <a
+					<a href="${pageContext.request.contextPath}/source/register_complaint.jsp">Register Complaint</a> <a
+						href="${pageContext.request.contextPath}/source/search_complaint.jsp">Search Complaint</a> <a
 						href="${pageContext.request.contextPath}/ComplaintStatus">Complaint
 						Status</a>
 				</div></li>
@@ -38,7 +38,7 @@
 				<div class="dropdown-content">
 					<a href="${pageContext.request.contextPath}/PaymentHistory">Payments History</a> 
 
-					<a href="search_payment.jsp">Search Payment Details</a>
+					<a href="${pageContext.request.contextPath}/source/search_payment.jsp">Search Payment Details</a>
 				</div>
 			</li>
 
@@ -69,6 +69,10 @@
 	</nav>
       </div>
       <div class="signup">
+      <%
+    	HashMap<String, String> m1 = (HashMap<String, String>)session.getAttribute("payment_details_id");
+		
+      %>
         <div class="container">
           <div class='title' style="font-size: 25px; color: #CCBA78">Your Transaction Details</div>
           <div class='details-cont'>
@@ -112,10 +116,10 @@
      
           
         </div>
+        
       </div>
     </div>
     <%
-    	HashMap<String, String> m1 = (HashMap<String, String>)session.getAttribute("payment_details_id");
     	String p1 = m1.get("tran_no");
     	String p2 = m1.get("bill_no");
     	String p3 = m1.get("paid_amt");

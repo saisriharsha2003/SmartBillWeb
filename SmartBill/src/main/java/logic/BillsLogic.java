@@ -3,6 +3,7 @@ package logic;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -94,6 +95,22 @@ public class BillsLogic {
 			m1.put("status", String.valueOf(rs.getString("status")));
 		}
 		return m1;
+	}
+	
+	public static boolean isBillExist(int bill_id) throws ClassNotFoundException, SQLException
+	{
+		Statement s = Utility.getStatement();
+		ResultSet rs = s.executeQuery("select * from bill");
+		while(rs.next())
+		{
+			if(rs.getInt("bill_number") == bill_id)
+			{
+				return true;
+			}
+		}
+		return false;
+		
+		
 	}
 	
 }

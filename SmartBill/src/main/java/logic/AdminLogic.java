@@ -62,7 +62,7 @@ public class AdminLogic {
 		return lh1;
 	}
 	
-	public class DateUtils {
+	public static class DateUtils {
 	    public static String getTodayDate() {
 	        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 	        Date date = new Date();

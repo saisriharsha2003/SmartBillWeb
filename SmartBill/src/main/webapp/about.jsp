@@ -37,7 +37,7 @@
                 </p>
                 <div class="flexcenter">
 					<div class="sbutton" style="width: 20%; padding: 20px;">
-						<button id="aButton" style="cursor: pointer; " onclick="window.location.href='admin_home.jsp'">Get Started</button>
+						<button id="aButton" style="cursor: pointer; " onclick="window.location.href='register.jsp'">Get Started</button>
 					</div>
 				</div>
             </div>

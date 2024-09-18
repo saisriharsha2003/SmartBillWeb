@@ -15,15 +15,15 @@
     <div>
       <div class="hero">
         <nav>
-	          <a href="<%=request.getContextPath()%>/admin_home.jsp"><img class="logo"
-	                src="<%=request.getContextPath()%>/assets/logo.png"></a>
+	          <a href="<%=request.getContextPath()%>/admin_home.jsp">
+	          <img class="logo" src="<%=request.getContextPath()%>/assets/logo.png"></a>
 	          <ul>
-	            <li><a href="admin_home.jsp">Home</a></li>
+	            <li><a href="${pageContext.request.contextPath}/source/admin_home.jsp">Home</a></li>
 	            <li><a href="${pageContext.request.contextPath}/AdminViewConsumers">View Consumers</a></li>
 	            	            <li><a href="${pageContext.request.contextPath}/source/admin_addbill.jsp"
 >Add Bills</a></li>
 
-	            <li><a href="/SmartBillWeb/AdminViewBills">View Bills</a></li>	            	            
+	            <li><a href="${pageContext.request.contextPath}/AdminViewBills">View Bills</a></li>	            	            
 	            <li><a href="${pageContext.request.contextPath}/AdminViewComplaints">View Complaints</a></li>
 	          </ul>
 	          <img src="<%=request.getContextPath()%>/assets/user.png" class="user-pic" onclick="toggleMenu()">

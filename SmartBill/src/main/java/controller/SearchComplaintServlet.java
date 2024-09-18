@@ -24,12 +24,22 @@ public class SearchComplaintServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int compid = Integer.parseInt(request.getParameter("search_compid"));
+		
 		try {
-			HashMap<String, String> scomp = ComplaintsLogic.fetchComplaintDetailsById(compid);
-			HttpSession session = request.getSession();
-			session.setAttribute("search_complaint_id", scomp);
+			boolean iscomp = ComplaintsLogic.isComplaintExist(compid);
+			if(iscomp){
+				HashMap<String, String> scomp = ComplaintsLogic.fetchComplaintDetailsById(compid);
+				HttpSession session = request.getSession();
+				session.setAttribute("search_complaint_id", scomp);
+	
+				response.sendRedirect("source/complaint_details_id.jsp");
+			}else
+			{
+				request.setAttribute("er_comp_id", compid);
 
-			response.sendRedirect("source/complaint_details_id.jsp");
+                request.setAttribute("error_msg", "Complaint Details for above mentioned complaint id not found.");
+                request.getRequestDispatcher("source/search_complaint.jsp").forward(request, response);
+			}
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

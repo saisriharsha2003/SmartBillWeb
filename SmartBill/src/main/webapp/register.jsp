@@ -59,6 +59,8 @@
 	                <span class="details">Mobile Number</span>
 	                <input type="text" id='phno' name = "mobile"
 	                  placeholder="Enter your Mobile Number" required
+	                  pattern = "/^(\+\d{1,3}[- ]?)?\d{10}$/"
+	                  title="Must contain 10 digits."
 	                  value="<%= request.getAttribute("er_mob") != null ? request.getAttribute("er_mob") : "" %>"
 	                  oninvalid="this.setCustomValidity('Please Enter Mobile Number')"
 	                  onchange="this.setCustomValidity('')">

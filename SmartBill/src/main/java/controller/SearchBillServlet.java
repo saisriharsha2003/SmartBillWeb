@@ -26,13 +26,25 @@ public class SearchBillServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int compid = Integer.parseInt(request.getParameter("search_billid"));
+		int bill_id = Integer.parseInt(request.getParameter("search_billid"));
 		try {
-			HashMap<String, String> sbill = BillsLogic.fetchBillDetailsById(compid);
+			boolean isbill = BillsLogic.isBillExist(bill_id);
+			if(isbill){
+
+			HashMap<String, String> sbill = BillsLogic.fetchBillDetailsById(bill_id);
 			HttpSession session = request.getSession();
 			session.setAttribute("search_bill_id", sbill);
 
 			response.sendRedirect("source/bill_details_id.jsp");
+			}
+			else
+			{
+				request.setAttribute("er_bill_id", bill_id);
+                request.setAttribute("error_msg", "Bill Details for above mentioned bill number not found.");
+                request.getRequestDispatcher("source/search_bill.jsp").forward(request, response);
+
+
+			}
 		} catch (ClassNotFoundException | SQLException | ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -3,6 +3,7 @@ package logic;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -69,6 +70,21 @@ public class ComplaintsLogic {
 			mp1.put("status", rs.getString("complaint_status"));
 		}
 		return mp1;
+	}
+	
+	public static boolean isComplaintExist(int compid) throws ClassNotFoundException, SQLException
+	{
+		Statement s = Utility.getStatement();
+		ResultSet rs = s.executeQuery("select * from complaint");
+		while(rs.next())
+		{
+			if(rs.getInt("complaint_id") == compid)
+			{
+				return true;
+			}
+		}
+		return false;
+		
 	}
 
 }

@@ -10,36 +10,39 @@
 </head>
 <body>
     <div class="hero">
-        <nav> 
-            <a href="<%=request.getContextPath()%>/home.jsp"><img class="logo" src="<%=request.getContextPath()%>/assets/logo.png"></a>
-            <ul>
-                <li><a href="home.jsp">Home</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropbtn">Bill</a>
-                    <div class="dropdown-content">
-                        <a href="${pageContext.request.contextPath}/PayBills">Pay Bills</a>
-                        <a href="${pageContext.request.contextPath}/ViewBills">View Bills</a>
-                        <a href="${pageContext.request.contextPath}/source/search_bill.jsp">Search Bill</a>
-                    </div>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropbtn">Complaint</a>
-                    <div class="dropdown-content">
-                        <a href="register_complaint.jsp">Register Complaint</a>
-                        <a href="search_complaint.jsp">Search Complaint</a>
-                        <a href="${pageContext.request.contextPath}/ComplaintStatus">Complaint Status</a>
-                    </div>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropbtn">Payments</a>
-                    <div class="dropdown-content">
-                        <a href="${pageContext.request.contextPath}/PaymentHistory">Payments History</a> 
-                        <a href="search_payment.jsp">Search Payment Details</a>
-                    </div>
-                </li>
-            </ul>
-            <img src="<%=request.getContextPath()%>/assets/user.png" class="user-pic" onclick="toggleMenu()">
-            <div class="sub-menu-wrap" id="subMenu">
+        <nav> <a href="${pageContext.request.contextPath}/source/home.jsp"><img class="logo"
+			src="${pageContext.request.contextPath}/assets/logo.png"></a>
+		<ul>
+			<li><a href="${pageContext.request.contextPath}/source/home.jsp">Home</a></li>
+
+			<li class="dropdown"><a href="#" class="dropbtn">Bill</a>
+				<div class="dropdown-content">
+					<a href="${pageContext.request.contextPath}/PayBills">Pay Bills</a> 
+					<a href="${pageContext.request.contextPath}/ViewBills">View Bills</a>
+					<a href="${pageContext.request.contextPath}/source/search_bill.jsp">Search
+						Bill</a>
+				</div></li>
+
+			<li class="dropdown"><a href="#" class="dropbtn">Complaint</a>
+				<div class="dropdown-content">
+					<a href="${pageContext.request.contextPath}/source/register_complaint.jsp">Register Complaint</a> <a
+						href="${pageContext.request.contextPath}/source/search_complaint.jsp">Search Complaint</a> <a
+						href="${pageContext.request.contextPath}/ComplaintStatus">Complaint
+						Status</a>
+				</div></li>
+
+			<li class="dropdown"><a href="#" class="dropbtn">Payments</a>
+				<div class="dropdown-content">
+					<a href="${pageContext.request.contextPath}/PaymentHistory">Payments History</a> 
+
+					<a href="${pageContext.request.contextPath}/source/search_payment.jsp">Search Payment Details</a>
+				</div>
+			</li>
+
+		</ul>
+
+		<img src="<%=request.getContextPath()%>/assets/user.png" class="user-pic" onclick="toggleMenu()">
+		<div class="sub-menu-wrap" id="subMenu">
 			<div class="sub-menu">
 				<div class="user-info">
 					<img src="<%=request.getContextPath()%>/assets/user.png" style="width: 80px; height: 80px">
@@ -60,7 +63,7 @@
 				</a>
 			</div>
 		</div>
-        </nav>
+	</nav>
     </div>
     <div class="signup">
         <div class="container" style="width: 800px;">
