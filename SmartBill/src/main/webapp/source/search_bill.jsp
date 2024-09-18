@@ -72,16 +72,19 @@
 		<div class="container">
 			<div class="title" style="margin-bottom: 20px;">Search
 				Bill</div>
-			<form class="complaint_status_form" action="<%=request.getContextPath()%>/SearchBills" method = "post">
+			<form class="search_bill_form" action="<%=request.getContextPath()%>/SearchBills" method = "post">
 				<span class="details" style="font-weight: 600">Bill Number</span>
 				<div class="user-details">
 
 					<div class="input-box" style="width: 100%">
 						<input type="text" class="searchi" name="search_billid"
-							placeholder="Enter your Bill ID" required
-							value="<%= request.getAttribute("er_bill_id") != null ? request.getAttribute("er_bill_id") : "" %>"
-							oninvalid="this.setCustomValidity('Please Enter Bill ID')"
-							onchange="this.setCustomValidity('')">
+						    placeholder="Enter your Bill ID" required
+						    value="<%= request.getAttribute("er_bill_id") != null ? request.getAttribute("er_bill_id") : "" %>"
+						    oninput="validateBillId(this)"
+						    pattern="\d{7}" maxlength="7"
+						    oninvalid="this.setCustomValidity('Please Enter a Valid Integer Bill ID')"
+						    onchange="this.setCustomValidity('')">
+
 						<button class="searchb">
 							<i class="fa fa-search"></i>
 						</button>
@@ -97,6 +100,25 @@
 		</div>
 		<script src="<%=request.getContextPath()%>/scripts/script.js"></script>
 		<script>
+	    function validateBillId(input) {
+	        input.setCustomValidity('');
+	        
+	        var value = input.value.trim();
+	        var isValid = /^\d{7}$/.test(value);
+	        
+	        if (!isValid) {
+	            input.setCustomValidity('Above mentioned bill id is invalid.');
+	        }
+	    }
+	    
+	    document.querySelector('form').addEventListener('submit', function(event) {
+	        var billIdInput = document.querySelector('input[name="search_billid"]');
+	        validateBillId(billIdInput);
+	        if (billIdInput.validationMessage) {
+	            event.preventDefault(); 
+	        }
+	    });
+
 		if(document.getElementById("cu_name"))
 		{
 			var name = '<%=(session.getAttribute("consumer_lgname") != null) ? session.getAttribute("consumer_lgname") : ""%>';

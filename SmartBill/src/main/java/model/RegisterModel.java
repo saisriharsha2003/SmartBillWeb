@@ -2,7 +2,8 @@ package model;
 
 public class RegisterModel {
 	
-	private long consumerId;
+	private long consumerNumber;
+	private String meterNumber;
 	private String title;
 	private String name;
 	private String email;
@@ -11,10 +12,11 @@ public class RegisterModel {
 	private String userName;
 	private String password;
 	
-	public RegisterModel(long consumerId, String title, String name, String email, long mobile, String gender,
+	public RegisterModel(long consumerNumber, String meterNumber, String title, String name, String email, long mobile, String gender,
 			String userName, String password) {
 		
-		this.consumerId = consumerId;
+		this.consumerNumber = consumerNumber;
+		this.meterNumber = meterNumber;
 		this.title = title;
 		this.name = name;
 		this.email = email;
@@ -22,14 +24,6 @@ public class RegisterModel {
 		this.gender = gender;
 		this.userName = userName;
 		this.password = password;
-	}
-	
-	public long getConsumerId() {
-		return consumerId;
-	}
-	
-	public void setConsumerId(long consumerId) {
-		this.consumerId = consumerId;
 	}
 	
 	public String getTitle() {
@@ -84,5 +78,21 @@ public class RegisterModel {
 	
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public long getConsumerNumber() {
+		return consumerNumber;
+	}
+
+	public void setConsumerNumber(long consumerNumber) {
+		this.consumerNumber = consumerNumber;
+	}
+
+	public String getMeterNumber() {
+		return meterNumber;
+	}
+
+	public void setMeterNumber(String meterNumber) {
+		this.meterNumber = meterNumber;
 	}
 }

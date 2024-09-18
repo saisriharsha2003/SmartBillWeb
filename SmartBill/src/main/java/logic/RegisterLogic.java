@@ -12,23 +12,24 @@ public class RegisterLogic {
 	public static int registerConsumer(RegisterModel reg) throws ClassNotFoundException, SQLException
 	{
 		
-		String sql = "insert into consumer values(?,?,?,?,?,?,?,?)";
+		String sql = "insert into consumer values(?,?,?,?,?,?,?,?,?)";
 		PreparedStatement pst = Utility.getPreparedStatement(sql);
-		pst.setLong(1, reg.getConsumerId());
-		pst.setString(2, reg.getTitle());
-		pst.setString(3, reg.getName());
-		pst.setString(4, reg.getEmail());
-		pst.setLong(5, reg.getMobile());
-		pst.setString(6, reg.getGender());
-		pst.setString(7, reg.getUserName());
-		pst.setString(8, reg.getPassword());
+		pst.setLong(1, reg.getConsumerNumber());
+		pst.setString(2, reg.getMeterNumber());
+		pst.setString(3, reg.getTitle());
+		pst.setString(4, reg.getName());
+		pst.setString(5, reg.getEmail());
+		pst.setLong(6, reg.getMobile());
+		pst.setString(7, reg.getGender());
+		pst.setString(8, reg.getUserName());
+		pst.setString(9, reg.getPassword());
 		int res = pst.executeUpdate();
 
 		String sql1 = "insert into login values(?,?,?,?)";
 		PreparedStatement pst1 = Utility.getPreparedStatement(sql1);
 		pst1.setString(1, reg.getUserName());
 		pst1.setString(2, reg.getPassword());
-		pst1.setLong(3, reg.getConsumerId());
+		pst1.setLong(3, reg.getConsumerNumber());
 		pst1.setString(4, "Active");
 		pst1.executeUpdate();
 		
@@ -64,5 +65,62 @@ public class RegisterLogic {
 		return false;
 		
 	}
-
+	
+	public static boolean isConsumerNumberFound(RegisterModel reg) throws ClassNotFoundException, SQLException
+	{
+		Statement p1 = Utility.getStatement();
+		ResultSet r1 = p1.executeQuery("select * from consumer_details");
+		while(r1.next())
+		{
+			if(reg.getConsumerNumber() == r1.getLong("consumer_number"))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public static boolean isMeterNumberMatch(RegisterModel reg) throws ClassNotFoundException, SQLException
+	{
+		PreparedStatement p1 = Utility.getPreparedStatement("select * from consumer_details where consumer_number = ?");
+		p1.setLong(1, reg.getConsumerNumber());
+		
+		ResultSet r1 = p1.executeQuery();
+		while(r1.next())
+		{
+			if(r1.getString("meter_number").equalsIgnoreCase(reg.getMeterNumber()))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public static boolean isConsumerNumberAlreadyExists(RegisterModel reg) throws ClassNotFoundException, SQLException
+	{
+		Statement p1 = Utility.getStatement();
+		ResultSet r1 = p1.executeQuery("select * from consumer");
+		while(r1.next())
+		{
+			if(reg.getConsumerNumber() == r1.getLong("consumer_id"))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public static boolean isMeterNumberExists(RegisterModel reg) throws ClassNotFoundException, SQLException
+	{
+		Statement p1 = Utility.getStatement();
+		ResultSet r1 = p1.executeQuery("select * from consumer");
+		while(r1.next())
+		{
+			if(reg.getMeterNumber() == r1.getString("meter_number"))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
 }

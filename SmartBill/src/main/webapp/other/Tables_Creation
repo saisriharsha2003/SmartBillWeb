@@ -1,8 +1,30 @@
-delete from consumer;
+drop table consumer;
+drop table consumer;
+drop table bill;
+drop table complaint;
+drop table login;
+drop table payment;
 select * from complaint;
+drop table consumer_details;
 -- consumer or registration table
+
+create table consumer_details(consumer_number bigint, meter_number varchar(10));
+INSERT INTO consumer_details (consumer_number, meter_number)
+VALUES 
+    (4802365910284, 'MTRX9012'),
+    (7823401597463, 'MTRY3456'),
+    (1594702836157, 'MTRZ7890'),
+    (2039485761923, 'MTRW4567'),
+    (3674901259834, 'MTRV1234'),
+    (5729834061478, 'MTRU5678'),
+    (4938271604923, 'MTRT8901'),
+    (8501923746509, 'MTRS2345'),
+    (6142378905612, 'MTRR6789'),
+    (9754208364517, 'MTRQ0123');
+
 create table consumer (
 		consumer_id bigint primary key,
+		meter_number varchar(20),
 		title varchar(20),
 		consumer_name varchar(100),
 		email varchar(50),
@@ -81,3 +103,4 @@ alter table login
 add constraint fk_login
 foreign key (consumer_id)
 references consumer (consumer_id);
+
