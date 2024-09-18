@@ -1,4 +1,4 @@
-package view;
+package logic;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,7 +14,7 @@ import java.util.List;
 import model.BillModel;
 import utility.Utility;
 
-public class AdminView {
+public class AdminLogic {
 	public static int fetchCountConsumers() throws ClassNotFoundException, SQLException
 	{
 		Statement st = Utility.getStatement();
@@ -48,7 +48,6 @@ public class AdminView {
 	{
 		List<HashMap<String, String>> lh1=new ArrayList<HashMap<String, String>>();
 		Statement p1 = Utility.getStatement();
-		System.out.println("hello");
 		ResultSet rs= p1.executeQuery("select * from consumer");
 		while(rs.next())
 		{
@@ -60,11 +59,10 @@ public class AdminView {
 			h1.put("user_name", rs.getString("user_name"));
 			lh1.add(h1);
 		}
-		System.out.println(lh1.size());
 		return lh1;
 	}
 	
-	public class DateUtils {
+	public static class DateUtils {
 	    public static String getTodayDate() {
 	        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 	        Date date = new Date();
@@ -151,8 +149,8 @@ public class AdminView {
 		while(rs.next())
 		{
 			HashMap<String, String> h1=new HashMap<String, String>();
-			h1.put("comp_no", String.valueOf(rs.getInt("comp_no")));
-			h1.put("cons_no", String.valueOf(rs.getLong("consumer_no")));
+			h1.put("comp_no", String.valueOf(rs.getInt("complaint_id")));
+			h1.put("cons_no", String.valueOf(rs.getLong("consumer_id")));
 			h1.put("mobile", String.valueOf(rs.getLong("mobile")));
 			h1.put("contact_per", rs.getString("contact"));
 			h1.put("problem", rs.getString("problem"));
@@ -166,7 +164,7 @@ public class AdminView {
 	public static int updateComplaint(int compid) throws ClassNotFoundException, SQLException
 	{
 		int r1 = 0;
-		PreparedStatement p1= Utility.getPreparedStatement("update complaint set complaint_status = ? where comp_no = ?");
+		PreparedStatement p1= Utility.getPreparedStatement("update complaint set complaint_status = ? where complaint_id = ?");
 		p1.setString(1, "Solved");
 		p1.setInt(2, compid);
 		r1 = p1.executeUpdate();
@@ -176,13 +174,13 @@ public class AdminView {
 	public static HashMap<String, String> fetchUpdatedComplaint(int cmpid) throws ClassNotFoundException, SQLException
 	{
 		HashMap<String, String> h1=new HashMap<String, String>();
-		PreparedStatement p1 = Utility.getPreparedStatement("select * from complaint where comp_no = ?");
+		PreparedStatement p1 = Utility.getPreparedStatement("select * from complaint where complaint_id = ?");
 		p1.setInt(1, cmpid);
 		ResultSet rs= p1.executeQuery();
 		while(rs.next())
 		{
-			h1.put("comp_no", String.valueOf(rs.getInt("comp_no")));
-			h1.put("cons_no", String.valueOf(rs.getLong("consumer_no")));
+			h1.put("comp_no", String.valueOf(rs.getInt("complaint_id")));
+			h1.put("cons_no", String.valueOf(rs.getLong("consumer_id")));
 			h1.put("contact_per", rs.getString("contact"));
 			h1.put("problem", rs.getString("problem"));
 			h1.put("address", rs.getString("address"));

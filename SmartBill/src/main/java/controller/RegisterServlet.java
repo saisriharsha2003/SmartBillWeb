@@ -12,15 +12,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import logic.RegisterLogic;
 import model.RegisterModel;
-import view.RegisterView;
 
 @WebServlet("/Register")
-public class RegisterController extends HttpServlet {
+public class RegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     
-    public RegisterController() {
+    public RegisterServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -41,18 +41,35 @@ public class RegisterController extends HttpServlet {
 		
 		RegisterModel reg = new RegisterModel(randomNumber, title, name, email, mobile, gender, user, pwd);
 		
-		System.out.println(mobile);
 		try {
-			int n1 = RegisterView.registerConsumer(reg);
-			if(n1==1)
+			boolean isexist = RegisterLogic.isAlreadyExist(reg);
+			if(!isexist)
 			{
-				HttpSession session = request.getSession();
-				session.setAttribute("consumer_number", reg.getConsumerId()); 
-				session.setAttribute("name", reg.getName());
-				session.setAttribute("username", reg.getUserName());
+				int n1 = RegisterLogic.registerConsumer(reg);
+				if(n1==1)
+				{
+					HttpSession session = request.getSession();
+					session.setAttribute("consumer_number", reg.getConsumerId()); 
+					session.setAttribute("name", reg.getName());
+					session.setAttribute("username", reg.getUserName());
+	
+					
+					response.sendRedirect("success.jsp");
+				}
+			}
+			else
+			{
+				request.setAttribute("er_cname", name);
+                request.setAttribute("er_title", title);
+                request.setAttribute("er_email", email);
+                request.setAttribute("er_mob", mobile);
+                request.setAttribute("er_gen", gender);
+                request.setAttribute("er_user", user);
+                request.setAttribute("er_pwd", pwd);
 
+                request.setAttribute("error_msg", "Consumer already exist. Kindly login.");
+                request.getRequestDispatcher("register.jsp").forward(request, response);
 				
-				response.sendRedirect("success.jsp");
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block

@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="<%=request.getContextPath()%>/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="icon" href="<%=request.getContextPath()%>/assets/icon.png" type="image/icon type">
-    <title>Delete Account</title>
+    <title>Reactivation Successful</title>
 </head>
 <body>
     <div class="hero">
@@ -34,10 +34,10 @@
             <form action = "<%=request.getContextPath()%>/login.jsp">
 	            <div class="flexcenter">
 	            	<div class="sbutton" style="width: 100%; padding: 20px; ">
-						<button style="cursor: pointer;" onclick="window.location.href='home.jsp'">Back to Home</button>
+						<button style="cursor: pointer;" type="button" onclick="window.location.href='index.jsp'">Back to Home</button>
 					</div>
 					<div class="sbutton" style="width: 100% ; padding: 20px;">
-						<button type="submit" style="cursor: pointer; onclick="window.location.href=''">Login</button>
+						<button type="submit" style="cursor: pointer; onclick="window.location.href='login.jsp'">Login</button>
 					</div>
 	            </div>
             </form>

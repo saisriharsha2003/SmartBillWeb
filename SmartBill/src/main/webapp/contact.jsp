@@ -6,7 +6,7 @@
         <meta charset="ISO-8859-1">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/style.css">
         <link rel="icon" href="<%=request.getContextPath()%>/assets/icon.png" type="image/icon type">
-        <title>Smart Bill</title>
+        <title>Contact Us</title>
     </head>
     <body>
         <div class="hero">

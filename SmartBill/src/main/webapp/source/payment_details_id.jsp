@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ page import="java.util.*" %>
+<%@ page import = "java.util.*" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-	<html>
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-		<link rel="stylesheet" href="<%=request.getContextPath()%>/style.css">
+<html>
+  <head>
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="icon" href="<%=request.getContextPath()%>/assets/icon.png" type="image/icon type">
-    <title>Complaint Registered</title>
+    <title>Payment Details</title>
+    
   </head>
   <body>
     <div>
@@ -66,78 +67,84 @@
 			</div>
 		</div>
 	</nav>
-        
       </div>
       <div class="signup">
+      <%
+    	HashMap<String, String> m1 = (HashMap<String, String>)session.getAttribute("payment_details_id");
+		
+      %>
         <div class="container">
-          <div class='title' style="font-size: 25px; color: #008000">Complaint Registered Successfully!</div>
+          <div class='title' style="font-size: 25px; color: #CCBA78">Your Transaction Details</div>
           <div class='details-cont'>
             <table>
               <tbody>
                 <tr>
-                  <td><span class='cust'>Complaint Number</span></td>
+                  <td><span class='cust'> Transaction ID</span></td>
                   <td><span class='col'>:</span><span class='cust1'
-                      id='cocno'></span></td>
+                      id='tran_id'></span></td>
                 </tr>
                 <tr>
-                  <td><span class='cust'>Contact Person</span></td>
+                  <td><span class='cust'> Bill ID </span></td>
                   <td><span class='col'>:</span><span class='cust1'
-                      id='cocnp'></span></td>
+                      id='tran_billid'></span></td>
                 </tr>
                 <tr>
-                  <td><span class='cust'> Mobile Number</span></td>
+                  <td><span class='cust'> Paid Amount </span></td>
                   <td><span class='col'>:</span><span class='cust1'
-                      id='com'></span></td>
+                      id='tran_amt'></span></td>
                 </tr>
                 <tr>
-                  <td><span class='cust'>Problem</span></td>
+                  <td><span class='cust'> Transaction Mode </span></td>
                   <td><span class='col'>:</span><span class='cust1'
-                      id='cop'></span></td>
+                      id='tran_mode'></span></td>
+                </tr>
+                <tr>
+                  <td><span class='cust'> Transaction Date </span></td>
+                  <td><span class='col'>:</span><span class='cust1'
+                      id='tran_date'></span></td>
                 </tr>
                 
-                <tr>
-                  <td><span class='cust'> Address</span></td>
-                  <td><span class='col'>:</span><span class='cust1'
-                      id='addr'></span></td>
-                </tr>
+                
+                
               </tbody>
             </table>
           </div>
-          <div class="sbutton">
-            <button type="submit" id="bButton" value="" style="cursor: pointer;" onclick="window.location='home.jsp';">Back to Home</button>
-          </div>
+         
+       	<div class="sbutton" style="width:100%;">
+           	<button type="submit" id="bButton" style="cursor:pointer" onclick="window.location='home.jsp';">Back to Home</button>
+        </div>	
+     
+          
         </div>
+        
       </div>
-      <script src="<%=request.getContextPath()%>/scripts/script.js"></script>
-      <%
-	      	HashMap<String, String> mp =(HashMap<String, String>)session.getAttribute("complaint-details");
-		  	String comp_id = mp.get("comp_id");
-		  	String comp_per = mp.get("comp_per");
-		  	String comp_mob = mp.get("comp_mobile");
-		  	String comp_prob = mp.get("comp_problem");
-		  	String comp_add = mp.get("comp_address");
-
-      %>
-		<script>
-			
-			var name = '<%= (session.getAttribute("consumer_lgname") != null) ? session.getAttribute("consumer_lgname") : "" %>';
-	  		var c6 = document.getElementById("cu_name");
-	  		if(c6) c6.textContent = name;
-	  		
-	  		console.log('<%= comp_id %>')
-			var cn1 = document.getElementById("cocno");
-			var cn2 = document.getElementById("cocnp");
-			var cn3 = document.getElementById("com");
-			var cn4 = document.getElementById("cop");
-			var cn5 = document.getElementById("addr");
-			
-			if (cn1) cn1.textContent = '<%= comp_id %>';
-	        if (cn2) cn2.textContent = '<%= comp_per %>';
-	        if (cn3) cn3.textContent = '<%= comp_mob %>';
-	        if (cn4) cn4.textContent = '<%= comp_prob %>';
-	        if (cn5) cn5.textContent = '<%= comp_add %>';
-		
-		</script>
     </div>
+    <%
+    	String p1 = m1.get("tran_no");
+    	String p2 = m1.get("bill_no");
+    	String p3 = m1.get("paid_amt");
+    	String p4 = m1.get("tran_mode");
+    	String p5 = m1.get("tran_date");
+    %>
+    <script src="<%=request.getContextPath()%>/scripts/script.js"></script>
+    <script type="text/javascript">
+    	var name = '<%= (session.getAttribute("consumer_lgname") != null) ? session.getAttribute("consumer_lgname") : "" %>';
+		var c6 = document.getElementById("cu_name");
+		if(c6) c6.textContent = name;
+		
+	   var cn1 = document.getElementById("tran_id");
+	   var cn2 = document.getElementById("tran_billid");
+	   var cn3 = document.getElementById("tran_amt");
+	   var cn4 = document.getElementById("tran_mode");  
+	   var cn5 = document.getElementById("tran_date");
+	
+	   var n1 = "<%= p1 %>";
+	   if (cn1) cn1.textContent = n1;
+	   if (cn2) cn2.textContent = "<%= p2 %>";
+	   if (cn3) cn3.textContent = "<%= p3 %>";
+	   if (cn4) cn4.textContent = "<%= p4 %>";
+	   if (cn5) cn5.textContent = "<%= p5 %>";
+
+    </script>
   </body>
 </html>

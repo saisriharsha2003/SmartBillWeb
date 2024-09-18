@@ -13,54 +13,60 @@
 <body>
 
     <div class="hero">
-        <nav>
-            <a href="<%=request.getContextPath()%>/home.jsp"><img class="logo" src="<%=request.getContextPath()%>/assets/logo.png"></a>
-            <ul>
-                <li><a href="home.jsp">Home</a></li>
-                <li class="dropdown"><a href="#" class="dropbtn">Bill</a>
-                    <div class="dropdown-content">
-                        <a href="${pageContext.request.contextPath}/PayBills">Pay Bills</a>
-                        <a href="${pageContext.request.contextPath}/ViewBills">View Bills</a>
-                        <a href="search_bill.jsp">Search Bill</a>
-                    </div>
-                </li>
-                <li class="dropdown"><a href="#" class="dropbtn">Complaint</a>
-                    <div class="dropdown-content">
-                        <a href="register_complaint.jsp">Register Complaint</a>
-                        <a href="search_complaint.jsp">Search Complaint</a>
-                        <a href="${pageContext.request.contextPath}/ComplaintStatus">Complaint Status</a>
-                    </div>
-                </li>
-                <li class="dropdown"><a href="#" class="dropbtn">Payments</a>
-                    <div class="dropdown-content">
-                        <a href="${pageContext.request.contextPath}/PaymentHistory">Payments History</a>
-                        <a href="">Search Payment Details</a>
-                    </div>
-                </li>
-            </ul>
-            <img src="<%=request.getContextPath()%>/assets/user.png" class="user-pic" onclick="toggleMenu()">
-            <div class="sub-menu-wrap" id="subMenu">
-                <div class="sub-menu">
-                    <div class="user-info">
-                        <img src="<%=request.getContextPath()%>/assets/user.png" style="width: 80px; height: 80px">
-                        <h2 id="cu_name" style="color: #CCBA78;"></h2>
-                    </div>
-                    <hr>
-                    <a href="edit_profile.jsp" class="sub-menu-link"> 
-                        <img src="<%=request.getContextPath()%>/assets/edit.png" style="width: 50px; height: 50px">
-                        <p>Edit Profile</p> <span class="ext">></span>
-                    </a> 
-                    <a href="delete_profile.jsp" class="sub-menu-link"> 
-                        <img src="<%=request.getContextPath()%>/assets/delete.png" style="width: 50px; height: 50px">
-                        <p>Delete Account</p> <span class="ext">></span>
-                    </a> 
-                    <a href="<%=request.getContextPath()%>/LogoutServlet" class="sub-menu-link">  
-                        <img src="<%=request.getContextPath()%>/assets/logout.png" style="width: 50px; height: 50px">
-                        <p>Logout</p> <span class="ext">></span>
-                    </a>
-                </div>
-            </div>
-        </nav>
+        <nav> <a href="${pageContext.request.contextPath}/source/home.jsp"><img class="logo"
+			src="${pageContext.request.contextPath}/assets/logo.png"></a>
+		<ul>
+			<li><a href="${pageContext.request.contextPath}/source/home.jsp">Home</a></li>
+
+			<li class="dropdown"><a href="#" class="dropbtn">Bill</a>
+				<div class="dropdown-content">
+					<a href="${pageContext.request.contextPath}/PayBills">Pay Bills</a> 
+					<a href="${pageContext.request.contextPath}/ViewBills">View Bills</a>
+					<a href="${pageContext.request.contextPath}/source/search_bill.jsp">Search
+						Bill</a>
+				</div></li>
+
+			<li class="dropdown"><a href="#" class="dropbtn">Complaint</a>
+				<div class="dropdown-content">
+					<a href="${pageContext.request.contextPath}/source/register_complaint.jsp">Register Complaint</a> <a
+						href="${pageContext.request.contextPath}/source/search_complaint.jsp">Search Complaint</a> <a
+						href="${pageContext.request.contextPath}/ComplaintStatus">Complaint
+						Status</a>
+				</div></li>
+
+			<li class="dropdown"><a href="#" class="dropbtn">Payments</a>
+				<div class="dropdown-content">
+					<a href="${pageContext.request.contextPath}/PaymentHistory">Payments History</a> 
+
+					<a href="${pageContext.request.contextPath}/source/search_payment.jsp">Search Payment Details</a>
+				</div>
+			</li>
+
+		</ul>
+
+		<img src="<%=request.getContextPath()%>/assets/user.png" class="user-pic" onclick="toggleMenu()">
+		<div class="sub-menu-wrap" id="subMenu">
+			<div class="sub-menu">
+				<div class="user-info">
+					<img src="<%=request.getContextPath()%>/assets/user.png" style="width: 80px; height: 80px">
+					<h2 id="cu_name" style="color: #CCBA78;"></h2>
+				</div>
+				<hr>
+				<a href="edit_profile.jsp" class="sub-menu-link"> 
+					<img src="<%=request.getContextPath()%>/assets/edit.png" style="width: 50px; height: 50px">
+					<p>Edit Profile</p> <span class="ext">></span>
+				</a> 
+				<a href="delete_profile.jsp" class="sub-menu-link"> 
+					<img src="<%=request.getContextPath()%>/assets/delete.png" style="width: 50px; height: 50px">
+					<p>Delete Account</p> <span class="ext">></span>
+				</a> 
+				<a href="<%=request.getContextPath()%>/LogoutServlet" class="sub-menu-link">  
+				<img src="<%=request.getContextPath()%>/assets/logout.png" style="width: 50px; height: 50px">
+					<p>Logout</p> <span class="ext">></span>
+				</a>
+			</div>
+		</div>
+	</nav>
     </div>
 
     <div class="signup">

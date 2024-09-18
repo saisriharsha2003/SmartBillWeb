@@ -13,31 +13,33 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import view.AdminView;
+import logic.AdminLogic;
+import logic.BillsLogic;
+import logic.ComplaintsLogic;
 
-@WebServlet("/AdminViewBills")
-public class AdminViewBillsController extends HttpServlet {
+@WebServlet("/ViewBills")
+public class ViewBillsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    
-    public AdminViewBillsController() {
+       
+    public ViewBillsServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
 		
+		long conid = Long.parseLong(session.getAttribute("consumer_lgid").toString());
 		try {
-			int res = AdminView.updatePenalty();
-			List<HashMap<String, String>> h1 = AdminView.fetchAllBillsAdmin();
-			HttpSession session = request.getSession();
-			session.setAttribute("admin_bills", h1);
-			response.sendRedirect("source/admin_view_bills.jsp");
+			int res = AdminLogic.updatePenalty();
+			List<HashMap<String, String>> l1 = BillsLogic.fetchAllBills(conid);
+			session.setAttribute("view_all_bills", l1);
+
+			response.sendRedirect("source/view_bills.jsp");
 		} catch (ClassNotFoundException | SQLException | ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 	}
 
-	
 }

@@ -2,7 +2,6 @@ package controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.text.ParseException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -13,30 +12,26 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import view.AdminView;
-import view.BillsView;
-import view.ComplaintsView;
+import logic.AdminLogic;
 
-@WebServlet("/ViewBills")
-public class ViewBillsController extends HttpServlet {
+
+@WebServlet("/AdminViewComplaints")
+public class AdminViewComplaintsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public ViewBillsController() {
+
+    public AdminViewComplaintsServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		
-		long conid = Long.parseLong(session.getAttribute("consumer_lgid").toString());
 		try {
-			int res = AdminView.updatePenalty();
-			List<HashMap<String, String>> l1 = BillsView.fetchAllBills(conid);
-			session.setAttribute("view_all_bills", l1);
-
-			response.sendRedirect("source/view_bills.jsp");
-		} catch (ClassNotFoundException | SQLException | ParseException e) {
+			List<HashMap<String, String>> h1 = AdminLogic.fetchAllComplaints();
+			HttpSession session = request.getSession();
+			session.setAttribute("admin_complaints", h1);
+			response.sendRedirect("source/admin_view_complaints.jsp");
+		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

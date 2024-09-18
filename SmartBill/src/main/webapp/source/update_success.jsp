@@ -14,39 +14,39 @@
 <body>
 	<div>
 		<div class="hero">
-			<nav> <a href="<%=request.getContextPath()%>/home.jsp"><img class="logo"
-				src="<%=request.getContextPath()%>/assets/logo.png"></a>
-			<ul>
-				<li><a href="home.jsp">Home</a></li>
+			<nav> <a href="${pageContext.request.contextPath}/source/home.jsp"><img class="logo"
+			src="${pageContext.request.contextPath}/assets/logo.png"></a>
+		<ul>
+			<li><a href="home.jsp">Home</a></li>
 
-				<li class="dropdown"><a href="#" class="dropbtn">Bill</a>
-					<div class="dropdown-content">
+			<li class="dropdown"><a href="#" class="dropbtn">Bill</a>
+				<div class="dropdown-content">
 					<a href="${pageContext.request.contextPath}/PayBills">Pay Bills</a> 
-					<a href="${pageContext.request.contextPath}/ViewBills">View Bills</a> 
-					<a href="search_bill.jsp">Search Bill</a>
-					</div>
-				</li>
+					<a href="${pageContext.request.contextPath}/ViewBills">View Bills</a>
+					<a href="${pageContext.request.contextPath}/source/search_bill.jsp">Search
+						Bill</a>
+				</div></li>
 
-				<li class="dropdown"><a href="#" class="dropbtn">Complaint</a>
-					<div class="dropdown-content">
-						<a href="register_complaint.jsp">Register Complaint</a> <a
-							href="search_complaint.jsp">Search Complaint</a> <a
-							href="${pageContext.request.contextPath}/ComplaintStatus">Complaint
-							Status</a>
-					</div></li>
+			<li class="dropdown"><a href="#" class="dropbtn">Complaint</a>
+				<div class="dropdown-content">
+					<a href="${pageContext.request.contextPath}/source/register_complaint.jsp">Register Complaint</a> <a
+						href="${pageContext.request.contextPath}/source/search_complaint.jsp">Search Complaint</a> <a
+						href="${pageContext.request.contextPath}/ComplaintStatus">Complaint
+						Status</a>
+				</div></li>
 
-				<li class="dropdown"><a href="#" class="dropbtn">Payments</a>
+			<li class="dropdown"><a href="#" class="dropbtn">Payments</a>
 				<div class="dropdown-content">
 					<a href="${pageContext.request.contextPath}/PaymentHistory">Payments History</a> 
 
-					<a href="">Search Payment Details</a>
+					<a href="${pageContext.request.contextPath}/source/search_payment.jsp">Search Payment Details</a>
 				</div>
 			</li>
 
-			</ul>
+		</ul>
 
-			<img src="<%=request.getContextPath()%>/assets/user.png" class="user-pic" onclick="toggleMenu()">
-			<div class="sub-menu-wrap" id="subMenu">
+		<img src="<%=request.getContextPath()%>/assets/user.png" class="user-pic" onclick="toggleMenu()">
+		<div class="sub-menu-wrap" id="subMenu">
 			<div class="sub-menu">
 				<div class="user-info">
 					<img src="<%=request.getContextPath()%>/assets/user.png" style="width: 80px; height: 80px">
@@ -67,7 +67,7 @@
 				</a>
 			</div>
 		</div>
-		</nav>
+	</nav>
 		</div>
 		<div class="signup">
 			<div class="container">
@@ -110,6 +110,8 @@
 
 			</div>
 		</div>
+		<script src="<%=request.getContextPath()%>/scripts/script.js"></script>
+		
 	</div>
 	<%
 		HashMap<String, String> m1 = (HashMap<String, String>)session.getAttribute("updated_user_details");
@@ -119,6 +121,13 @@
 		String p4 = m1.get("up-uname");
 	%>
 	<script type="text/javascript">
+	if(document.getElementById("cu_name"))
+	{
+		var name = '<%=(session.getAttribute("consumer_lgname") != null) ? session.getAttribute("consumer_lgname") : ""%>';
+		var c1 = document.getElementById("cu_name");
+		if (c1)
+			c1.textContent = name;
+	}
         var cn1 = document.getElementById("up_name");
         var cn2 = document.getElementById("up_email");
         var cn3 = document.getElementById("up_mobile");

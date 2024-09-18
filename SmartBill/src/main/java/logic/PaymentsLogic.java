@@ -1,4 +1,4 @@
-package view;
+package logic;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,10 +10,12 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.derby.client.am.Statement;
+
 import model.PaymentModel;
 import utility.Utility;
 
-public class PaymentsView {
+public class PaymentsLogic {
 	public static int makePayment(PaymentModel pm, long conid) throws ClassNotFoundException, SQLException, ParseException {
 	    PreparedStatement p1 = Utility.getPreparedStatement("insert into payment values(?,?,?,?,?,?)");
 	    p1.setInt(1, pm.getTransactionNumber());
@@ -43,7 +45,6 @@ public class PaymentsView {
 
 	    String nstatus = "";
 	    double t1 = edamt - pm.getPaidAmount() ;
-	    System.out.println(t1);
 	    if(t1==0 && pen == 0)
 	    {
 	    	t1=0;
@@ -84,7 +85,6 @@ public class PaymentsView {
 	    		nstatus = "Paid";
 	    	}
 	    }
-	    System.out.println("status"+nstatus);
 	    PreparedStatement p3 = Utility.getPreparedStatement("update bill set status = ? , due_amount = ?, penalty = ? where bill_number = ?");
 	    p3.setString(1, nstatus);
 	    p3.setInt(4, pm.getBillNumber());
@@ -117,7 +117,7 @@ public class PaymentsView {
 		ResultSet rs = p1.executeQuery();
 		while(rs.next()) {
 			HashMap<String, String> mp1=new HashMap<String, String>();
-			mp1.put("tran_no", String.valueOf(rs.getInt("transcation_number")));
+			mp1.put("tran_no", String.valueOf(rs.getInt("transaction_number")));
 			mp1.put("bill_no", String.valueOf(rs.getString("bill_number")));
 			mp1.put("paid_amt", String.valueOf(rs.getDouble("paid_amount")));
 			mp1.put("tran_mode", rs.getString("transaction_mode"));
@@ -125,6 +125,38 @@ public class PaymentsView {
 			ln.add(mp1);
 		}
 		return ln;
+	}
+	
+	public static boolean isTransactionFound(int tran_id) throws ClassNotFoundException, SQLException
+	{
+		Statement st = (Statement) Utility.getStatement();
+		ResultSet r1 = st.executeQuery("select * from payment");
+		while(r1.next())
+		{
+			System.out.println(r1.getInt("transaction_number") +"  "+tran_id);
+			int tran_no = r1.getInt("transaction_number");
+			if(tran_id == tran_no);
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public static HashMap<String, String> searchTransaction(int tran_id) throws ClassNotFoundException, SQLException
+	{
+		HashMap<String, String> mp1=new HashMap<String, String>();
+		PreparedStatement p1= Utility.getPreparedStatement("select * from payment where transaction_number = ?");
+		p1.setLong(1, tran_id);
+		ResultSet rs = p1.executeQuery();
+		while(rs.next()) {
+			mp1.put("tran_no", String.valueOf(rs.getInt("transaction_number")));
+			mp1.put("bill_no", String.valueOf(rs.getString("bill_number")));
+			mp1.put("paid_amt", String.valueOf(rs.getDouble("paid_amount")));
+			mp1.put("tran_mode", rs.getString("transaction_mode"));
+			mp1.put("tran_date", rs.getString("transaction_date"));
+		}
+		return mp1;
 	}
 
 }

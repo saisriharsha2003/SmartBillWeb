@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Random;
 import model.BillModel;
-import view.AdminView;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,13 +12,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import logic.AdminLogic;
+
 
 @WebServlet("/AdminAddBill")
-public class AdminAddBillController extends HttpServlet {
+public class AdminAddBillServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     
-    public AdminAddBillController() {
+    public AdminAddBillServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -42,7 +43,7 @@ public class AdminAddBillController extends HttpServlet {
 		BillModel bill = new model.BillModel(billno, amt, pamt, date, penalty, status, cno );
 		
 		try {
-			int res = AdminView.adminAddBill(bill);
+			int res = AdminLogic.adminAddBill(bill);
 			if(res == 1)
 			{
 				HttpSession session = request.getSession();

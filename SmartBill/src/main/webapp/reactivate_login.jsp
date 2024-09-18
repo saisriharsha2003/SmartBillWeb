@@ -4,7 +4,7 @@
 <head>
     <link rel="stylesheet" href="<%= request.getContextPath() %>/style.css">
     <link rel="icon" href="<%= request.getContextPath() %>/assets/icon.png" type="image/icon type">
-    <title>Login</title>
+    <title>Reactivate Login</title>
 </head>
 <body>
     <div>
@@ -51,14 +51,7 @@
                                    onkeyup='login_check();'>
                             <span class="message" id='login_message'></span>
                         </div>
-                        <div class="input-box">
-                            <span class="details">Login As</span>
-                            <select class="drtitle" name="userType">
-                                <option value="Default" <%= "Default".equals(request.getAttribute("user_type")) ? "selected" : "" %>>Select User Type</option>
-                                <option value="Admin" <%= "Admin".equals(request.getAttribute("user_type")) ? "selected" : "" %>>Admin</option>
-                                <option value="Consumer" <%= "Consumer".equals(request.getAttribute("user_type")) ? "selected" : "" %>>Consumer</option>
-                            </select>
-                        </div>
+                        
                     </div>
                     <div class="sbutton">
                         <button type="submit" id="aButton" style="cursor: pointer">Verify</button>

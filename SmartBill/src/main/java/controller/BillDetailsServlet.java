@@ -11,15 +11,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import view.AdminView;
-import view.BillsView;
-import view.PaymentsView;
+import logic.AdminLogic;
+import logic.BillsLogic;
+import logic.PaymentsLogic;
 
 @WebServlet("/BillDetails")
-public class BillDetailsController extends HttpServlet {
+public class BillDetailsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public BillDetailsController() {
+    public BillDetailsServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,9 +29,9 @@ public class BillDetailsController extends HttpServlet {
 		int billid = Integer.parseInt(request.getParameter("up_bill"));
 		HashMap<String, String> mp;
 		try {
-			double due_amt = PaymentsView.fetchDueAmount(billid);
+			double due_amt = PaymentsLogic.fetchDueAmount(billid);
 
-			mp = BillsView.fetchPaymentBillDetails(billid);
+			mp = BillsLogic.fetchPaymentBillDetails(billid);
 			session.setAttribute("payment_billdet", mp);
 			session.setAttribute("payment_due_amount", due_amt);
 			

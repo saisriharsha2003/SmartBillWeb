@@ -10,13 +10,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import view.LoginView;
+import logic.LoginLogic;
 
 @WebServlet("/ReactivateAccount")
-public class ReactivateAccountController extends HttpServlet {
+public class ReactivateAccountServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public ReactivateAccountController() {
+    public ReactivateAccountServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,10 +27,10 @@ public class ReactivateAccountController extends HttpServlet {
 		String pwd = request.getParameter("lpwd");
 		String ut = request.getParameter("uerType");
 		try {
-			boolean res1 = LoginView.reauthenticateConsumer(uname, pwd);
+			boolean res1 = LoginLogic.reauthenticateConsumer(uname, pwd);
 			if(res1 == true)
 			{
-				int res = LoginView.reactivateAccount(uname);
+				int res = LoginLogic.reactivateAccount(uname);
 				if(res==1)
 				{
 					response.sendRedirect("reactivate_success.jsp");

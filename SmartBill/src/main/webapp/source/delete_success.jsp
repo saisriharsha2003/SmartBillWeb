@@ -32,7 +32,7 @@
                 <p style="font-size: 30px; font-weight: 600; color: #CCBA78;">Account Deletion Successful</p>
             </div>
             <div class="flexcenter" style="padding-top:30px; padding-bottom: 30px;">
-            	<p style="font-size: 25px; font-weight: 600;"> Click below to reactivate your account?</p>
+            	<p style="font-size: 20px; font-weight: 600;"> Your Account has been successfully deleted.</p>
             </div>
             <div class="flexcenter">
             <div class="sbutton" class="flexcenter" style="display: flex; justify-content: center; gap:10px;margin-bottom: 30px; width: 90%;">

@@ -13,23 +13,23 @@
   <body>
     <div>
       <div class="hero">
-        <nav> <a href="<%=request.getContextPath()%>/home.jsp"><img class="logo"
-			src="<%=request.getContextPath()%>/assets/logo.png"></a>
+        <nav> <a href="${pageContext.request.contextPath}/source/home.jsp"><img class="logo"
+			src="${pageContext.request.contextPath}/assets/logo.png"></a>
 		<ul>
-			<li><a href="home.jsp">Home</a></li>
+			<li><a href="${pageContext.request.contextPath}/source/home.jsp">Home</a></li>
 
 			<li class="dropdown"><a href="#" class="dropbtn">Bill</a>
 				<div class="dropdown-content">
 					<a href="${pageContext.request.contextPath}/PayBills">Pay Bills</a> 
 					<a href="${pageContext.request.contextPath}/ViewBills">View Bills</a>
-					<a href="search_bill.jsp">Search
+					<a href="${pageContext.request.contextPath}/source/search_bill.jsp">Search
 						Bill</a>
 				</div></li>
 
 			<li class="dropdown"><a href="#" class="dropbtn">Complaint</a>
 				<div class="dropdown-content">
-					<a href="register_complaint.jsp">Register Complaint</a> <a
-						href="search_complaint.jsp">Search Complaint</a> <a
+					<a href="${pageContext.request.contextPath}/source/register_complaint.jsp">Register Complaint</a> <a
+						href="${pageContext.request.contextPath}/source/search_complaint.jsp">Search Complaint</a> <a
 						href="${pageContext.request.contextPath}/ComplaintStatus">Complaint
 						Status</a>
 				</div></li>
@@ -38,7 +38,7 @@
 				<div class="dropdown-content">
 					<a href="${pageContext.request.contextPath}/PaymentHistory">Payments History</a> 
 
-					<a href="">Search Payment Details</a>
+					<a href="${pageContext.request.contextPath}/source/search_payment.jsp">Search Payment Details</a>
 				</div>
 			</li>
 
@@ -72,8 +72,18 @@
         <div class="container">
           <div class='title' style="font-size: 25px; color: #CCBA78">Your Complaint Details</div>
           <div class='details-cont'>
+           <%
+		    	HashMap<String, String> m1 = (HashMap<String, String>)session.getAttribute("search_complaint_id");
+		    	String p1 = m1.get("complaint_id");
+		    	String p2 = m1.get("contact_person");
+		    	String p3 = m1.get("mobile");
+		    	String p4 = m1.get("problem");
+		    	String p5 = m1.get("address");
+		    	String p6 = m1.get("status");
+		    %>
             <table>
-              <tbody>
+            
+		    <tbody>
                 <tr>
                   <td><span class='cust'> Complaint ID </span></td>
                   <td><span class='col'>:</span><span class='cust1'
@@ -84,11 +94,7 @@
                   <td><span class='col'>:</span><span class='cust1'
                       id='fcompper'></span></td>
                 </tr>
-                <tr>
-                  <td><span class='cust'> Status </span></td>
-                  <td><span class='col'>:</span><span class='cust1'
-                      id='fcompstatus'></span></td>
-                </tr>
+                
                 <tr>
                   <td><span class='cust'> Mobile Number </span></td>
                   <td><span class='col'>:</span><span class='cust1'
@@ -104,8 +110,19 @@
                   <td><span class='col'>:</span><span class='cust1'
                       id='fcompaddr'></span></td>
                 </tr>
-                
-                
+                <% if(p6.equalsIgnoreCase("Solved")) { %>
+                <tr>
+                  <td><span class='cust'> Status </span></td>
+                  <td><span class='col'>:</span><span class='cust1'
+                      style="color:green; font-weight: 700" id='fcompstatus'></span></td>
+                </tr>
+                <% } else{ %>
+                <tr>
+                  <td><span class='cust'> Status </span></td>
+                  <td><span class='col'>:</span><span class='cust1'
+                      style="color:red; font-weight: 700" id='fcompstatus'></span></td>
+                </tr>
+                <%} %>
               </tbody>
             </table>
           </div>
@@ -118,15 +135,7 @@
         </div>
       </div>
     </div>
-    <%
-    	HashMap<String, String> m1 = (HashMap<String, String>)session.getAttribute("search_complaint_id");
-    	String p1 = m1.get("complaint_id");
-    	String p2 = m1.get("contact_person");
-    	String p3 = m1.get("mobile");
-    	String p4 = m1.get("problem");
-    	String p5 = m1.get("address");
-    	String p6 = m1.get("status");
-    %>
+   
     <script src="<%=request.getContextPath()%>/scripts/script.js"></script>
     <script type="text/javascript">
     	var name = '<%= (session.getAttribute("consumer_lgname") != null) ? session.getAttribute("consumer_lgname") : "" %>';

@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="<%=request.getContextPath()%>/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="icon" href="<%=request.getContextPath()%>/assets/icon.png" type="image/icon type">
-    <title>Delete Account</title>
+    <title>Reactivate Account</title>
 </head>
 <body>
     <div class="hero">

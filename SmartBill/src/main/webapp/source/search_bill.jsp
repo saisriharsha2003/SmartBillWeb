@@ -13,23 +13,23 @@
 <body>
 
 	<div class="hero">
-		<nav> <a href="<%=request.getContextPath()%>/home.jsp"><img class="logo"
-			src="<%=request.getContextPath()%>/assets/logo.png"></a>
+		<nav> <a href="${pageContext.request.contextPath}/source/home.jsp"><img class="logo"
+			src="${pageContext.request.contextPath}/assets/logo.png"></a>
 		<ul>
-			<li><a href="home.jsp">Home</a></li>
+			<li><a href="${pageContext.request.contextPath}/source/home.jsp">Home</a></li>
 
 			<li class="dropdown"><a href="#" class="dropbtn">Bill</a>
 				<div class="dropdown-content">
 					<a href="${pageContext.request.contextPath}/PayBills">Pay Bills</a> 
-					<a	href="${pageContext.request.contextPath}/ViewBills">View Bills</a>
-					<a href="search_bill.jsp">Search
+					<a href="${pageContext.request.contextPath}/ViewBills">View Bills</a>
+					<a href="${pageContext.request.contextPath}/source/search_bill.jsp">Search
 						Bill</a>
 				</div></li>
 
 			<li class="dropdown"><a href="#" class="dropbtn">Complaint</a>
 				<div class="dropdown-content">
-					<a href="register_complaint.jsp">Register Complaint</a> <a
-						href="search_complaint.jsp">Search Complaint</a> <a
+					<a href="${pageContext.request.contextPath}/source/register_complaint.jsp">Register Complaint</a> <a
+						href="${pageContext.request.contextPath}/source/search_complaint.jsp">Search Complaint</a> <a
 						href="${pageContext.request.contextPath}/ComplaintStatus">Complaint
 						Status</a>
 				</div></li>
@@ -38,7 +38,7 @@
 				<div class="dropdown-content">
 					<a href="${pageContext.request.contextPath}/PaymentHistory">Payments History</a> 
 
-					<a href="">Search Payment Details</a>
+					<a href="${pageContext.request.contextPath}/source/search_payment.jsp">Search Payment Details</a>
 				</div>
 			</li>
 
@@ -78,8 +78,9 @@
 
 					<div class="input-box" style="width: 100%">
 						<input type="text" class="searchi" name="search_billid"
-							placeholder="Enter your Complaint Number" required
-							oninvalid="this.setCustomValidity('Please Enter Complaint Number')"
+							placeholder="Enter your Bill ID" required
+							value="<%= request.getAttribute("er_bill_id") != null ? request.getAttribute("er_bill_id") : "" %>"
+							oninvalid="this.setCustomValidity('Please Enter Bill ID')"
 							onchange="this.setCustomValidity('')">
 						<button class="searchb">
 							<i class="fa fa-search"></i>
@@ -88,10 +89,22 @@
 				</div>
 				<div class="sbutton">
 					<button type="submit" id="aButton" style="cursor: pointer">Get Bill Status</button>
+					<span class="lmessage1" id='llogin_message'><%= request.getAttribute("error_msg") != null ? request.getAttribute("error_msg") : "" %></span>
+					
 				</div>
 			</form>
 			
 		</div>
+		<script src="<%=request.getContextPath()%>/scripts/script.js"></script>
+		<script>
+		if(document.getElementById("cu_name"))
+		{
+			var name = '<%=(session.getAttribute("consumer_lgname") != null) ? session.getAttribute("consumer_lgname") : ""%>';
+			var c1 = document.getElementById("cu_name");
+			if (c1)
+				c1.textContent = name;
+		}
+		</script>
 	</div>
 </body>
 </html>

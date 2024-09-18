@@ -1,9 +1,3 @@
-select * from consumer;
-select * from login;
-select * from admin_login;
-select * from bill;
-select * from complaint;
-
 delete from consumer;
 select * from complaint;
 -- consumer or registration table

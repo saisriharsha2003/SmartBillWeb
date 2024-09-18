@@ -18,7 +18,7 @@
 	          <a href="<%=request.getContextPath()%>/admin_home.jsp"><img class="logo"
 	                src="<%=request.getContextPath()%>/assets/logo.png"></a>
 	          <ul>
-	            <li><a href="admin_home.jsp">Home</a></li>
+	            <li><a href="${pageContext.request.contextPath}/source/admin_home.jsp">Home</a></li>
 	            <li><a href="${pageContext.request.contextPath}/AdminViewConsumers">View Consumers</a></li>
 	            	            <li><a href="${pageContext.request.contextPath}/source/admin_addbill.jsp"
 >Add Bills</a></li>
