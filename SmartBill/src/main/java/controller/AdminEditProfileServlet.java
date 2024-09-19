@@ -2,9 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,49 +12,54 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import logic.ComplaintsLogic;
+import logic.AdminLogic;
 
 /**
- * Servlet implementation class ComplaintStatusServlet
- * Handles fetching and displaying the complaint status for the logged-in consumer.
- * This servlet retrieves all complaints for a consumer based on their ID.
+ * Servlet implementation class AdminEditProfileServlet
+ * Handles requests for editing the admin's profile details such as username and password.
  */
-@WebServlet("/ComplaintStatus")
-public class ComplaintStatusServlet extends HttpServlet {
+@WebServlet("/EditProfileAdmin")
+public class AdminEditProfileServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * Default constructor.
      * Calls the parent class constructor.
      */
-    public ComplaintStatusServlet() {
+    public AdminEditProfileServlet() {
         super();
     }
 
     /**
-     * Processes HTTP GET requests to fetch and display all complaints for the logged-in consumer.
+     * Processes HTTP POST requests for updating the admin profile details.
      * 
      * @param request  HttpServletRequest object that contains the request the client made to the servlet.
      * @param response HttpServletResponse object that contains the response the servlet returns to the client.
      * @throws ServletException if the request could not be handled
      * @throws IOException if an I/O error occurs during request handling
      */
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Extracting form data for username and password
+        String uname = request.getParameter("edit-aname");
+        String pwd = request.getParameter("edit-apassword");
+
+        // Get the session object
         HttpSession session = request.getSession();
         
-        // Get the consumer ID from the session
-        long conid = Long.parseLong(session.getAttribute("consumer_lgid").toString());
-        System.out.println(conid); // Logging the consumer ID for debugging
-        
         try {
-            // Fetch all complaints for the consumer and store them in a list
-            List<HashMap<String, String>> l1 = ComplaintsLogic.fetchAllComplaints(conid);
+            // Call the logic layer to update the password
+            int res = AdminLogic.updatePassword(uname, pwd);
             
-            // Set the list of complaints in the session
-            session.setAttribute("view_all_comp", l1);
+            // Create a HashMap to store updated admin details
+            HashMap<String, String> mp = new HashMap<>();
+            mp.put("username", uname); // Store updated username
+            mp.put("password", pwd);   // Store updated password
             
-            // Redirect to the view all complaints page
-            response.sendRedirect("source/view_all_complaints.jsp");
+            // Set the updated details in the session
+            session.setAttribute("admin_details", mp);
+            
+            // Redirect to the admin home page after successful update
+            response.sendRedirect("source/admin_home.jsp");
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
             request.setAttribute("errorMessage", "An error occurred while processing your request: " + e.getMessage());

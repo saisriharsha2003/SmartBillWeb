@@ -1,4 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%
+    response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+    response.setHeader("Pragma", "no-cache");
+    response.setDateHeader("Expires", 0);
+
+    if (session.getAttribute("consumer_lgname") == null) {
+        response.sendRedirect(request.getContextPath() + "/login.jsp");
+        return;
+    }
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -9,6 +19,7 @@
 </head>
 <body>
     <div class="hero">
+    <% long cid = (long)session.getAttribute("consumer_lgid");%>
         <nav>
             <a href="${pageContext.request.contextPath}/source/home.jsp"><img class="logo" src="${pageContext.request.contextPath}/assets/logo.png"></a>
             <ul>
@@ -65,9 +76,7 @@
                 <div class="user-details">
                     <div class="input-box">
                         <span class="details">Consumer Number</span>
-                        <input type="text" id="fcno" name="fcno" placeholder="Enter your Consumer Number" required
-                            oninvalid="this.setCustomValidity('Please Enter Consumer Number')"
-                            onchange="this.setCustomValidity('')">
+                        <input type="text" id="fcno" name="fcno"readonly>
                     </div>
                     <div class="input-box">
                         <span class="details">Landmark</span>
@@ -125,6 +134,9 @@
         function toggleMenu() {
             subm.classList.toggle("open-menu");
         }
+        
+        var cnid = document.getElementById("fcno");
+        cnid.value = <%= cid%>;
 
         var name = '<%=(session.getAttribute("consumer_lgname") != null) ? session.getAttribute("consumer_lgname") : ""%>';
         var c1 = document.getElementById("cu_name");

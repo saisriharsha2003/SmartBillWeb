@@ -1,6 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page import = "java.util.*" %>
+<%
+    response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+    response.setHeader("Pragma", "no-cache");
+    response.setDateHeader("Expires", 0);
+
+    if (session.getAttribute("consumer_lgname") == null) {
+        response.sendRedirect(request.getContextPath() + "/login.jsp");
+        return;
+    }
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
   <head>
@@ -71,7 +81,16 @@
       <div class="signup">
       <%
     	HashMap<String, String> m1 = (HashMap<String, String>)session.getAttribute("payment_details_id");
-		
+     
+	  	String p1 = m1.get("tran_no");
+	  	String p2 = m1.get("bill_no");
+	  	String p3 = m1.get("paid_amt");
+	  	String p4 = m1.get("tran_mode");
+	  	String p5 = m1.get("tran_date");
+	  	if(p1!= null)
+	  	{
+	  	
+  
       %>
         <div class="container">
           <div class='title' style="font-size: 25px; color: #CCBA78">Your Transaction Details</div>
@@ -116,16 +135,28 @@
      
           
         </div>
+        <% }else{ %>
+        <div class = "container">
+            <div class="flexcenter" style="text-align: center; align-items: center; gap: 20px;">
+                <img src="<%=request.getContextPath()%>/assets/smile.webp" alt="Delete Emoji" style="height: 70px; width: 70px; border-radius: 100%">
+                <p class="title1" style="font-size: 30px;">No tRANSACTIONS Found!</p>
+            </div>
+            <div class="flexcenter">
+            	<p style="font-size: 20px; font-weight: 600; margin-top: 20px; maring-bottom:10px;">No transactions found for the mentioned transaction number.</p>
+            </div>
+            
+            <div class="flexcenter">
+            	<div class="sbutton" style="width: 100%; padding: 20px; ">
+					<button id="aButton" style="cursor: pointer; " onclick="window.location.href='home.jsp'">Back to Home</button>
+				</div>
+            </div>
+          
+    	</div>
+    	<%} %>
         
       </div>
     </div>
-    <%
-    	String p1 = m1.get("tran_no");
-    	String p2 = m1.get("bill_no");
-    	String p3 = m1.get("paid_amt");
-    	String p4 = m1.get("tran_mode");
-    	String p5 = m1.get("tran_date");
-    %>
+   
     <script src="<%=request.getContextPath()%>/scripts/script.js"></script>
     <script type="text/javascript">
     	var name = '<%= (session.getAttribute("consumer_lgname") != null) ? session.getAttribute("consumer_lgname") : "" %>';

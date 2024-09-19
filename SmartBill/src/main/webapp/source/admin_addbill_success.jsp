@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ page import = "java.util.*" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
   <head>
@@ -34,7 +35,7 @@
 	        		<h2 id="acu_name" style="color:#CCBA78;"></h2>
 	        	</div>
 	        	<hr>
-	        	<a href="#" class="sub-menu-link">
+	        	<a href="${pageContext.request.contextPath}/source/admin_edit_profile.jsp" class="sub-menu-link">
 	        		<img src="<%=request.getContextPath()%>/assets/edit.png" style="width: 50px; height: 50px">
 	        		<p>Edit Profile</p>
 	        		<span class="ext">></span>
@@ -55,7 +56,7 @@
             <table>
               <tbody>
                 <tr>
-                  <td><span class='cust'>Consumer Number</span></td>
+                  <td><span class='cust'>Meter Number</span></td>
                   <td><span class='col'>:</span><span class='cust1'
                       id='adbill_cn'></span></td>
                 </tr>
@@ -85,6 +86,13 @@
         </div>
       </div>
     </div>
+    <%
+    	HashMap<String, String> m1= (HashMap<String, String>)session.getAttribute("admin_add_bills");
+    	String bn = m1.get("addbill_bno");
+    	String mn = m1.get("addbill_mno");
+    	String amt = m1.get("adbill_amt");
+    	String due = m1.get("adbill_date");
+    %>
     <script type="text/javascript">
 	    let subm = document.getElementById("subMenu");
 	    function toggleMenu() {
@@ -98,17 +106,11 @@
         var cn2 = document.getElementById("adbill_cn");
         var cn3 = document.getElementById("adbill_amt");
         var cn4 = document.getElementById("adbill_due");
-
-        
-        var bn = '<%= (session.getAttribute("addbill_bn") != null) ? session.getAttribute("addbill_bn").toString() : "" %>';
-        var cn = '<%= (session.getAttribute("addbill_cn") != null) ? session.getAttribute("addbill_cn") : "" %>';
-        var amt = '<%= (session.getAttribute("adbill_amt") != null) ? session.getAttribute("adbill_amt") : "" %>';
-        var due = '<%= (session.getAttribute("adbill_date") != null) ? session.getAttribute("adbill_date") : "" %>';
-
-        if (cn1) cn1.textContent = bn;
-        if (cn2) cn2.textContent = cn;
-        if (cn3) cn3.textContent = amt;
-        if (cn4) cn4.textContent = due;
+       
+        if (cn1) cn1.textContent = '<%= bn %>';
+        if (cn2) cn2.textContent = '<%= mn %>';
+        if (cn3) cn3.textContent = '<%= amt %>';
+        if (cn4) cn4.textContent = '<%= due %>';
 
     </script>
   </body>

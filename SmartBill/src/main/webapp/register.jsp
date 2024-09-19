@@ -26,13 +26,7 @@
                 <div class="title">Register to SmartBill</div>
                 <form name='myform' action="<%=request.getContextPath()%>/Register" method="post">
                     <div class="user-details">
-                        <div class="input-box">
-                            <span class="details">Consumer Number</span>
-                            <input type="text" name="cnumber" id='cnumber' placeholder="Enter your Consumer Number"
-                                required value="<%= request.getAttribute("er_cnumber") != null ? request.getAttribute("er_cnumber") : "" %>"
-                                oninvalid="this.setCustomValidity('Please Enter Consumer Number')"
-                                onchange="this.setCustomValidity('')">
-                        </div>
+                        
                         <div class="input-box">
                             <span class="details">Meter Number</span>
                             <input type="text" name="mnumber" id='mnumber' placeholder="Enter your Meter Number"

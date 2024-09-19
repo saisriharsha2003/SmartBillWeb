@@ -31,7 +31,7 @@
                         <h2 id="acu_name" style="color:#CCBA78;"></h2>
                     </div>
                     <hr>
-                    <a href="#" class="sub-menu-link">
+                    <a href="${pageContext.request.contextPath}/source/admin_edit_profile.jsp" class="sub-menu-link">
                         <img src="<%=request.getContextPath()%>/assets/edit.png" style="width: 50px; height: 50px">
                         <p>Edit Profile</p>
                         <span class="ext">></span>
@@ -64,7 +64,7 @@
                     <thead>
                         <tr>
                             <th>Bill ID</th>
-                            <th>Consumer ID</th>
+                            <th>Meter Number</th>
                             <th>Due Amount</th>
                             <th>Bill Amount</th>
                             <th>Due Date</th>
@@ -106,7 +106,7 @@
                         %>
                         <tr>
                             <td><%= bill.get("bill_id") %></td>
-                            <td><%= bill.get("consumer_id") %></td>
+                            <td><%= bill.get("meter_number") %></td>
                             <td><%= bill.get("due_amount") %></td>
                             <td><%= bill.get("pay_amount") %></td>
                             <td><%= bill.get("due_date") %></td>
@@ -132,7 +132,7 @@
                         %>
                         <tr>
                             <td><%= bill.get("bill_id") %></td>
-                            <td><%= bill.get("consumer_id") %></td>
+                            <td><%= bill.get("meter_number") %></td>
                             <td><%= bill.get("due_amount") %></td>
                             <td><%= bill.get("pay_amount") %></td>
                             <td><%= bill.get("due_date") %></td>
@@ -196,7 +196,7 @@
 					<button id="aButton" style="cursor: pointer; " onclick="window.location.href='home.jsp'">Back to Home</button>
 				</div>
 				<div class="sbutton" style="width: 100% ; padding: 20px;">
-					<button type="submit" id="aButton" style="cursor: pointer; " onclick="window.location.href='admin_adbill.jsp'">Add Bill</button>
+					<button type="submit" id="aButton" style="cursor: pointer; " onclick="window.location.href='admin_addbill.jsp'">Add Bill</button>
 				</div>
             </div>
             

@@ -45,6 +45,11 @@
                   <td><span class='col'>:</span><span class='cust1'
                       id='custcnm'></span></td>
                 </tr>
+                <tr>
+                  <td><span class='cust'>Meter Number</span></td>
+                  <td><span class='col'>:</span><span class='cust1'
+                      id='custmno'></span></td>
+                </tr>
                 
               </tbody>
             </table>
@@ -59,14 +64,17 @@
         var cn1 = document.getElementById("custcn");
         var cn2 = document.getElementById("custcnm");
         var cn3 = document.getElementById("custun");
+        var cn4 = document.getElementById("custmno");
+
         
         var consumerNumber = '<%= (session.getAttribute("consumer_number") != null) ? session.getAttribute("consumer_number").toString() : "" %>';
         var name = '<%= (session.getAttribute("name") != null) ? session.getAttribute("name") : "" %>';
         var username = '<%= (session.getAttribute("username") != null) ? session.getAttribute("username") : "" %>';
-        
+        var meterno = '<%= (session.getAttribute("reg_meter_number") != null) ? session.getAttribute("reg_meter_number") : "" %>';
         if (cn1) cn1.textContent = consumerNumber;
         if (cn2) cn2.textContent = name;
         if (cn3) cn3.textContent = username;
+        if(cn4) cn4.textContent = meterno;
     </script>
   </body>
 </html>
