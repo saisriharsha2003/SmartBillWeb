@@ -1,6 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ page import="java.util.*"%>
+<%
+    response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+    response.setHeader("Pragma", "no-cache");
+    response.setDateHeader("Expires", 0);
+
+    if (session.getAttribute("consumer_lgname") == null) {
+        response.sendRedirect(request.getContextPath() + "/login.jsp");
+        return;
+    }
+%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -79,7 +89,7 @@
 		         	HashMap<String, String> hm=(HashMap<String, String>) session.getAttribute("payment_billdet");
 		         	String det_bno = hm.get("bill_id");
 		         	String det_bamt = hm.get("bill_amt");
-		         	String det_conid = hm.get("cons_id");
+		         	String det_conid = hm.get("meter_number");
 					String pay_damt = String.valueOf((double)session.getAttribute("payment_due_amount"));
 					String pen = hm.get("penalty");
 		         %>
@@ -123,7 +133,7 @@
 	        	<div style="display: flex; justify-content: center; margin-top: 20px; margin-bottom: 20px;">
 	        	<table class="paybilldet" >
 	        		<thead>
-	        			<th>Customer Number</th>
+	        			<th>Meter Number</th>
 	        			<th>Bill Number</th>
 	        			<th>Payable Amount</th>
 	        		</thead>

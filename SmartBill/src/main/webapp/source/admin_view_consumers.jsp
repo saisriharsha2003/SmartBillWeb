@@ -32,7 +32,7 @@
                         <h2 id="acu_name" style="color:#CCBA78;"></h2>
                     </div>
                     <hr>
-                    <a href="#" class="sub-menu-link">
+                    <a href="${pageContext.request.contextPath}/source/admin_edit_profile.jsp" class="sub-menu-link">
                         <img src="<%=request.getContextPath()%>/assets/edit.png" style="width: 50px; height: 50px">
                         <p>Edit Profile</p>
                         <span class="ext">></span>

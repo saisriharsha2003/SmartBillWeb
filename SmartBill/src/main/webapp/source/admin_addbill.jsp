@@ -34,7 +34,7 @@
 	        		<h2 id="acu_name" style="color:#CCBA78;"></h2>
 	        	</div>
 	        	<hr>
-	        	<a href="#" class="sub-menu-link">
+	        	<a href="${pageContext.request.contextPath}/source/admin_edit_profile.jsp" class="sub-menu-link">
 	        		<img src="<%=request.getContextPath()%>/assets/edit.png" style="width: 50px; height: 50px">
 	        		<p>Edit Profile</p>
 	        		<span class="ext">></span>
@@ -59,7 +59,7 @@
 	         <form id="my_login_form" action="<%=request.getContextPath()%>/AdminAddBill" method = "post">
 	            <div class="user-details">
 	              <div class="input-box">
-	                <span class="details" style="color:black;">Consumer Number</span>
+	                <span class="details" style="color:black;">Meter Number</span>
 	                
 	                <input type="text" id='abillcn' placeholder="Enter your Consumer Number"
 	                  name="adbillcn" required

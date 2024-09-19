@@ -1,6 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ page import="java.util.*"%>
+<%
+    response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+    response.setHeader("Pragma", "no-cache");
+    response.setDateHeader("Expires", 0);
+
+    if (session.getAttribute("consumer_lgname") == null) {
+        response.sendRedirect(request.getContextPath() + "/login.jsp");
+        return;
+    }
+%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -74,7 +84,7 @@
 		<div class="container">
           <div class="title" style="margin-bottom: 20px;">Payment Screen</div>
           <div style="display: flex; align-items: center;">
-          <img src="<%=request.getContextPath()%>/assets/visa-img.jpg" style="height: 20%; width: 70%;">
+          <img src="<%=request.getContextPath()%>/assets/visa-img.jpg" style="height: 10%; width: 50%;">
           <div>
           <% String pmt = (String)session.getAttribute("billdet_pamount"); %>
           <p><span style="font-size: 20px; font-weight: 700;">Payment Amount:</span> <span id = "ps_pamt" style="font-size: 20px; font-weight: 700; color: red;"></span></p>

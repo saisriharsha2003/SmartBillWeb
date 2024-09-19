@@ -1,6 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ page import="java.util.* "%>
+<%
+    response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+    response.setHeader("Pragma", "no-cache");
+    response.setDateHeader("Expires", 0);
+
+    if (session.getAttribute("consumer_lgname") == null) {
+        response.sendRedirect(request.getContextPath() + "/login.jsp");
+        return;
+    }
+%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -101,12 +111,19 @@
 							onkeyup='edit_check();'>
 					</div>
 					<div class="input-box">
-						<span class="details">Congfirm Password</span> <input
+						<span class="details">Confirm Password</span> <input
 							type="password" id="edit-cpassword" name="edit-cpassword"
 							pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
 							title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
 							onkeyup='edit_check();'>
 							<span class="edit-message" id='edit-message'></span> 
+					</div>
+					<div class="input-box">
+						<span class="details">Consumer Number</span> <input type="text" readonly name="cons_no" id="cons_no"
+							>
+					</div>
+					<div class="input-box">
+						<span class="details">Meter Number</span> <input type="text" readonly name="meter_no" id="meter_no">
 					</div>
 				</div>
 				<div style="display: flex; justify-content: center;">
@@ -134,6 +151,8 @@
 		String uname = mp.get("username");
 		String mobile = mp.get("mobile");
 		String email = mp.get("email");
+		String cno = mp.get("consumer_id");
+		String mno = mp.get("meter_number");
 	%>
 <script>
 	var name = ' <%=(session.getAttribute("consumer_lgname") != null) ? session.getAttribute("consumer_lgname") : ""%> ' ;
@@ -146,6 +165,9 @@
     var c4 = document.getElementById("edit-uname");
     var c5 = document.getElementById("edit-password");
     var c6 = document.getElementById("edit-cpassword");
+    var c7 = document.getElementById("cons_no");
+    var c8 = document.getElementById("meter_no");
+
     
     if(c1) c1.value = '<%=name%>';
 	if(c2) c2.value = '<%=email%>';
@@ -153,5 +175,8 @@
    	if(c4) c4.value = '<%=uname%>';
     if(c5) c5.value= '<%=pwd%>';
     if(c6) c6.value =  '<%=pwd%>';
+    if(c7) c7.value =  '<%=cno%>';
+    if(c8) c8.value =  '<%=mno%>';
+
 </script>
 </html>
